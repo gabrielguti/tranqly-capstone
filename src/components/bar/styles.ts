@@ -49,6 +49,9 @@ export const BarContainer = styled.div`
       );
       text-align: center;
     }
+    .bm-overlay {
+      background: transparent !important;
+    }
     a {
       color: var(--gray200);
       padding: 1em;
