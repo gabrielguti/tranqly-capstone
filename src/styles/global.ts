@@ -34,16 +34,6 @@ export default createGlobalStyle`
 		margin: 0;
 	}
 
-
-a{
-text-decoration:none;
-}
-
-svg, svg path{
-margin:0;
-}
-
-
 	:root {
 
 		--black0: 		rgba(38, 38, 38, 1);
@@ -63,4 +53,4 @@ margin:0;
 		--red100:		rgba(221, 104, 104, 1);
 	}
 
-`;
+`
