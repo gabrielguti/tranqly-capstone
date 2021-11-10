@@ -1,4 +1,3 @@
-import { ComponentType } from "react";
 import { Switch } from "react-router-dom";
 import Route from "./Route"
 import DashboardPatient from "../pages/dashboardPatient";
