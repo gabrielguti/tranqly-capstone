@@ -18,7 +18,7 @@ export default createGlobalStyle`
 		cursor: pointer;
 		background: none;
 		border: none;
-		
+		}
 		&:focus{
 			outline: none;
 		}
