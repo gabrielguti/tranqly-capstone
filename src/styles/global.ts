@@ -8,10 +8,12 @@ export default createGlobalStyle`
 		box-sizing: border-box;
 		font-family: 'Poppins', sans-serif;
 	}
+  
 	html, body {
 		max-width: 100vw;
 		max-height: 100vh;
 	}
+
 	button {
 		cursor: pointer;
 		background: none;
@@ -21,12 +23,15 @@ export default createGlobalStyle`
 			outline: none;
 		}
 	}
+  
 	a {
 		text-decoration: none;
 	}
+  
 	svg, svg path {
 		margin: 0;
 	}
+
 	:root {
 		--black0: 		rgba(38, 38, 38, 1);
 		--gray50: 		rgba(247, 247, 247, 1);
@@ -44,4 +49,5 @@ export default createGlobalStyle`
 		--red50:		rgba(244, 64, 64, 1);
 		--red100:		rgba(221, 104, 104, 1);
 	}
-	`;
+
+`;
