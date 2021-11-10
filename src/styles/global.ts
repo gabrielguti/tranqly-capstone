@@ -1,18 +1,21 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+
 	* {
 		margin: 0;
 		padding: 0;
 		outline: 0;
 		box-sizing: border-box;
 		font-family: 'Poppins', sans-serif;
+
 	}
   
 	html, body {
 		max-width: 100vw;
 		max-height: 100vh;
 	}
+
 
 	button {
 		cursor: pointer;
@@ -32,6 +35,7 @@ export default createGlobalStyle`
 	}
 
 	:root {
+
 		--black0: 		rgba(38, 38, 38, 1);
 		--gray50: 		rgba(247, 247, 247, 1);
 		--gray100: 		rgba(202, 199, 199, 1);
@@ -50,4 +54,4 @@ export default createGlobalStyle`
 		--red100:		rgba(221, 104, 104, 1);
 	}
 
-`;
+`
