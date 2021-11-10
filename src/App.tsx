@@ -1,13 +1,12 @@
-import React from "react";
-import GlobalStyles from "./styles/global"
-
+import GlobalStyles from "./styles/global";
+import Bar from "./components/bar";
 
 function App() {
   return (
-  <>
-  <div>App</div>
-  <GlobalStyles/>
-  </>
+    <>
+      <GlobalStyles />
+      <Bar />
+    </>
   );
 }
 
