@@ -17,11 +17,7 @@ const Routes = () => {
         <Route path="/signin" component={Login} />
         <Route path="/signupclient" component={RegisterClient} />
         <Route path="/signupprofessional" component={RegisterProfessional} />
-        <Route
-          path="/profileprofessional"
-          component={ProfileProfessional}
-          isPrivate
-        />
+        <Route path="/profileprofessional" component={ProfileProfessional} />
         <Route path="/profileclient" component={ProfileClient} isPrivate />
         <Route
           path="/dashboardpatient"
