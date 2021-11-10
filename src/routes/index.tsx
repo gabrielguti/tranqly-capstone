@@ -1,6 +1,6 @@
 import { ComponentType } from "react";
 import { Switch } from "react-router-dom";
-import Route from "./Route"
+import Route from "./Route";
 import DashboardPatient from "../pages/dashboardPatient";
 import DashboardProfessional from "../pages/dashboardProfessional";
 import Login from "../pages/login";
@@ -10,21 +10,32 @@ import RegisterClient from "../pages/registerClient";
 import RegisterProfessional from "../pages/registerProfessional";
 import LandingPage from "../pages/landingPage";
 
-
 const Routes = () => {
-  return <>
-  <Switch>
-    <Route exact path="/" component={LandingPage}/>
-    <Route path="/signin" component={Login}/>
-    <Route path="/signupclient" component={RegisterClient}/>
-    <Route path="/signupprofessional" component={RegisterProfessional}/>
-    <Route path="/profileprofessional" component={ProfileProfessional} isPrivate/>
-    <Route path="/profileclient" component={ProfileClient} isPrivate/>
-    <Route path="/dashboardpatient" component={DashboardPatient} isPrivate/>
-    <Route path="dashboardprofessional" component={DashboardProfessional} isPrivate/>
-  </Switch>
-
-  </>;
+  return (
+    <>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/signin" component={Login} />
+        <Route path="/signupclient" component={RegisterClient} />
+        <Route path="/signupprofessional" component={RegisterProfessional} />
+        <Route
+          path="/profileprofessional"
+          component={ProfileProfessional}
+          isPrivate
+        />
+        <Route path="/profileclient" component={ProfileClient} isPrivate />
+        <Route
+          path="/dashboardpatient"
+          component={DashboardPatient}
+          isPrivate
+        />
+        <Route
+          path="/dashboardprofessional"
+          component={DashboardProfessional}
+        />
+      </Switch>
+    </>
+  );
 };
 
 export default Routes;
