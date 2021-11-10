@@ -1,12 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+
 	* {
 		margin: 0;
 		padding: 0;
 		outline: 0;
 		box-sizing: border-box;
 		font-family: 'Poppins', sans-serif;
+
 	}
   
 	html, body {
@@ -14,11 +16,11 @@ export default createGlobalStyle`
 		max-height: 100vh;
 	}
 
+
 	button {
 		cursor: pointer;
 		background: none;
 		border: none;
-		}
 		&:focus{
 			outline: none;
 		}
@@ -32,7 +34,18 @@ export default createGlobalStyle`
 		margin: 0;
 	}
 
+
+a{
+text-decoration:none;
+}
+
+svg, svg path{
+margin:0;
+}
+
+
 	:root {
+
 		--black0: 		rgba(38, 38, 38, 1);
 		--gray50: 		rgba(247, 247, 247, 1);
 		--gray100: 		rgba(202, 199, 199, 1);
