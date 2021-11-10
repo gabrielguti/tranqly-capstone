@@ -1,5 +1,11 @@
+import Index from "../bar";
+
 const Header = () => {
-  return <></>;
+  return (
+    <>
+      <Index />
+    </>
+  );
 };
 
 export default Header;
