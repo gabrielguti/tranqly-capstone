@@ -8,7 +8,7 @@ export default createGlobalStyle`
 		box-sizing: border-box;
 		font-family: 'Poppins', sans-serif;
 	}
-
+  
 	html, body {
 		max-width: 100vw;
 		max-height: 100vh;
@@ -23,11 +23,11 @@ export default createGlobalStyle`
 			outline: none;
 		}
 	}
-
+  
 	a {
 		text-decoration: none;
 	}
-
+  
 	svg, svg path {
 		margin: 0;
 	}
@@ -49,4 +49,5 @@ export default createGlobalStyle`
 		--red50:		rgba(244, 64, 64, 1);
 		--red100:		rgba(221, 104, 104, 1);
 	}
+
 `;
