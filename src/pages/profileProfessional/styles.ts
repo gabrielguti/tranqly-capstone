@@ -28,7 +28,8 @@ export const ContainerProfessionalData = styled.div`
       }
     }
     .data {
-      margin: 0 0 50px 0;
+      margin-bottom: 50px;
+      padding: 5px;
       max-width: 600px;
       width: 100%;
       display: flex;
@@ -61,11 +62,15 @@ export const ContainerProfessionalData = styled.div`
 
 export const Calendar = styled.div`
   width: 100%;
-  max-width: 900px;
-  margin: auto;
-  padding: 20px 0;
+  padding-top: 30px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   .tittle {
+    width: 100%;
+    max-width: 770px;
     height: 70px;
     background-color: var(--purple300);
     font-size: 28px;
@@ -75,8 +80,13 @@ export const Calendar = styled.div`
     justify-content: center;
   }
   .container {
+    width: 100%;
+    max-width: 770px;
     display: flex;
-    overflow-y: scroll;
+    overflow-x: scroll;
+    @media (min-width: 770px) {
+      overflow-x: unset;
+    }
   }
   .week {
   }
@@ -111,7 +121,7 @@ export const Coment = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
   .containerComent {
     display: grid;
     flex-wrap: wrap;
@@ -125,4 +135,11 @@ export const Coment = styled.div`
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
+`;
+
+export const Line = styled.div`
+  width: 80%;
+  border-top: 3px solid var(--purple300);
+  margin: 20px auto;
+  padding: 20px;
 `;

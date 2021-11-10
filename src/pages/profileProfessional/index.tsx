@@ -1,4 +1,4 @@
-import { Calendar, ContainerProfessionalData, Coment } from "./styles";
+import { Calendar, ContainerProfessionalData, Coment, Line } from "./styles";
 import Bar from "../../components/bar";
 import profile from "../../assets/img/profile.png";
 import { FaStar } from "react-icons/fa";
@@ -26,8 +26,8 @@ const ProfileProfessional = () => {
               </div>
             </div>
             <div>
-              <span>Psicologo</span>
-              <span>Traumas | TEPT | Relacionamentos</span>
+              <p>Psicologo</p>
+              <p>Traumas | TEPT | Relacionamentos</p>
             </div>
             <div>
               <p>
@@ -40,7 +40,9 @@ const ProfileProfessional = () => {
         </div>
       </ContainerProfessionalData>
       <Calendar>
-        <div className="tittle">Escolha seu horário</div>
+        <div className="tittle">
+          <p>Escolha seu horário</p>
+        </div>
         <div className="container">
           <div className="week">
             <div className="day">
@@ -162,6 +164,7 @@ const ProfileProfessional = () => {
           <CardComent />
         </div>
       </Coment>
+      <Line />
     </>
   );
 };
