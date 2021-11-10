@@ -18,7 +18,6 @@ export default createGlobalStyle`
 		cursor: pointer;
 		background: none;
 		border: none;
-		}
 		&:focus{
 			outline: none;
 		}
@@ -45,6 +44,7 @@ export default createGlobalStyle`
 		--orange200:	rgba(247, 112, 0, 1);
 		--yellow50:		rgba(252, 244, 94, 1);
 		--yellow100:	rgba(250, 250, 0, 1);
+		--yellow200:    rgba(255, 193, 5, 1);
 		--green50:		rgba(134, 224, 145, 1);
 		--red50:		rgba(244, 64, 64, 1);
 		--red100:		rgba(221, 104, 104, 1);
