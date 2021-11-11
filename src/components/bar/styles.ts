@@ -27,6 +27,14 @@ export const BarContainer = styled.div`
     }
   }
   .burguer {
+    .bm-burger-button {
+      position: relative;
+      width: 36px;
+      height: 30px;
+    }
+    .bm-burger-bars {
+      background: #373a47;
+    }
     .bm-cross {
       background: var(--gray200);
     }
