@@ -1,9 +1,10 @@
 import { ReactNode } from "react";
-import { AuthProvider } from "./AuthProvider";
+import { AuthProvider } from "./authProvider";
+import { ProfessionalProvider } from "./professionals";
 
 interface AppProviderProps {
   children: ReactNode;
 }
 export const AppProvider = ({ children }: AppProviderProps) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return <AuthProvider><ProfessionalProvider>{children}</ProfessionalProvider></AuthProvider>;
 };
