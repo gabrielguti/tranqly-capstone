@@ -25,10 +25,11 @@ export const ProfessionalContext = createContext<IProfessional>({} as IProfessio
 
 export const ProfessionalProvider=({children}:ProfessionalProps)=>{
     const [professionals, setProfessionals]=useState<IProfessionalData[]>([] as IProfessionalData[])
+    const [sProfessionals, setSProfessionals]=useState<IProfessionalData[]>([]as IProfessionalData[])
     
     const getProfessionals=useCallback(()=>{
         api.get(`/users?type=professional`)
-        .then((response)=>setProfessionals(response.data))
+        .then((response)=>{setProfessionals(response.data); setSProfessionals(response.data)})
         .catch((e)=>console.log(e))
     },[])
     
@@ -37,15 +38,19 @@ export const ProfessionalProvider=({children}:ProfessionalProps)=>{
     },[getProfessionals])
 
     const filterProfessional=(searchProfessional:string)=>{
-        if(searchProfessional===""){
+        if(searchProfessional===""|| (sProfessionals.filter((professional)=>
+        professional.name.toLocaleLowerCase().includes(searchProfessional) || 
+        professional.profession.toLocaleLowerCase().includes(searchProfessional)
+    )).length===0 ){
             getProfessionals();
         } else{
             setProfessionals(
-            professionals.filter((professional)=>
+                sProfessionals.filter((professional)=>
                 professional.name.toLocaleLowerCase().includes(searchProfessional) || 
-                professional.profession.toLocaleLowerCase().includes(searchProfessional)   
+                professional.profession.toLocaleLowerCase().includes(searchProfessional)
             ))
         }
+
     }
 
     return(
