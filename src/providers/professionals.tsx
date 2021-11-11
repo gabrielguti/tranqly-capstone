@@ -16,16 +16,16 @@ interface IProfessionalData{
 
 interface IProfessional{
     getProfessional: ()=>void;
-    professional: IProfessionalData[];
+    professionals: IProfessionalData[];
 }
 
-const ProfessionalContext = createContext<IProfessional>({} as IProfessional)
+export const ProfessionalContext = createContext<IProfessional>({} as IProfessional)
 
 export const ProfessionalProvider=({children}:ProfessionalProps)=>{
-    const [professional, setProfessional]=useState<IProfessionalData[]>([] as IProfessionalData[])
+    const [professionals, setProfessionals]=useState<IProfessionalData[]>([] as IProfessionalData[])
     const getProfessional=()=>{
-        api.get(`//users?type=professional`)
-        .then((response)=>console.log(response))
+        api.get(`/users?type=professional`)
+        .then((response)=>setProfessionals(response.data))
         .catch((e)=>console.log(e))
     }
     
@@ -34,7 +34,7 @@ export const ProfessionalProvider=({children}:ProfessionalProps)=>{
     },[getProfessional])
 
     return(
-        <ProfessionalContext.Provider value={{getProfessional, professional}}>{children}</ProfessionalContext.Provider>
+        <ProfessionalContext.Provider value={{getProfessional, professionals}}>{children}</ProfessionalContext.Provider>
     )
 
 }

@@ -38,8 +38,8 @@ export default createGlobalStyle`
 
 		--black0: 		rgba(38, 38, 38, 1);
 		--gray50: 		rgba(247, 247, 247, 1);
-		--gray100: 		rgba(202, 199, 199, 1);
-		--gray200: 		rgba(222, 226, 230, 1);
+		--gray100: 		rgba(222, 226, 230, 1);
+		--gray200: 		rgba(202, 199, 199, 1);
 		--purple100:	rgba(150, 119, 217, 1);
 		--purple200:	rgba(120, 78, 209, 1);
 		--purple300:	rgba(69, 36, 122, 0.87);
