@@ -1,4 +1,4 @@
-import {createContext, ReactNode, useCallback, useContext, useEffect, useState} from "react"
+import {createContext, ReactNode, useCallback, useEffect, useState} from "react"
 import api from "../services/api"
 
 interface ProfessionalProps{
@@ -12,10 +12,11 @@ interface IProfessionalData{
     type:string;
     profession:string;
     description:string;
+    areas:[]
 }
 
 interface IProfessional{
-    getProfessional: ()=>void;
+    getProfessionals: ()=>void;
     professionals: IProfessionalData[];
 }
 
@@ -23,18 +24,18 @@ export const ProfessionalContext = createContext<IProfessional>({} as IProfessio
 
 export const ProfessionalProvider=({children}:ProfessionalProps)=>{
     const [professionals, setProfessionals]=useState<IProfessionalData[]>([] as IProfessionalData[])
-    const getProfessional=()=>{
+    const getProfessionals=useCallback(()=>{
         api.get(`/users?type=professional`)
         .then((response)=>setProfessionals(response.data))
         .catch((e)=>console.log(e))
-    }
+    },[])
     
     useEffect(()=>{
-        getProfessional();
-    },[getProfessional])
+        getProfessionals();
+    },[getProfessionals])
 
     return(
-        <ProfessionalContext.Provider value={{getProfessional, professionals}}>{children}</ProfessionalContext.Provider>
+        <ProfessionalContext.Provider value={{getProfessionals, professionals}}>{children}</ProfessionalContext.Provider>
     )
 
 }

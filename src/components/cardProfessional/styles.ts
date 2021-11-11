@@ -5,7 +5,7 @@ export const ContainerProfessional=styled.div`
     flex-direction: column;
     border-radius: 10px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 35px;
     width: 90%;
     box-shadow: 0px 0px 15px 6px rgb(0 0 0 / 30%);
     border: none;
@@ -70,16 +70,16 @@ export const PDescription=styled.p`
 
 `
 export const ContainerAreas=styled.div`
+        margin:20px 0 20px 0;
 @media(min-width:767px){
-        margin:0 0 20px 0;
-        
+        display: flex;
     }
 `
 export const PAreas = styled.p`
     font-size: 15px;
     font-weight: lighter;
     color: rgba(0, 0, 0, 0.7);
-    margin-bottom: 20px;
+    margin-right: 10px;
 `
 export const ContainerButtonSchedule=styled.div`
     margin: 0 auto;

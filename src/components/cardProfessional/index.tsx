@@ -6,7 +6,8 @@ interface ProfessionalData {
     name:string;
     profession:string;
     description:string;
-    image:string
+    image:string;
+    areas:[]
 }
 
 interface CardProfessionalProps{
@@ -28,7 +29,11 @@ const CardProfessional=({professional}:CardProfessionalProps)=>{
             </ContainerName>
         <ContainerSkylls>
             <ContainerProfession><PProfession>{professional.profession}</PProfession></ContainerProfession>
-            <ContainerAreas><PAreas>Traumas | TEPT | Relacionamentos</PAreas></ContainerAreas>
+            <ContainerAreas>
+                {professional.areas.map((area, index)=>{
+                    return <PAreas key={index}>{area}</PAreas>
+                })}
+            </ContainerAreas>
             <ContainerDescription><PDescription>{professional.description}</PDescription></ContainerDescription>
         </ContainerSkylls>
         <ContainerButtonSchedule>
