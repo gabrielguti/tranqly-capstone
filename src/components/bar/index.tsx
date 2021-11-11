@@ -4,7 +4,7 @@ import { FaBars } from "react-icons/fa";
 import { slide as Menu } from "react-burger-menu";
 import Button from "../button";
 
-export default function Index() {
+export default function index() {
   return (
     <>
       <BarContainer>

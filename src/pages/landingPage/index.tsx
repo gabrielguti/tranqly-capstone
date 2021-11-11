@@ -1,12 +1,12 @@
 import { MainContainer, HeaderContainer, MainInfoContainer } from "./styles";
 import landingImg from "../../assets/img/IllustrationO15.svg";
 import ProfileImg from "../../assets/img/profile.png";
-import Header from "../../components/header";
+import Bar from "../../components/bar";
 
 const LandingPage = () => {
   return (
     <MainContainer>
-      <Header />
+      <Bar />
       <HeaderContainer>
         <div className="InfoHeader">
           <h1 id="MainInfo">Um jeito diferente de mudar sua vida</h1>
