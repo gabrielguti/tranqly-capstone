@@ -8,6 +8,7 @@ import ProfileProfessional from "../pages/profileProfessional";
 import RegisterClient from "../pages/registerClient";
 import RegisterProfessional from "../pages/registerProfessional";
 import LandingPage from "../pages/landingPage";
+import DashboardFilter from "../pages/dashboardFilter";
 
 const Routes = () => {
   return (
@@ -20,10 +21,9 @@ const Routes = () => {
         <Route path="/profileprofessional" component={ProfileProfessional} />
         <Route path="/profileclient" component={ProfileClient} />
         <Route path="/dashboardpatient" component={DashboardPatient} />
-        <Route
-          path="/dashboardprofessional"
-          component={DashboardProfessional}
-        />
+        <Route path="/dashboardprofessional" component={DashboardProfessional} />
+        <Route path="/dashboardfilter" component={DashboardFilter}/>
+
       </Switch>
     </>
   );
