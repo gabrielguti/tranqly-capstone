@@ -9,6 +9,10 @@ export default function index() {
           <div>
             <img src={logo} alt="log" />
           </div>
+
+          <a href="/">
+            <button>Home</button>
+          </a>
         </div>
       </BarContainer>
     </>

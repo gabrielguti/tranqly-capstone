@@ -18,9 +18,9 @@ export default function index() {
               <a href="/">
                 <img src={logo} alt="logo" />
               </a>
-              <a href="/">Para especialistas</a>
-              <a href="/">Para clientes</a>
-              <a href="/">
+              <a href="/signupprofessional">Para especialistas</a>
+              <a href="/signupclient">Para clientes</a>
+              <a href="/signin">
                 <Button>Logar</Button>
               </a>
             </Menu>
