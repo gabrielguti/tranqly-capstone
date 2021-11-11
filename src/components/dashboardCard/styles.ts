@@ -10,6 +10,9 @@ export const CardPro = styled.div`
   margin-top: 5vh;
   width: 250px;
   margin-bottom: 7vh;
+  @media (min-width: 1000px) {
+    height: 350px;
+  }
 `;
 
 export const Date = styled.div`
@@ -47,12 +50,15 @@ export const Info = styled.div`
   flex-direction: column;
   justify-content: space-between;
   button {
-    margin-top: 5vh;
+    margin-top: 2vh;
     background-color: var(--red50);
     width: 60%;
     :hover {
       opacity: 0.8;
       background-color: var(--red50);
+    }
+    @media (min-width: 900px) {
+      margin-top: 5vh;
     }
   }
 
