@@ -23,6 +23,7 @@ const Routes = () => {
         <Route path="/dashboardpatient" component={DashboardPatient} />
         <Route path="/dashboardprofessional" component={DashboardProfessional} />
         <Route path="/dashboardfilter" component={DashboardFilter}/>
+
       </Switch>
     </>
   );
