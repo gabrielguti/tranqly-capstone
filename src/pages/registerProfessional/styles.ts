@@ -34,7 +34,7 @@ export const FormContainer = styled.div`
       height: 40vh;
       margin: 0 auto;
       width: 300px;
-      height: 500px;
+      height: 600px;
       border-radius: 10px;
       box-shadow: 0px 0px 4px 4px #00000040;
       background: white;
@@ -52,10 +52,21 @@ export const FormContainer = styled.div`
         border-radius: 5px;
       }
     }
+
+    .SubInputDiv {
+      display: flex;
+      justify-content: space-evenly;
+      > input {
+        padding: 10px;
+        border: 2px solid var(--purple100);
+        border-radius: 5px;
+        width: 43%;
+      }
+    }
   }
 
   @media only screen and (max-width: 1023px) {
-    margin-top: 10vh;
+    margin-top: 5vh;
     > img {
       display: none;
     }
@@ -63,7 +74,7 @@ export const FormContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     .FormDiv {
       position: absolute;
-      top: 15%;
+      top: 10%;
       left: 10%;
     }
   }

@@ -18,6 +18,16 @@ export const BarContainer = styled.div`
         cursor: pointer;
       }
     }
+    > a {
+      > button {
+        width: 80px;
+        height: 30px;
+        padding: 5px;
+        background: var(--orange200);
+        border-radius: 7px;
+        color: white;
+      }
+    }
   }
   @media (min-width: 700px) {
     padding: 0 60px;

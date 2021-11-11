@@ -20,6 +20,9 @@ const RegisterClient = () => {
           <p>
             Já possui conta? <a href="/signin">Entre aqui</a>
           </p>
+          <p>
+            Cadastro para <a href="/signupprofessional">Profissionais</a>
+          </p>
         </div>
       </FormContainer>
     </MainContainer>
