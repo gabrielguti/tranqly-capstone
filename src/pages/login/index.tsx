@@ -8,15 +8,15 @@ const Login = () => {
       <Header />
       <FormContainer>
         <img src={LoginImg} alt={"LoginImg"} />
-        <h1>Entrar</h1>
         <div className="FormDiv">
+          <h1>Entrar</h1>
           <form>
             <input placeholder="Email" />
             <input placeholder="Senha" />
             <button>Entrar</button>
           </form>
           <p>
-            Não possui conta? <a href="/singup">Cadastre-se</a>
+            Não possui conta? <a href="/signupclient">Cadastre-se</a>
           </p>
         </div>
       </FormContainer>

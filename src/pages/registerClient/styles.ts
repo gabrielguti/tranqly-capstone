@@ -10,7 +10,7 @@ export const FormContainer = styled.div`
   > img {
     width: 100vh;
     height: 80vh;
-    margin-left: 1.5vw;
+    margin-left: 3vw;
   }
 
   .FormDiv {
@@ -34,7 +34,7 @@ export const FormContainer = styled.div`
       height: 40vh;
       margin: 0 auto;
       width: 300px;
-      height: 300px;
+      height: 500px;
       border-radius: 10px;
       box-shadow: 0px 0px 4px 4px #00000040;
       background: white;
@@ -55,7 +55,7 @@ export const FormContainer = styled.div`
   }
 
   @media only screen and (max-width: 1023px) {
-    margin-top: 15vh;
+    margin-top: 10vh;
     > img {
       display: none;
     }
@@ -63,18 +63,18 @@ export const FormContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     .FormDiv {
       position: absolute;
-      top: 20%;
-      right: 10%;
+      top: 15%;
+      left: 10%;
     }
   }
   @media only screen and (min-width: 1440px) {
     > img {
-      margin-left: 15vw;
+      margin-left: 32vw;
     }
   }
   @media only screen and (min-width: 2560px) {
     .FormDiv {
-      right: 30%;
+      left: 10%;
     }
   }
 `;
