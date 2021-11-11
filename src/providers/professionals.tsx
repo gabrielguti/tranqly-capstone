@@ -25,6 +25,7 @@ export const ProfessionalContext = createContext<IProfessional>({} as IProfessio
 
 export const ProfessionalProvider=({children}:ProfessionalProps)=>{
     const [professionals, setProfessionals]=useState<IProfessionalData[]>([] as IProfessionalData[])
+    
     const getProfessionals=useCallback(()=>{
         api.get(`/users?type=professional`)
         .then((response)=>setProfessionals(response.data))
