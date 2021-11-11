@@ -18,6 +18,7 @@ interface IProfessionalData{
 interface IProfessional{
     getProfessionals: ()=>void;
     professionals: IProfessionalData[];
+    filterProfessional:(searchProfessional:string)=>void;
 }
 
 export const ProfessionalContext = createContext<IProfessional>({} as IProfessional)
@@ -34,8 +35,20 @@ export const ProfessionalProvider=({children}:ProfessionalProps)=>{
         getProfessionals();
     },[getProfessionals])
 
+    const filterProfessional=(searchProfessional:string)=>{
+        if(searchProfessional===""){
+            getProfessionals();
+        } else{
+            setProfessionals(
+            professionals.filter((professional)=>
+                professional.name.toLocaleLowerCase().includes(searchProfessional) || 
+                professional.profession.toLocaleLowerCase().includes(searchProfessional)   
+            ))
+        }
+    }
+
     return(
-        <ProfessionalContext.Provider value={{getProfessionals, professionals}}>{children}</ProfessionalContext.Provider>
+        <ProfessionalContext.Provider value={{getProfessionals, professionals, filterProfessional}}>{children}</ProfessionalContext.Provider>
     )
 
 }
