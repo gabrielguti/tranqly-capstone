@@ -73,6 +73,7 @@ export const ContainerAreas=styled.div`
         margin:20px 0 20px 0;
 @media(min-width:767px){
         display: flex;
+        margin: 0 0 20px 0;
     }
 `
 export const PAreas = styled.p`
