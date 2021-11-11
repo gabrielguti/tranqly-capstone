@@ -54,4 +54,4 @@ export default createGlobalStyle`
 		--red100:		rgba(221, 104, 104, 1);
 	}
 
-`
+`;
