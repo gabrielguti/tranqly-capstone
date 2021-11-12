@@ -2,6 +2,7 @@ import { MainContainer, HeaderContainer, MainInfoContainer } from "./styles";
 import landingImg from "../../assets/img/IllustrationO15.svg";
 import ProfileImg from "../../assets/img/profile.png";
 import Bar from "../../components/bar";
+import ProfessionalsSlider from "../../components/slider";
 
 const LandingPage = () => {
   return (
@@ -24,15 +25,8 @@ const LandingPage = () => {
       <MainInfoContainer>
         <h2 className="mainTitle">Alguns profissionais</h2>
 
-        <div className="Carousel"></div>
-
-        <div className="RatingDiv">
-          <h2>Nossas avaliações</h2>
-          <div className="Ratings">
-            <div className="ratingInfo"></div>
-            <div className="ratingInfo"></div>
-            <div className="ratingInfo"></div>
-          </div>
+        <div className="Carousel">
+          <ProfessionalsSlider />
         </div>
 
         <div className="LastInfo">
