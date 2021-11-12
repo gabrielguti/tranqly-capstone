@@ -84,9 +84,6 @@ export const Calendar = styled.div`
     max-width: 770px;
     display: flex;
     overflow-x: scroll;
-    @media (min-width: 770px) {
-      overflow-x: unset;
-    }
   }
   .week {
   }
@@ -113,6 +110,11 @@ export const Calendar = styled.div`
     background-color: white;
     border-radius: 10px;
     margin: 5px 0;
+    color: black;
+    font-size: 14px;
+    padding: 5px;
+    cursor: pointer;
+    background-color: var(--orange200);
   }
 `;
 
