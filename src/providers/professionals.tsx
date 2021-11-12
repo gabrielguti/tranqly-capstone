@@ -57,11 +57,15 @@ export const ProfessionalProvider=({children}:ProfessionalProps)=>{
     }
 
     const renderization=(item:string)=>{
-        setSProfess(
-            sProfessionals.filter((professional)=>
-                professional.name.toLocaleLowerCase().includes(item.split(" ")[0].toLocaleLowerCase())
-        ))
+        
+        const professionalStorage = sProfessionals.filter((professional)=>
+        professional.name.toLocaleLowerCase().includes(item.split(" ")[0].toLocaleLowerCase()))
+        localStorage.setItem("@tranqly:prof", JSON.stringify(professionalStorage))
+        const professionalInStorage = JSON.parse(localStorage.getItem("@tranqly:prof")||"")
+
+          setSProfess(professionalInStorage)
     }
+
 
     return(
         <ProfessionalContext.Provider value={{getProfessionals, professionals, filterProfessional, sProfess, renderization}}>{children}</ProfessionalContext.Provider>

@@ -4,19 +4,18 @@ import profile from "../../assets/img/profile.png";
 import { FaStar } from "react-icons/fa";
 import Button from "../../components/button";
 import CardComent from "../../components/CardComent";
-import { useContext } from "react";
-import { ProfessionalContext } from "../../providers/professionals";
 import CardProfessionalData from "../../components/cardProfessionalData";
 
 const ProfileProfessional = () => {
 
-  const {sProfess}=useContext(ProfessionalContext)
-  console.log(sProfess)
+
+  const getProfessionalStorage = JSON.parse(localStorage.getItem("@tranqly:prof")||"")
+  
   return (
     <>
       <Bar />
       <ContainerProfessionalData>
-        <CardProfessionalData professional={sProfess[0]}/>
+        <CardProfessionalData professional={getProfessionalStorage[0]}/>
       </ContainerProfessionalData>
       <Calendar>
         <div className="tittle">
