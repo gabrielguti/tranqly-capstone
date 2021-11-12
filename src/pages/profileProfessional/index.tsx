@@ -1,8 +1,6 @@
 /* eslint-disable array-callback-return */
 import { Calendar, ContainerProfessionalData, Coment, Line } from "./styles";
 import Bar from "../../components/bar";
-import profile from "../../assets/img/profile.png";
-import { FaStar } from "react-icons/fa";
 import Button from "../../components/button";
 import CardComent from "../../components/CardComent";
 import { useEffect, useState } from "react";
@@ -10,6 +8,9 @@ import api from "../../services/api";
 import moment from "moment";
 import "moment/locale/pt-br";
 import { FaCheck } from "react-icons/fa";
+import CardProfessionalData from "../../components/cardProfessionalData";
+
+
 interface dataProps {
   userId: number;
   disponivel: boolean;
@@ -21,7 +22,7 @@ const ProfileProfessional = () => {
   const [calendar, setCalendar] = useState<dataProps[]>([]);
   let ref: string[] = [];
   // const now = moment();
-
+  const getProfessionalStorage = JSON.parse(localStorage.getItem("@tranqly:prof")||"")
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZyZWRlcmljb0BtYXNvbWVuby5jb20iLCJpYXQiOjE2MzY2ODIzMTYsImV4cCI6MTYzNjY4NTkxNiwic3ViIjoiMSJ9.W1MApBtshV1AAi8EpUOZoNKnfXmYGuSreC_XtWBVtBA";
 
@@ -44,34 +45,7 @@ const ProfileProfessional = () => {
     <>
       <Bar />
       <ContainerProfessionalData>
-        <div className="ProfessionalData">
-          <div className="img">
-            <img src={profile} alt="imgProfile" />
-          </div>
-          <div className="data">
-            <div>
-              <h2>FREDERICO MASOMENO</h2>
-              <div className="stars">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-            </div>
-            <div>
-              <p>Psicologo</p>
-              <p>Traumas | TEPT | Relacionamentos</p>
-            </div>
-            <div>
-              <p>
-                Psicologo formado na Faculdade Imaginária de Natanlandia com
-                especialização em traumas e relacionamentos. Com experiência em
-                muitos lugares loucos mano. Dattebayo.
-              </p>
-            </div>
-          </div>
-        </div>
+      <CardProfessionalData professional={getProfessionalStorage[0]}/>
       </ContainerProfessionalData>
 
       <Calendar>
