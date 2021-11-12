@@ -1,5 +1,5 @@
 import "swiper/swiper-bundle";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ProfessionalContext } from "../../providers/professionals";
 import Slider from "react-slick";
 import { MainContainer } from "./styles";
@@ -9,15 +9,14 @@ import CardComent from "../CardComent";
 import StarsCount from "../starsCount";
 
 const ProfessionalsSlider = () => {
-  const [accumulator, setAccumulator] = useState<number>(0);
-  const { professionals, professionalComments, clients, qualifications } =
+  const { allProfessionals, professionalComments, clients, qualifications } =
     useContext(ProfessionalContext);
 
-  for (let i = professionals.length - 1; i > 0; i--) {
+  for (let i = allProfessionals.length - 1; i > 0; i--) {
     let rand = Math.floor(Math.random() * (i + 1));
-    [professionals[i], professionals[rand]] = [
-      professionals[rand],
-      professionals[i],
+    [allProfessionals[i], allProfessionals[rand]] = [
+      allProfessionals[rand],
+      allProfessionals[i],
     ];
   }
 
@@ -25,7 +24,7 @@ const ProfessionalsSlider = () => {
 
   return (
     <Slider>
-      {professionals.map((elt, index) => {
+      {allProfessionals.map((elt, index) => {
         const { image, name, profession, areas, description, id } = elt;
 
         const filteredComments = professionalComments.filter((elt) => {
