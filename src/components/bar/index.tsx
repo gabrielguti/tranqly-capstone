@@ -18,6 +18,7 @@ export default function index() {
               </a>
               <a href="/signupprofessional">Para especialistas</a>
               <a href="/signupclient">Para clientes</a>
+              <a href="/dashboardfilter">Procurar especialista</a>
               <a href="/signin">
                 <Button>Logar</Button>
               </a>
