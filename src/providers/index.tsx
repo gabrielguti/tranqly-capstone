@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { AuthProvider } from "./authProvider";
 import { ProfessionalProvider } from "./professionals";
-
 interface AppProviderProps {
   children: ReactNode;
 }

@@ -6,11 +6,9 @@ import {
   useState,
 } from "react";
 import api from "../services/api";
-
 interface ProfessionalProps {
   children: ReactNode;
 }
-
 interface IProfessionalComments {
   id: number;
   destinyId: number;
@@ -18,7 +16,6 @@ interface IProfessionalComments {
   coment: string;
   UserId: number;
 }
-
 interface IProfessionalData {
   id: number;
   name: string;
@@ -28,7 +25,6 @@ interface IProfessionalData {
   description: string;
   areas: [];
 }
-
 interface IClientData {
   id: number;
   name: string;
@@ -42,7 +38,6 @@ interface IQualificationData {
   qualification: number;
   id: number;
 }
-
 interface IProfessional {
   getProfessional: () => void;
   professionals: IProfessionalData[];
@@ -52,13 +47,11 @@ interface IProfessional {
   clients: IClientData[];
   qualifications: IQualificationData[];
   sProfess: IProfessionalData[];
-    renderization:(item:string)=>void;
+  renderization:(nameProfessional:string)=>void;
 }
-
 export const ProfessionalContext = createContext<IProfessional>(
   {} as IProfessional
 );
-
 export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
   const [professionals, setProfessionals] = useState<IProfessionalData[]>(
     [] as IProfessionalData[]
@@ -77,7 +70,6 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
   const [allProfessionals, setAllProfessionals] = useState<IProfessionalData[]>(
     [] as IProfessionalData[]
   );
-
   const getProfessionals = useCallback(() => {
     api
       .get(`/users?type=professional`)
@@ -87,11 +79,9 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
       })
       .catch((e) => console.log(e));
   }, []);
-
   useEffect(() => {
     getProfessionals();
   }, [getProfessionals]);
-
   const filterProfessional = (searchProfessional: string) => {
     if (
       searchProfessional === "" ||
@@ -118,7 +108,6 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
       );
     }
   };
-
   const getProfessional = () => {
     api
       .get(`/users?type=professional`)
@@ -127,13 +116,11 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
       })
       .catch((e) => console.log(e));
   };
-
   const getClients = () => {
     api.get(`/users?type=client`).then((response) => {
       setClients(response.data);
     });
   };
-
   const getComments = () => {
     api
       .get(`/coments`)
@@ -142,7 +129,6 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
       })
       .catch((e) => console.log(e));
   };
-
   const getQualifications = () => {
     api
       .get(`/qualification`)
@@ -151,24 +137,19 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
       })
       .catch((e) => console.log(e));
   };
-
-  const renderization=(item:string)=>{
-        
+  const renderization=(nameProfessional:string)=>{
     const professionalStorage = sProfessionals.filter((professional)=>
-    professional.name.toLocaleLowerCase().includes(item.split(" ")[0].toLocaleLowerCase()))
-    localStorage.setItem("@tranqly:prof", JSON.stringify(professionalStorage))
-    const professionalInStorage = JSON.parse(localStorage.getItem("@tranqly:prof")||"")
-
+    professional.name.toLocaleLowerCase().includes(nameProfessional.split(" ")[0].toLocaleLowerCase()))
+    localStorage.setItem("@tranqyl:prof", JSON.stringify(professionalStorage))
+    const professionalInStorage = JSON.parse(localStorage.getItem("@tranqyl:prof")||"")
       setSProfess(professionalInStorage)
 }
-
   useEffect(() => {
     getProfessional();
     getComments();
     getClients();
     getQualifications();
   }, []);
-
   return (
     <ProfessionalContext.Provider
       value={{
@@ -177,8 +158,8 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
         professionalComments,
         clients,
         filterProfessional,
-        qualifications, 
-        sProfess, 
+        qualifications,
+        sProfess,
         renderization,
         allProfessionals,
       }}
