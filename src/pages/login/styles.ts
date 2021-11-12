@@ -38,10 +38,16 @@ export const FormContainer = styled.div`
       border-radius: 10px;
       box-shadow: 0px 0px 4px 4px #00000040;
       background: white;
-      > input {
-        padding: 10px;
-        border: 2px solid var(--purple100);
-        border-radius: 5px;
+      > div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        color: var(--red100);
+        > input {
+          padding: 10px;
+          border: 2px solid var(--purple100);
+          border-radius: 5px;
+        }
       }
       > button {
         background: var(--purple100);
@@ -73,6 +79,15 @@ export const FormContainer = styled.div`
     }
     .FormDiv {
       right: 20%;
+    }
+  }
+  @media only screen and (min-width: 2000px) {
+    > img {
+      margin-left: 30vw;
+    }
+    .FormDiv {
+      top: 15%;
+      right: 30%;
     }
   }
   @media only screen and (min-width: 2560px) {

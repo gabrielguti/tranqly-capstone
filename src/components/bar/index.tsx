@@ -22,6 +22,9 @@ export default function index() {
               <a href="/signin">
                 <Button>Logar</Button>
               </a>
+              <a href="/">
+                <Button>Home</Button>
+              </a>
             </Menu>
           </div>
         </div>
