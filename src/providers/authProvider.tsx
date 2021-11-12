@@ -42,13 +42,6 @@ const UseAuth = () => {
   return context;
 };
 
-const AutContext = createContext<AuthContextData>({}as AuthContextData)
-
-const AuthProvider = ({children}: AuthProviderProps)=>{
-
-    const [data, setData]=useState<AuthState>(()=>{
-    const accessToken =localStorage.getItem("@tranqyl:accessToken")
-    const user = localStorage.getItem("@tranqyl:user")
 
 const AutContext = createContext<AuthContextData>({} as AuthContextData);
 
