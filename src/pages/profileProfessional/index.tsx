@@ -4,40 +4,19 @@ import profile from "../../assets/img/profile.png";
 import { FaStar } from "react-icons/fa";
 import Button from "../../components/button";
 import CardComent from "../../components/CardComent";
+import { useContext } from "react";
+import { ProfessionalContext } from "../../providers/professionals";
+import CardProfessionalData from "../../components/cardProfessionalData";
 
 const ProfileProfessional = () => {
+
+  const {sProfess}=useContext(ProfessionalContext)
+  console.log(sProfess)
   return (
     <>
       <Bar />
       <ContainerProfessionalData>
-        <div className="ProfessionalData">
-          <div className="img">
-            <img src={profile} alt="imgProfile" />
-          </div>
-          <div className="data">
-            <div>
-              <h2>FREDERICO MASOMENO</h2>
-              <div className="stars">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-            </div>
-            <div>
-              <p>Psicologo</p>
-              <p>Traumas | TEPT | Relacionamentos</p>
-            </div>
-            <div>
-              <p>
-                Psicologo formado na Faculdade Imaginária de Natanlandia com
-                especialização em traumas e relacionamentos. Com experiência em
-                muitos lugares loucos mano. Dattebayo.
-              </p>
-            </div>
-          </div>
-        </div>
+        <CardProfessionalData professional={sProfess[0]}/>
       </ContainerProfessionalData>
       <Calendar>
         <div className="tittle">
