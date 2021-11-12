@@ -74,18 +74,26 @@ export const FormContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     .FormDiv {
       position: absolute;
-      top: 10%;
+      top: 5%;
       left: 10%;
     }
   }
   @media only screen and (min-width: 1440px) {
     > img {
-      margin-left: 32vw;
+      margin-left: 20vw;
+    }
+    .FormDiv {
+      top: 5%;
+      left: 15%;
     }
   }
   @media only screen and (min-width: 2560px) {
+    > img {
+      margin-left: 30vw;
+    }
     .FormDiv {
-      left: 10%;
+      top: 15%;
+      left: 30%;
     }
   }
 `;

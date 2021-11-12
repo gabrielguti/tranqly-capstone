@@ -6,6 +6,10 @@ export const MainContainer = styled.div`
     flex-direction: column;
     padding: 10px;
 
+    > img {
+      border-radius: 100%;
+    }
+
     > div {
       display: flex;
       flex-direction: column;

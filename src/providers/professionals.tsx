@@ -7,7 +7,6 @@ import {
 } from "react";
 import api from "../services/api";
 
-
 interface ProfessionalProps {
   children: ReactNode;
 }
@@ -27,7 +26,7 @@ interface IProfessionalData {
   type: string;
   profession: string;
   description: string;
-  areas:[];
+  areas: [];
 }
 
 interface IClientData {
@@ -47,7 +46,8 @@ interface IQualificationData {
 interface IProfessional {
   getProfessional: () => void;
   professionals: IProfessionalData[];
-  filterProfessional:(searchProfessional:string)=>void;
+  allProfessionals: IProfessionalData[];
+  filterProfessional: (searchProfessional: string) => void;
   professionalComments: IProfessionalComments[];
   clients: IClientData[];
   qualifications: IQualificationData[];
@@ -70,38 +70,61 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
     [] as IQualificationData[]
   );
   const [clients, setClients] = useState<IClientData[]>([] as IClientData[]);
-  const [sProfessionals, setSProfessionals]=useState<IProfessionalData[]>([]as IProfessionalData[])
   const [sProfess, setSProfess]=useState<IProfessionalData[]>([]as IProfessionalData[])
-    const getProfessionals=useCallback(()=>{
-        api.get(`/users?type=professional`)
-        .then((response)=>{setProfessionals(response.data); setSProfessionals(response.data)})
-        .catch((e)=>console.log(e))
-    },[])
-    
-    useEffect(()=>{
-        getProfessionals();
-    },[getProfessionals])
+  const [sProfessionals, setSProfessionals] = useState<IProfessionalData[]>(
+    [] as IProfessionalData[]
+  );
+  const [allProfessionals, setAllProfessionals] = useState<IProfessionalData[]>(
+    [] as IProfessionalData[]
+  );
 
-    const filterProfessional=(searchProfessional:string)=>{
-        if(searchProfessional===""|| (sProfessionals.filter((professional)=>
-        professional.name.toLocaleLowerCase().includes(searchProfessional) || 
-        professional.profession.toLocaleLowerCase().includes(searchProfessional)
-    )).length===0 ){
-            getProfessionals();
-        } else{
-            setProfessionals(
-                sProfessionals.filter((professional)=>
-                professional.name.toLocaleLowerCase().includes(searchProfessional) || 
-                professional.profession.toLocaleLowerCase().includes(searchProfessional)
-            ))
-        }
+  const getProfessionals = useCallback(() => {
+    api
+      .get(`/users?type=professional`)
+      .then((response) => {
+        setProfessionals(response.data);
+        setSProfessionals(response.data);
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
+  useEffect(() => {
+    getProfessionals();
+  }, [getProfessionals]);
+
+  const filterProfessional = (searchProfessional: string) => {
+    if (
+      searchProfessional === "" ||
+      sProfessionals.filter(
+        (professional) =>
+          professional.name.toLocaleLowerCase().includes(searchProfessional) ||
+          professional.profession
+            .toLocaleLowerCase()
+            .includes(searchProfessional)
+      ).length === 0
+    ) {
+      getProfessionals();
+    } else {
+      setProfessionals(
+        sProfessionals.filter(
+          (professional) =>
+            professional.name
+              .toLocaleLowerCase()
+              .includes(searchProfessional) ||
+            professional.profession
+              .toLocaleLowerCase()
+              .includes(searchProfessional)
+        )
+      );
     }
+  };
 
   const getProfessional = () => {
     api
       .get(`/users?type=professional`)
-      .then((response) => setProfessionals(response.data))
+      .then((response) => {
+        setAllProfessionals(response.data);
+      })
       .catch((e) => console.log(e));
   };
 
@@ -157,6 +180,7 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
         qualifications, 
         sProfess, 
         renderization
+        allProfessionals,
       }}
     >
       {children}
