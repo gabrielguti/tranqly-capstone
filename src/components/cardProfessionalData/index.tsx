@@ -33,10 +33,10 @@ const CardProfessionalData = ({professional}:CardProfessionalProps)=>{
               </div>
             </div>
             <div>
-              <p>{professional.profession}</p>
+              {/* <p>{professional.profession}</p>
               {professional.areas.map((area, index)=>{
                     return <p key={index}>{area}</p>
-                })}
+                })} */}
             </div>
             <div>
               <p>

@@ -2,7 +2,6 @@ import { MainContainer, HeaderContainer, MainInfoContainer } from "./styles";
 import landingImg from "../../assets/img/IllustrationO15.svg";
 import ProfileImg from "../../assets/img/profile.png";
 import Bar from "../../components/bar";
-import ProfessionalsSlider from "../../components/slider";
 
 const LandingPage = () => {
   return (
@@ -26,7 +25,6 @@ const LandingPage = () => {
         <h2 className="mainTitle">Alguns profissionais</h2>
 
         <div className="Carousel">
-          <ProfessionalsSlider />
         </div>
 
         <div className="LastInfo">
