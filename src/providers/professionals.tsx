@@ -179,7 +179,7 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
         filterProfessional,
         qualifications, 
         sProfess, 
-        renderization
+        renderization,
         allProfessionals,
       }}
     >
