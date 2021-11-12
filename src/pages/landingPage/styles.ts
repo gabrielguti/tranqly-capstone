@@ -71,11 +71,11 @@ export const MainInfoContainer = styled.div`
   }
 
   .Carousel {
-    height: 25vh;
+    padding: 10px;
     background: var(--gray50);
+
     @media only screen and (max-width: 425px) {
       width: 90%;
-      height: 45vh;
       margin: 0 auto;
     }
   }
@@ -87,14 +87,12 @@ export const MainInfoContainer = styled.div`
     }
 
     .Ratings {
-      height: 80vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: space-evenly;
+      flex-wrap: wrap;
       @media only screen and (min-width: 1024px) {
         flex-direction: row;
-        height: 15vh;
       }
       .ratingInfo {
         width: 80%;

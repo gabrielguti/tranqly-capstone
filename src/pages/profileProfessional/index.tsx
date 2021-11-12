@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { Calendar, ContainerProfessionalData, Coment, Line } from "./styles";
 import Bar from "../../components/bar";
 import profile from "../../assets/img/profile.png";
@@ -12,19 +13,21 @@ import { FaCheck } from "react-icons/fa";
 interface dataProps {
   userId: number;
   disponivel: boolean;
-  calendar: string;
+  date: string;
   id: number;
 }
 
 const ProfileProfessional = () => {
   const [calendar, setCalendar] = useState<dataProps[]>([]);
+  let ref: string[] = [];
+  // const now = moment();
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvY29tQHByb2JlbWEuY29tIiwiaWF0IjoxNjM2NjUwNjg3LCJleHAiOjE2MzY2NTQyODcsInN1YiI6IjIifQ.v5h8N3dS5MPTlD_oRW_lpCQkHc0L56D7UjDBOn9WuTU";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZyZWRlcmljb0BtYXNvbWVuby5jb20iLCJpYXQiOjE2MzY2ODIzMTYsImV4cCI6MTYzNjY4NTkxNiwic3ViIjoiMSJ9.W1MApBtshV1AAi8EpUOZoNKnfXmYGuSreC_XtWBVtBA";
 
   useEffect(() => {
     api
-      .get("/profissional?userId=1", {
+      .get("/users/1/professional", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -33,6 +36,9 @@ const ProfileProfessional = () => {
       .then((r) => console.log(r))
       .catch((e) => console.log(e));
   }, []);
+
+  console.log(calendar);
+  console.log(ref);
 
   return (
     <>
@@ -67,45 +73,49 @@ const ProfileProfessional = () => {
           </div>
         </div>
       </ContainerProfessionalData>
+
       <Calendar>
         <div className="tittle">
           <p>Escolha seu horário</p>
         </div>
         <div className="container">
-          {calendar.map((item) => {
-            return (
-              <div className="week">
-                <div className="day">
-                  <p>Domingo</p>
+          {calendar.sort().map((item) => {
+            if (!ref.includes(item.date) && ref.push(item.date)) {
+              return (
+                <div className="week">
+                  <div className="day">
+                    <p>{moment(item.date).format("ddd")}</p>
+                  </div>
+                  <div className="times">
+                    {calendar
+                      .filter((fil) => fil.date === item.date)
+                      .map((str) => {
+                        return (
+                          <div className="time">
+                            <p style={{ textAlign: "center" }}>
+                              {moment(str.date).format("DD/MM/YYYY")}
+                            </p>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <span>{moment(str.date).format("LT")}</span>
+                              <span>
+                                <FaCheck />
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
                 </div>
-                <div className="times">
-                  {calendar.map((item) => {
-                    return (
-                      <div className="time">
-                        <p style={{ textAlign: "center" }}>
-                          {moment(item.calendar).format("DD/MM/YYYY")}
-                        </p>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <span>{moment(item.calendar).format("LT")}</span>
-                          <span>
-                            <FaCheck />
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
+              );
+            }
           })}
         </div>
       </Calendar>
-      <br></br>
       <Coment>
         <h1>Comentários</h1>
         <Button>Criar comentário</Button>
