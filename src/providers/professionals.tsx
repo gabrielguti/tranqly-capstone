@@ -2,7 +2,6 @@ import {
   createContext,
   ReactNode,
   useCallback,
-  useContext,
   useEffect,
   useState,
 } from "react";
@@ -52,6 +51,8 @@ interface IProfessional {
   professionalComments: IProfessionalComments[];
   clients: IClientData[];
   qualifications: IQualificationData[];
+  sProfess: IProfessionalData[];
+    renderization:(item:string)=>void;
 }
 
 export const ProfessionalContext = createContext<IProfessional>(
@@ -70,7 +71,7 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
   );
   const [clients, setClients] = useState<IClientData[]>([] as IClientData[]);
   const [sProfessionals, setSProfessionals]=useState<IProfessionalData[]>([]as IProfessionalData[])
-    
+  const [sProfess, setSProfess]=useState<IProfessionalData[]>([]as IProfessionalData[])
     const getProfessionals=useCallback(()=>{
         api.get(`/users?type=professional`)
         .then((response)=>{setProfessionals(response.data); setSProfessionals(response.data)})
@@ -128,6 +129,16 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
       .catch((e) => console.log(e));
   };
 
+  const renderization=(item:string)=>{
+        
+    const professionalStorage = sProfessionals.filter((professional)=>
+    professional.name.toLocaleLowerCase().includes(item.split(" ")[0].toLocaleLowerCase()))
+    localStorage.setItem("@tranqly:prof", JSON.stringify(professionalStorage))
+    const professionalInStorage = JSON.parse(localStorage.getItem("@tranqly:prof")||"")
+
+      setSProfess(professionalInStorage)
+}
+
   useEffect(() => {
     getProfessional();
     getComments();
@@ -143,7 +154,9 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
         professionalComments,
         clients,
         filterProfessional,
-        qualifications,
+        qualifications, 
+        sProfess, 
+        renderization
       }}
     >
       {children}

@@ -1,5 +1,8 @@
 import { ButtonSchedule, ContainerAreas, ContainerButtonSchedule, ContainerDescription, ContainerImgProfessional, ContainerName, ContainerProfession, ContainerProfessional, ContainerSkylls, PAreas, PDescription, PProfession, } from "./styles"
 import { FaStar } from "react-icons/fa";
+import { useHistory } from "react-router";
+import { useContext } from "react";
+import { ProfessionalContext } from "../../providers/professionals";
 
 
 interface ProfessionalData {
@@ -15,6 +18,15 @@ interface CardProfessionalProps{
 }
 
 const CardProfessional=({professional}:CardProfessionalProps)=>{
+    const history = useHistory()
+    const {renderization, }=useContext(ProfessionalContext)
+    
+
+    const schedule =(name:string)=>{
+       renderization(name)
+
+         return history.push("/profileprofessional")
+    }
     
     return(
     <ContainerProfessional>
@@ -37,7 +49,7 @@ const CardProfessional=({professional}:CardProfessionalProps)=>{
             <ContainerDescription><PDescription>{professional.description}</PDescription></ContainerDescription>
         </ContainerSkylls>
         <ContainerButtonSchedule>
-            <ButtonSchedule>Agendar horário</ButtonSchedule>
+            <ButtonSchedule onClick={()=>schedule(professional.name)}>Agendar horário</ButtonSchedule>
         </ContainerButtonSchedule>
     </ContainerProfessional>)
 }
