@@ -1,11 +1,11 @@
 import { MainContainer, FormContainer } from "./styles";
-import Header from "../../components/header";
+import Bar from "../../components/bar";
 import LoginImg from "../../assets/img/IllustrationR18.svg";
 
 const Login = () => {
   return (
     <MainContainer>
-      <Header />
+      <Bar />
       <FormContainer>
         <img src={LoginImg} alt={"LoginImg"} />
         <div className="FormDiv">

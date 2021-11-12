@@ -1,11 +1,11 @@
 import { MainContainer, FormContainer } from "./styles";
-import Header from "../../components/header";
+import Bar from "../../components/bar";
 import ClientSingUpImg from "../../assets/img/IllustrationS19.svg";
 
 const RegisterProfessional = () => {
   return (
     <MainContainer>
-      <Header />
+      <Bar />
       <FormContainer>
         <img src={ClientSingUpImg} alt={"ClientSingUpImg"} />
         <div className="FormDiv">
