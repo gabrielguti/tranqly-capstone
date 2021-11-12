@@ -82,7 +82,9 @@ export const Calendar = styled.div`
   .container {
     width: 100%;
     max-width: 770px;
+    height: 625px;
     display: flex;
+    background-color: var(--gray50);
     overflow-x: scroll;
   }
   .week {
@@ -115,16 +117,46 @@ export const Calendar = styled.div`
     padding: 5px;
     cursor: pointer;
     background-color: var(--orange200);
+    p {
+      text-align: center;
+    }
+    div {
+      padding: 0 10px;
+      display: flex;
+      justify-content: space-between;
+      svg {
+        color: white;
+        :hover {
+          color: var(--purple200);
+        }
+      }
+    }
+    :hover {
+      background-color: var(--orange100);
+    }
+  }
+  .nothingHere {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 30px;
+    color: var(--purple100);
+    opacity: 0.8;
+    svg {
+      font-size: 80px;
+    }
   }
 `;
 
-export const Coment = styled.div`
+export const Comment = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   padding-bottom: 30px;
-  .containerComent {
+  .containerComment {
     display: grid;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -135,6 +167,43 @@ export const Coment = styled.div`
     }
     @media (min-width: 1000px) {
       grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  .modal {
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 450px;
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
+    gap: 20px;
+    svg {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    textarea {
+      width: 385px;
+      height: 160px;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: var(--gray100);
+    }
+    input {
+      background-color: var(--gray100);
+      padding: 0 20px;
+      width: 385px;
+      height: 50px;
+      border-radius: 10px;
     }
   }
 `;

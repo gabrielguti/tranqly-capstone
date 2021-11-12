@@ -1,44 +1,122 @@
 /* eslint-disable array-callback-return */
-import { Calendar, ContainerProfessionalData, Coment, Line } from "./styles";
+import { Calendar, ContainerProfessionalData, Comment, Line } from "./styles";
 import Bar from "../../components/bar";
 import profile from "../../assets/img/profile.png";
 import { FaStar } from "react-icons/fa";
 import Button from "../../components/button";
-import CardComent from "../../components/CardComent";
+import CardComments from "../../components/CardComments";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import moment from "moment";
 import "moment/locale/pt-br";
-import { FaCheck } from "react-icons/fa";
-interface dataProps {
+import { FaCheck, FaRegClock, FaTimes } from "react-icons/fa";
+interface DataProps {
   userId: number;
-  disponivel: boolean;
-  date: string;
+  type: boolean;
+  date: any;
   id: number;
 }
 
+interface CommentsProps {
+  namePatient: string;
+  comment: string;
+  id: number;
+  patientId: number;
+  professionalId: number;
+}
+
+interface CreateCommentsProps {
+  newComment: string;
+  newScore: number;
+}
+
 const ProfileProfessional = () => {
-  const [calendar, setCalendar] = useState<dataProps[]>([]);
+  const [calendar, setCalendar] = useState<DataProps[]>([]);
+  const [comments, setComments] = useState<CommentsProps[]>([]);
   let ref: string[] = [];
-  // const now = moment();
+  const [newComment, setNewComment] = useState("");
+  const [newScore, setNewScore] = useState(5);
+  const now = moment();
+  const [show, setShow] = useState(false);
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZyZWRlcmljb0BtYXNvbWVuby5jb20iLCJpYXQiOjE2MzY2ODIzMTYsImV4cCI6MTYzNjY4NTkxNiwic3ViIjoiMSJ9.W1MApBtshV1AAi8EpUOZoNKnfXmYGuSreC_XtWBVtBA";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZyZWRlcmljb0BtYXNvbWVuby5jb20iLCJpYXQiOjE2MzY3MzcxMzAsImV4cCI6MTYzNjc0MDczMCwic3ViIjoiMSJ9.Xvle3Xu44CLb9QFRd0ybIIF0jF1zVhAKokyuh-x2tnM";
 
-  useEffect(() => {
+  const searchDate = () => {
     api
-      .get("/users/1/professional", {
+      .get(`/users/${1}/professional`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => setCalendar(response.data))
-      .then((r) => console.log(r))
       .catch((e) => console.log(e));
-  }, []);
+  };
 
-  console.log(calendar);
-  console.log(ref);
+  const searchComments = () => {
+    api
+      .get(`/professional/${1}/comments`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => setComments(response.data))
+      .catch((e) => console.log(e));
+  };
+
+  const createComment = ({ newComment, newScore }: CreateCommentsProps) => {
+    const newData = {
+      comment: newComment,
+      score: newScore,
+    };
+    if (newComment.length > 50 && newComment.length < 200) {
+      api
+        .post(`/professional/${1}/comments`, newData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((_) => {
+          searchComments();
+          setShow(!show);
+        })
+        .catch((e) => console.log(e));
+    }
+    alert("");
+  };
+
+  const addMyCalendar = (data: any) => {
+    const newTime = { ...data, patientId: 2 };
+    api
+      .post(`/patient`, newTime, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((_) => searchDate())
+      .catch((e) => console.log(e));
+  };
+
+  const check = (id: number) => {
+    api
+      .patch(
+        `/professional/${id}`,
+        { type: false },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => addMyCalendar(response.data))
+      .then((_) => searchDate())
+      .catch((e) => console.log(e));
+  };
+
+  useEffect(() => {
+    searchDate();
+    searchComments();
+  }, []);
 
   return (
     <>
@@ -79,53 +157,89 @@ const ProfileProfessional = () => {
           <p>Escolha seu horário</p>
         </div>
         <div className="container">
-          {calendar.sort().map((item) => {
-            if (!ref.includes(item.date) && ref.push(item.date)) {
-              return (
-                <div className="week">
-                  <div className="day">
-                    <p>{moment(item.date).format("ddd")}</p>
-                  </div>
-                  <div className="times">
-                    {calendar
-                      .filter((fil) => fil.date === item.date)
-                      .map((str) => {
-                        return (
-                          <div className="time">
-                            <p style={{ textAlign: "center" }}>
-                              {moment(str.date).format("DD/MM/YYYY")}
-                            </p>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <span>{moment(str.date).format("LT")}</span>
-                              <span>
-                                <FaCheck />
-                              </span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
-                </div>
-              );
-            }
-          })}
+          {calendar.length > 0 ? (
+            <>
+              {calendar
+                .sort((n) => n.date)
+                .map((item) => {
+                  if (!ref.includes(item.date) && ref.push(item.date)) {
+                    return (
+                      <div className="week">
+                        <div className="day">
+                          <p>{moment(item.date).format("ddd")}</p>
+                        </div>
+                        <div className="times">
+                          {calendar
+                            .filter((f) => f.date === item.date)
+                            .filter((fil) => fil.type === true)
+                            .map((m) => {
+                              console.log(m.type);
+                              return (
+                                <div className="time">
+                                  <p>{moment(m.date).format("DD/MM/YYYY")}</p>
+                                  <div>
+                                    <span className="check">
+                                      {moment(m.date).format("LT")}
+                                    </span>
+                                    <span>
+                                      <FaCheck onClick={() => check(m.id)} />
+                                    </span>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
+            </>
+          ) : (
+            <div className="nothingHere">
+              <FaRegClock />
+              <h1>Não há horarios disponíveis com este especialista... </h1>
+            </div>
+          )}
         </div>
       </Calendar>
-      <Coment>
+      <Comment>
         <h1>Comentários</h1>
-        <Button>Criar comentário</Button>
-        <div className="containerComent">
-          <CardComent />
+        <Button onClick={() => setShow(!show)}>Criar comentário</Button>
+        <div className="containerComment">
+          {comments.map((item) => {
+            return <CardComments comments={item} />;
+          })}
+          {show && (
+            <div className="modal">
+              <FaTimes onClick={() => setShow(!show)} />
+              <textarea
+                placeholder="Seu comentário..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              ></textarea>
+              <input
+                placeholder="Sua Nota"
+                value={newScore}
+                onChange={(e) => setNewScore(Number(e.target.value))}
+              ></input>
+              <Button onClick={() => createComment({ newComment, newScore })}>
+                Comentar
+              </Button>
+            </div>
+          )}
         </div>
-      </Coment>
+      </Comment>
       <Line />
     </>
   );
 };
 
 export default ProfileProfessional;
+function type(
+  arg0: string,
+  type: any,
+  arg2: boolean,
+  arg3: { headers: { Authorization: string } }
+) {
+  throw new Error("Function not implemented.");
+}

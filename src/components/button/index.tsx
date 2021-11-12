@@ -3,8 +3,9 @@ import { ButtonContainer } from "./styles";
 
 interface ButtonProps {
   children: ReactNode;
+  onClick?: () => void;
 }
 
-export default function Button({ children }: ButtonProps) {
-  return <ButtonContainer>{children}</ButtonContainer>;
+export default function Button({ children, onClick }: ButtonProps) {
+  return <ButtonContainer onClick={onClick}>{children}</ButtonContainer>;
 }
