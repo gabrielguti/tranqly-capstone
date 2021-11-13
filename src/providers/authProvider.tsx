@@ -66,7 +66,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const response = await api.post("/login", { email, password });
     const { accessToken, user } = response.data;
     localStorage.setItem("@tranqyl:accessToken", accessToken);
-    localStorage.setItem("@tranqyy:user", JSON.stringify(user));
+    localStorage.setItem("@tranqyl:user", JSON.stringify(user));
     setData({ accessToken, user });
   }, []);
   const signOut = useCallback(() => {
