@@ -16,6 +16,7 @@ interface DataProps {
   type: boolean;
   date: any;
   id: number;
+  calendar: any;
 }
 
 interface CommentsProps {
@@ -117,6 +118,14 @@ const ProfileProfessional = () => {
     searchDate();
     searchComments();
   }, []);
+
+  // const formed = calendar
+  //   .map((item) => moment(item.date).format().replace(/\D/g, ""))
+  //   .sort((a: any, b: any) => a - b);
+  // console.log(formed);
+
+  const decrescente = calendar.sort((a, b) => b.date - a.date);
+  console.log(decrescente.slice(0).reverse());
 
   return (
     <>

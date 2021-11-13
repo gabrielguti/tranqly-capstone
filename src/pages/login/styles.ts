@@ -1,86 +1,82 @@
 import styled from "styled-components";
+import LoginImg from "../../assets/img/IllustrationR18.svg";
 
-export const MainContainer = styled.div`
+export const Container = styled.section`
+a {
+    color: var(--purple200);
+  }
+  height: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  @media (min-width: 1000px) {
+    background: url(${LoginImg});
+    height: 80vh;
+    background-repeat: no-repeat;
+    /* margin-right: -50%; */
+    width: 100%;
+    background-position: center;
+    background-size: contain;
+    margin-top: 2vh;
+  }
+`;
+export const Title = styled.div`
+  text-align: center;
+  margin-top: 5vh;
+  margin-bottom: 3vh;
+  @media (min-width: 1000px) {
+    margin-right: -50%;
+  }
+`;
+export const BoxForm = styled.div`
+  box-shadow: 0px 0px 12px gray;
+  border-radius: 10px;
+  height: 280px;
+  width: 270px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    span{
+      font-size: 0.7rem;
+      color: var(--red50);
+      height: 2vh;
+    }
+  }
+  input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid var(--purple100);
+    border-radius: 5px;
+    margin: 1vh;
+    color: var(--purple200);
+   
+  }
+  button {
+    background-color: var(--purple100);
+    color: var(--gray100);
+    width: 80%;
+    margin-top: 4vh;
+    padding: 6px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+  }
+  @media (min-width: 1000px) {
+    margin-right: -50%;
+  }
 `;
 
-export const FormContainer = styled.div`
-  position: relative;
-  > img {
-    width: 100vh;
-    height: 80vh;
-    margin-left: 1.5vw;
-  }
-
-  .FormDiv {
-    > h1 {
-      text-align: center;
-    }
-
-    > p {
-      margin-top: 5vh;
-      text-align: center;
-      > a {
-        color: var(--orange100);
-      }
-    }
-
-    > form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-      height: 40vh;
-      margin: 0 auto;
-      width: 300px;
-      height: 300px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 4px 4px #00000040;
-      background: white;
-      > input {
-        padding: 10px;
-        border: 2px solid var(--purple100);
-        border-radius: 5px;
-      }
-      > button {
-        background: var(--purple100);
-        color: white;
-        font-size: 1.1em;
-        width: 90%;
-        padding: 10px;
-        border-radius: 5px;
-      }
-    }
-  }
-
-  @media only screen and (max-width: 1023px) {
-    margin-top: 15vh;
-    > img {
-      display: none;
-    }
-  }
-  @media only screen and (min-width: 1024px) {
-    .FormDiv {
-      position: absolute;
-      top: 20%;
-      right: 10%;
-    }
-  }
-  @media only screen and (min-width: 1440px) {
-    > img {
-      margin-left: 15vw;
-    }
-    .FormDiv {
-      right: 20%;
-    }
-  }
-  @media only screen and (min-width: 2560px) {
-    > img {
-      margin-left: 30vw;
-    }
-    .FormDiv {
-      right: 30%;
-    }
+export const FooterForm = styled.div`
+  margin-top: 4vh;
+  @media (min-width: 1000px) {
+    margin-right: -50%;
   }
 `;
