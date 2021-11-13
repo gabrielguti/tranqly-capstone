@@ -35,6 +35,7 @@ interface CardProfessionalProps {
 const CardProfessional = ({ professional, average}: CardProfessionalProps, ) => {
   const history = useHistory();
   const { renderization } = useContext(ProfessionalContext);
+  const {name, image, description, areas, profession}=professional
 
   const schedule = (name: string) => {
     renderization(name);
@@ -47,21 +48,21 @@ const CardProfessional = ({ professional, average}: CardProfessionalProps, ) => 
     
     <ContainerProfessional>
       <ContainerImgProfessional>
-        <img src={professional.image} alt={professional.name} />
+        <img src={image} alt={name} />
       </ContainerImgProfessional>
       <ContainerName>
-        <p>{professional.name}</p>
+        <p>{name}</p>
         <StarsCount stars={average}/>
       </ContainerName>
       <ContainerSkylls>
         <ContainerProfession>
-          <PProfession>{professional.profession}</PProfession>
+          <PProfession>{profession}</PProfession>
         </ContainerProfession>
         <ContainerAreas>
-          <PAreas>{professional.areas}</PAreas>
+          <PAreas>{areas}</PAreas>
         </ContainerAreas>
         <ContainerDescription>
-          <PDescription>{professional.description}</PDescription>
+          <PDescription>{description}</PDescription>
         </ContainerDescription>
       </ContainerSkylls>
       <ContainerButtonSchedule>

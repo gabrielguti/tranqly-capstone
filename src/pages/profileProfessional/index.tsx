@@ -2,7 +2,6 @@
 import { Calendar, ContainerProfessionalData, Comments, Line } from "./styles";
 import Bar from "../../components/bar";
 import profile from "../../assets/img/profile.png";
-import { FaStar } from "react-icons/fa";
 import Button from "../../components/button";
 import CardComments from "../../components/CardComments";
 import { useEffect, useState } from "react";
@@ -89,16 +88,14 @@ const ProfileProfessional = () => {
   };
   let soma = 0;
   let averag = 0;
-  console.log(comments)
+ 
+    // eslint-disable-next-line no-lone-blocks
     {comments.map((val)=>{
       console.log(val.score)
       soma += val.score
       averag = Math.floor(soma/comments.length)
     })}
-    console.log("soma dos comentarios "+soma)
-    console.log("media dos comentarios "+averag)
 
-    
   const addMyCalendar = (data: any) => {
     const newTime = { ...data, patientId: 2 };
     api
