@@ -1,4 +1,5 @@
 import {FaStar}from "react-icons/fa"
+import StarsCount from "../stars"
 
 interface ProfessionalData {
     name:string;
@@ -10,9 +11,10 @@ interface ProfessionalData {
 
 interface CardProfessionalProps{
     professional:ProfessionalData;
+    average: number;
 }
 
-const CardProfessionalData = ({professional}:CardProfessionalProps)=>{
+const CardProfessionalData = ({professional, average}:CardProfessionalProps)=>{
     
     return(
         
@@ -25,11 +27,7 @@ const CardProfessionalData = ({professional}:CardProfessionalProps)=>{
             <div>
               <h2>{professional.name}</h2>
               <div className="stars">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
+                <StarsCount stars={average}/>
               </div>
             </div>
             <div>

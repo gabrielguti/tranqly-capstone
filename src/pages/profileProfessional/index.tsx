@@ -11,6 +11,8 @@ import moment from "moment";
 import "moment/locale/pt-br";
 import { FaCheck, FaRegClock, FaTimes } from "react-icons/fa";
 import { UseAuth } from "../../providers/authProvider";
+import CardProfessionalData from "../../components/cardProfessionalData";
+
 interface DataProps {
   userId: number;
   type: boolean;
@@ -24,6 +26,7 @@ interface CommentsProps {
   id: number;
   patientId: number;
   professionalId: number;
+  score:number
 }
 
 interface CreateCommentsProps {
@@ -84,7 +87,18 @@ const ProfileProfessional = () => {
     }
     alert("");
   };
+  let soma = 0;
+  let averag = 0;
+  console.log(comments)
+    {comments.map((val)=>{
+      console.log(val.score)
+      soma += val.score
+      averag = Math.floor(soma/comments.length)
+    })}
+    console.log("soma dos comentarios "+soma)
+    console.log("media dos comentarios "+averag)
 
+    
   const addMyCalendar = (data: any) => {
     const newTime = { ...data, patientId: 2 };
     api
@@ -118,38 +132,14 @@ const ProfileProfessional = () => {
     searchComments();
   }, []);
 
+
+  const getProfessionalStorage = JSON.parse(localStorage.getItem("@tranqyl:prof")||"")
+
   return (
     <>
       <Bar />
       <ContainerProfessionalData>
-        <div className="ProfessionalData">
-          <div className="img">
-            <img src={profile} alt="imgProfile" />
-          </div>
-          <div className="data">
-            <div>
-              <h2>FREDERICO MASOMENO</h2>
-              <div className="stars">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-            </div>
-            <div>
-              <p>Psicologo</p>
-              <p>Traumas | TEPT | Relacionamentos</p>
-            </div>
-            <div>
-              <p>
-                Psicologo formado na Faculdade Imaginária de Natanlandia com
-                especialização em traumas e relacionamentos. Com experiência em
-                muitos lugares loucos mano. Dattebayo.
-              </p>
-            </div>
-          </div>
-        </div>
+      <CardProfessionalData professional={getProfessionalStorage[0]} average={averag}/>
       </ContainerProfessionalData>
 
       <Calendar>
