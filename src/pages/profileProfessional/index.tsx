@@ -20,7 +20,6 @@ interface DataProps {
   type: boolean;
   date: any;
   id: number;
-  calendar: any;
 }
 
 interface CommentsProps {
