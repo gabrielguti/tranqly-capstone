@@ -33,6 +33,7 @@ export const Input=styled.input`
     margin-bottom: 35px;
     border-radius: 5px;
     border: none;
+    background-color: white;
     @media(min-width:767px){
         width:550px;
     }

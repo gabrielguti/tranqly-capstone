@@ -3,10 +3,26 @@ import logo from "../../assets/img/tranqyl.svg";
 import { slide as Menu } from "react-burger-menu";
 import Button from "../button";
 import { Link } from "react-router-dom";
+import { UseAuth } from "../../providers/authProvider";
+import { useHistory } from "react-router";
 
-export default function index() {
+
+const Index=()=> {
+  const{accessToken}=UseAuth()
+
+  const history = useHistory()
+  const {signOut}=UseAuth()
+
+  const changeLoginSignup=()=>{
+    if(accessToken){
+     signOut()
+    }else{
+      history.push("/signin")
+    }
+  }
+
+
   return (
-    <>
       <BarContainer>
         <div className="barWidth">
           <div>
@@ -23,12 +39,12 @@ export default function index() {
               <Link to="/signupclient">Para clientes</Link>
               <Link to="/dashboardfilter">Procurar especialista</Link>
               <Link to="/signin">
-                <Button>Logar</Button>
-              </Link>
+                 <Button onClick={()=>changeLoginSignup()}>{accessToken?"Deslogar": "Logar"}</Button>
+              </Link>              
             </Menu>
           </div>
         </div>
       </BarContainer>
-    </>
   );
 }
+export default Index
