@@ -2,16 +2,18 @@
 import { Calendar, ContainerProfessionalData, Comments, Line } from "./styles";
 import Bar from "../../components/bar";
 import profile from "../../assets/img/profile.png";
-import { FaStar } from "react-icons/fa";
 import Button from "../../components/button";
 import CardComments from "../../components/CardComments";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import moment from "moment";
 import "moment/locale/pt-br";
-import { FaRegClock, FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import ModalComment from "../../components/modalComment";
+import { FaCheck, FaRegClock, FaTimes } from "react-icons/fa";
+import { UseAuth } from "../../providers/authProvider";
+import CardProfessionalData from "../../components/cardProfessionalData";
+
 interface DataProps {
   calendar: any;
   userId: number;
@@ -26,6 +28,7 @@ interface CommentsProps {
   id: number;
   patientId: number;
   professionalId: number;
+  score:number
 }
 
 const ProfileProfessional = () => {
@@ -83,6 +86,15 @@ const ProfileProfessional = () => {
         .catch((e) => console.log(e));
     }
   };
+  let soma = 0;
+  let averag = 0;
+ 
+    // eslint-disable-next-line no-lone-blocks
+    {comments.map((val)=>{
+      console.log(val.score)
+      soma += val.score
+      averag = Math.floor(soma/comments.length)
+    })}
 
   const addMyCalendar = (data: any) => {
     const newTime = { ...data, patientId: 2 };
@@ -121,38 +133,13 @@ const ProfileProfessional = () => {
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
+  const getProfessionalStorage = JSON.parse(localStorage.getItem("@tranqyl:prof")||"")
+
   return (
     <>
       <Bar />
       <ContainerProfessionalData>
-        <div className="ProfessionalData">
-          <div className="img">
-            <img src={profile} alt="imgProfile" />
-          </div>
-          <div className="data">
-            <div>
-              <h2>FREDERICO MASOMENO</h2>
-              <div className="stars">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-            </div>
-            <div>
-              <p>Psicologo</p>
-              <p>Traumas | TEPT | Relacionamentos</p>
-            </div>
-            <div>
-              <p>
-                Psicologo formado na Faculdade Imaginária de Natanlandia com
-                especialização em traumas e relacionamentos. Com experiência em
-                muitos lugares loucos mano. Dattebayo.
-              </p>
-            </div>
-          </div>
-        </div>
+      <CardProfessionalData professional={getProfessionalStorage[0]} average={averag}/>
       </ContainerProfessionalData>
 
       <Calendar>

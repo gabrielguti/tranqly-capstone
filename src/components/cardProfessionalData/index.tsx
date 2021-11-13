@@ -1,4 +1,4 @@
-import {FaStar}from "react-icons/fa"
+import StarsCount from "../stars"
 
 interface ProfessionalData {
     name:string;
@@ -10,43 +10,37 @@ interface ProfessionalData {
 
 interface CardProfessionalProps{
     professional:ProfessionalData;
+    average: number;
 }
 
-const CardProfessionalData = ({professional}:CardProfessionalProps)=>{
+const CardProfessionalData = ({professional, average}:CardProfessionalProps)=>{
+
+  const {name, image, areas, description}=professional
     
     return(
         
-        
         <div className="ProfessionalData">
           <div className="img">
-            <img src={professional.image} alt={professional.name} />
+            <img src={image} alt={name} />
           </div>
           <div className="data">
             <div>
-              <h2>{professional.name}</h2>
+              <h2>{name}</h2>
               <div className="stars">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
+                <StarsCount stars={average}/>
               </div>
             </div>
             <div>
-              {/* <p>{professional.profession}</p>
-              {professional.areas.map((area, index)=>{
-                    return <p key={index}>{area}</p>
-                })} */}
+              <p>{areas}</p>
             </div>
             <div>
               <p>
-                {professional.description}
+                {description}
               </p>
             </div>
           </div>
         </div>
-        
-      
+   
     )
 }
 export default CardProfessionalData

@@ -20,7 +20,7 @@ const DashboardFilter =()=>{
         </ContainerSearch>
         
             {professionals.map((professional, index)=>{
-                return <CardProfessional key={index} professional={professional}/>
+                return <CardProfessional key={index} professional={professional} average={4}/>
             })}
 
         </>
