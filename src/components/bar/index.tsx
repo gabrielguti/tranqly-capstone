@@ -2,6 +2,7 @@ import { BarContainer } from "./styles";
 import logo from "../../assets/img/tranqyl.svg";
 import { slide as Menu } from "react-burger-menu";
 import Button from "../button";
+import { Link } from "react-router-dom";
 
 export default function index() {
   return (
@@ -9,19 +10,21 @@ export default function index() {
       <BarContainer>
         <div className="barWidth">
           <div>
-            <img src={logo} alt="log" />
+            <Link to="/">
+              <img src={logo} alt="log" />
+            </Link>
           </div>
           <div className="burguer">
             <Menu right>
-              <a href="/">
+              <Link to="/">
                 <img src={logo} alt="logo" />
-              </a>
-              <a href="/signupprofessional">Para especialistas</a>
-              <a href="/signupclient">Para clientes</a>
-              <a href="/dashboardfilter">Procurar especialista</a>
-              <a href="/signin">
+              </Link>
+              <Link to="/signupprofessional">Para especialistas</Link>
+              <Link to="/signupclient">Para clientes</Link>
+              <Link to="/dashboardfilter">Procurar especialista</Link>
+              <Link to="/signin">
                 <Button>Logar</Button>
-              </a>
+              </Link>
             </Menu>
           </div>
         </div>

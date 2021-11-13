@@ -3,6 +3,13 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100%;
+  .allComments {
+    text-align: center;
+    h1 {
+      padding: 20px 0;
+      color: var(--black0);
+    }
+  }
 `;
 
 export const HeaderContainer = styled.div`
@@ -83,25 +90,19 @@ export const Scroll = styled.div`
   }
 `;
 
-export const Comments = styled.div`
-  width: 100%;
-  height: 300px;
-  h1 {
-    text-align: center;
-    padding: 30px;
-  }
-  div {
-    max-width: 1280px;
-    margin: auto;
-  }
-`;
-
 export const FooterContainer = styled.div`
   background-color: var(--gray50);
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 100px;
+  flex-direction: column;
+  color: var(--black0);
+  h1 {
+    padding: 20px 0;
+    font-size: 32px;
+  }
   .containerProfile {
     padding: 20px 0;
     width: 100%;
@@ -114,7 +115,6 @@ export const FooterContainer = styled.div`
   }
   .profile {
     width: 150px;
-    height: 150px;
     font-weight: 300;
     text-align: center;
     img {
@@ -122,13 +122,13 @@ export const FooterContainer = styled.div`
       width: 90px;
       height: 90px;
     }
+    h1 {
+      font-size: 20px;
+      font-weight: 300;
+    }
   }
   p {
     font-size: 13px;
-  }
-  h1 {
-    font-size: 20px;
-    font-weight: 300;
   }
   a {
     color: var(--black0);
@@ -136,5 +136,20 @@ export const FooterContainer = styled.div`
   svg {
     margin: 0 8px;
     font-size: 20px;
+  }
+`;
+
+export const Comments = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  max-width: 1280px;
+  width: 100%;
+  margin: auto;
+  @media (min-width: 700px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: 1000px) {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `;

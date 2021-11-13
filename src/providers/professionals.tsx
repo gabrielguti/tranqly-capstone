@@ -2,6 +2,7 @@ import {
   createContext,
   ReactNode,
   useCallback,
+  useContext,
   useEffect,
   useState,
 } from "react";
@@ -47,7 +48,7 @@ interface IProfessional {
   clients: IClientData[];
   qualifications: IQualificationData[];
   sProfess: IProfessionalData[];
-  renderization:(nameProfessional:string)=>void;
+  renderization: (nameProfessional: string) => void;
 }
 export const ProfessionalContext = createContext<IProfessional>(
   {} as IProfessional
@@ -63,7 +64,9 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
     [] as IQualificationData[]
   );
   const [clients, setClients] = useState<IClientData[]>([] as IClientData[]);
-  const [sProfess, setSProfess]=useState<IProfessionalData[]>([]as IProfessionalData[])
+  const [sProfess, setSProfess] = useState<IProfessionalData[]>(
+    [] as IProfessionalData[]
+  );
   const [sProfessionals, setSProfessionals] = useState<IProfessionalData[]>(
     [] as IProfessionalData[]
   );
@@ -123,7 +126,7 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
   };
   const getComments = () => {
     api
-      .get(`/coments`)
+      .get(`/comments`)
       .then((response) => {
         setProfessionalComments(response.data);
       })
@@ -137,13 +140,18 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
       })
       .catch((e) => console.log(e));
   };
-  const renderization=(nameProfessional:string)=>{
-    const professionalStorage = sProfessionals.filter((professional)=>
-    professional.name.toLocaleLowerCase().includes(nameProfessional.split(" ")[0].toLocaleLowerCase()))
-    localStorage.setItem("@tranqyl:prof", JSON.stringify(professionalStorage))
-    const professionalInStorage = JSON.parse(localStorage.getItem("@tranqyl:prof")||"")
-      setSProfess(professionalInStorage)
-}
+  const renderization = (nameProfessional: string) => {
+    const professionalStorage = sProfessionals.filter((professional) =>
+      professional.name
+        .toLocaleLowerCase()
+        .includes(nameProfessional.split(" ")[0].toLocaleLowerCase())
+    );
+    localStorage.setItem("@tranqyl:prof", JSON.stringify(professionalStorage));
+    const professionalInStorage = JSON.parse(
+      localStorage.getItem("@tranqyl:prof") || ""
+    );
+    setSProfess(professionalInStorage);
+  };
   useEffect(() => {
     getProfessional();
     getComments();
@@ -168,3 +176,5 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
     </ProfessionalContext.Provider>
   );
 };
+
+export const UseProfessionalContext = () => useContext(ProfessionalContext);

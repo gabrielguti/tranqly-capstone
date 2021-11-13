@@ -1,147 +1,54 @@
 /* eslint-disable array-callback-return */
 import { Calendar, ContainerProfessionalData, Comments, Line } from "./styles";
 import Bar from "../../components/bar";
-import profile from "../../assets/img/profile.png";
 import Button from "../../components/button";
 import CardComments from "../../components/CardComments";
 import { useEffect, useState } from "react";
-import api from "../../services/api";
 import moment from "moment";
 import "moment/locale/pt-br";
-import toast from "react-hot-toast";
 import ModalComment from "../../components/modalComment";
-import { FaCheck, FaRegClock, FaTimes } from "react-icons/fa";
-import { UseAuth } from "../../providers/authProvider";
+import { FaRegClock } from "react-icons/fa";
 import CardProfessionalData from "../../components/cardProfessionalData";
-
-interface DataProps {
-  calendar: any;
-  userId: number;
-  type: boolean;
-  date: any;
-  id: number;
-  calendar: any;
-}
-
-interface CommentsProps {
-  namePatient: string;
-  comment: string;
-  id: number;
-  patientId: number;
-  professionalId: number;
-  score:number
-}
+import { useCalendar } from "../../providers/calendarProvider";
+import { UseAuth } from "../../providers/authProvider";
 
 const ProfileProfessional = () => {
-  const [calendar, setCalendar] = useState<DataProps[]>([]);
-  const [comments, setComments] = useState<CommentsProps[]>([]);
+  const {
+    searchDate,
+    searchComments,
+    createComment,
+    addMyCalendar,
+    check,
+    calendar,
+    comments,
+    newComment,
+    newScore,
+  } = useCalendar();
+
+  const { accessToken, user } = UseAuth();
+
   let ref: string[] = [];
   const [show, setShow] = useState(false);
   var now = new Date();
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZyZWRlcmljb0BtYXNvbWVuby5jb20iLCJpYXQiOjE2MzY3NTAwMzIsImV4cCI6MTYzNjc1MzYzMiwic3ViIjoiMSJ9.nX0oaY6W6_INLUy-DqC1SvpNUvpVNT-aEjG15hkmHPA";
-
-  const searchDate = () => {
-    api
-      .get(`/users/${1}/professional`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => setCalendar(response.data))
-      .catch((e) => console.log(e));
-  };
-
-  const searchComments = () => {
-    api
-      .get(`/professional/${1}/comments`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => setComments(response.data))
-      .catch((e) => console.log(e));
-  };
-
-  const createComment = (newComment: string, newScore: number) => {
-    const newData = {
-      comment: newComment,
-      score: newScore,
-    };
-    if (newComment.length <= 10) {
-      toast.error("Descreva com mais detalhes seu comentário.");
-    } else if (newComment.length > 200) {
-      toast.error("Descreva com menos detalhes seu comentário");
-    } else {
-      api
-        .post(`/professional/${1}/comments`, newData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((_) => {
-          searchComments();
-          setShow(!show);
-        })
-        .catch((e) => console.log(e));
-    }
-  };
-  let soma = 0;
-  let averag = 0;
- 
-    // eslint-disable-next-line no-lone-blocks
-    {comments.map((val)=>{
-      console.log(val.score)
-      soma += val.score
-      averag = Math.floor(soma/comments.length)
-    })}
-
-  const addMyCalendar = (data: any) => {
-    const newTime = { ...data, patientId: 2 };
-    api
-      .post(`/patient`, newTime, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((_) => searchDate())
-      .catch((e) => console.log(e));
-  };
-
-  const check = (id: number) => {
-    api
-      .patch(
-        `/professional/${id}`,
-        { type: false },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => addMyCalendar(response.data))
-      .then((_) => searchDate())
-      .catch((e) => console.log(e));
-  };
-
   useEffect(() => {
-    searchDate();
-    searchComments();
+    searchDate(Number(user.id), accessToken);
+    searchComments(Number(user.id), accessToken);
   }, []);
-
 
   const formed = calendar
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
-  const getProfessionalStorage = JSON.parse(localStorage.getItem("@tranqyl:prof")||"")
+  const getProfessionalStorage = JSON.parse(
+    localStorage.getItem("@tranqyl:prof") || ""
+  );
 
   return (
     <>
       <Bar />
       <ContainerProfessionalData>
-      <CardProfessionalData professional={getProfessionalStorage[0]} average={averag}/>
+        <CardProfessionalData professional={getProfessionalStorage[0]} />
       </ContainerProfessionalData>
 
       <Calendar>
@@ -169,12 +76,12 @@ const ProfileProfessional = () => {
                           {formed
                             .filter((f) => f.date === item.date)
                             .filter((fil) => fil.type === true)
-                            .map((m, secoundIndex) => {
+                            .map((m, secondIndex) => {
                               return (
                                 <div
-                                  key={secoundIndex}
+                                  key={secondIndex}
                                   className="time"
-                                  onClick={() => check(m.id)}
+                                  onClick={() => check(m.id, accessToken)}
                                 >
                                   <p>{moment(m.date).format("DD/MM/YYYY")}</p>
                                   <span className="check">

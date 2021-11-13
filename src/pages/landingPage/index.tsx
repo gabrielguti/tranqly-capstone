@@ -11,14 +11,19 @@ import Bar from "../../components/bar";
 import Button from "../../components/button";
 import Slider from "react-slick";
 import { useContext, useState } from "react";
-import { ProfessionalContext } from "../../providers/professionals";
+import {
+  ProfessionalContext,
+  UseProfessionalContext,
+} from "../../providers/professionals";
 import CardSlick from "../../components/cardSlick";
 import { FaLinkedin, FaGithubSquare } from "react-icons/fa";
 import CardKnowMore from "../../components/cardKnowMore";
+import CardComments from "../../components/CardComments";
 
 const LandingPage = () => {
   const { allProfessionals } = useContext(ProfessionalContext);
   const [show, setShow] = useState(false);
+  const { professionalComments } = UseProfessionalContext();
 
   var settings = {
     speed: 200,
@@ -70,11 +75,19 @@ const LandingPage = () => {
           </Slider>
         </div>
       </Scroll>
-      <Comments>
+      <div className="allComments">
         <h1>Nossas avaliações</h1>
-        <div></div>
-      </Comments>
+        <Comments>
+          {professionalComments
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 6)
+            .map((item) => {
+              return <CardComments comments={item} />;
+            })}
+        </Comments>
+      </div>
       <FooterContainer>
+        <h1>Desenvolvedores</h1>
         <div className="containerProfile">
           <div className="profile">
             <img

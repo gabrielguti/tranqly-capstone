@@ -12,7 +12,6 @@ export const Container = styled.div`
   align-items: center;
   div {
     position: relative;
-    margin-top: 60px;
     padding: 20px;
     width: 100%;
     max-width: 900px;

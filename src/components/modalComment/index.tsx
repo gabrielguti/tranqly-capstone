@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { ModalCommentStyle } from "./styles";
 import { FaTimes } from "react-icons/fa";
 import Button from "../button";
+import { UseAuth } from "../../providers/authProvider";
 
 interface ModalCommentProps {
   show: any;
   setShow: any;
-  createComment: (newComment: string, newScore: number) => void;
+  createComment: (
+    newComment: any,
+    newScore: number,
+    user: any,
+    accessToken: string
+  ) => void;
 }
 
 export default function ModalComment({
@@ -16,6 +22,7 @@ export default function ModalComment({
 }: ModalCommentProps) {
   const [newComment, setNewComment] = useState("");
   const [newScore, setNewScore] = useState(5);
+  const { accessToken, user } = UseAuth();
 
   return (
     <ModalCommentStyle>
@@ -31,7 +38,11 @@ export default function ModalComment({
           value={newScore}
           onChange={(e) => setNewScore(Number(e.target.value))}
         ></input>
-        <Button onClick={() => createComment(newComment, newScore)}>
+        <Button
+          onClick={() =>
+            createComment(newComment, newScore, user.id, accessToken)
+          }
+        >
           Comentar
         </Button>
       </div>
