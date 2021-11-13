@@ -33,7 +33,14 @@ export default createGlobalStyle`
 	svg, svg path {
 		margin: 0;
 	}
-
+	input, textarea {
+	border:none;
+    background-image:none;
+    background-color:transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+	}
 	:root {
 
 		--black0: 		rgba(38, 38, 38, 1);

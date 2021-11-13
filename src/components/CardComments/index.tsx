@@ -4,6 +4,7 @@ interface CommentsProps {
   comments: any;
 }
 export default function CardComments({ comments }: CommentsProps) {
+  const star = comments.score;
   return (
     <CardComentStyle>
       <div className="data">
@@ -12,11 +13,9 @@ export default function CardComments({ comments }: CommentsProps) {
       </div>
       <div className="coment">{comments.comment}</div>
       <div className="stars">
-        <FaStar />
-        <FaStar />
-        <FaStar />
-        <FaStar />
-        <FaStar />
+        {[...Array(star)].map(() => {
+          return <FaStar />;
+        })}
       </div>
     </CardComentStyle>
   );

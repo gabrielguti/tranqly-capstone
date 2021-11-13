@@ -70,7 +70,7 @@ export const Calendar = styled.div`
   align-items: center;
   .tittle {
     width: 100%;
-    max-width: 770px;
+    max-width: 940px;
     height: 70px;
     background-color: var(--purple300);
     font-size: 28px;
@@ -81,17 +81,20 @@ export const Calendar = styled.div`
   }
   .container {
     width: 100%;
-    max-width: 770px;
+    max-width: 940px;
     height: 625px;
     display: flex;
     background-color: var(--gray50);
     overflow-x: scroll;
   }
   .week {
+    height: 70px;
+    width: 100%;
   }
   .day {
     height: 70px;
-    width: 110px;
+    width: 100%;
+    min-width: 110px;
     background-color: var(--purple400);
     display: flex;
     align-items: center;
@@ -99,40 +102,37 @@ export const Calendar = styled.div`
     font-size: 18px;
   }
   .times {
-    width: 110px;
+    height: 70px;
+    min-width: 160px;
+    width: 100%;
     height: 485px;
     background-color: var(--gray50);
     display: flex;
     align-items: center;
     flex-direction: column;
+    border: 10px solid transparent;
   }
   .time {
-    width: 90px;
-    height: 50px;
+    min-width: 90px;
+    width: 100%;
+    font-weight: bold;
+    height: 60px;
     background-color: white;
     border-radius: 10px;
     margin: 5px 0;
-    color: black;
-    font-size: 14px;
+    color: white;
+    font-size: 16px;
     padding: 5px;
     cursor: pointer;
     background-color: var(--orange200);
-    p {
-      text-align: center;
-    }
-    div {
-      padding: 0 10px;
-      display: flex;
-      justify-content: space-between;
-      svg {
-        color: white;
-        :hover {
-          color: var(--purple200);
-        }
-      }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;  
     }
     :hover {
-      background-color: var(--orange100);
+      filter: brightness(1.2);
     }
   }
   .nothingHere {
