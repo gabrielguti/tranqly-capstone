@@ -147,7 +147,6 @@ export const Calendar = styled.div`
     svg {
       font-size: 80px;
     }
-  }
 `;
 
 export const Comments = styled.div`
@@ -155,7 +154,7 @@ export const Comments = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-bottom: 30px;
+  padding: 30px 0;
   .containerComment {
     display: grid;
     flex-wrap: wrap;
@@ -169,48 +168,12 @@ export const Comments = styled.div`
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
-  .modal {
-    background-color: white;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 450px;
-    height: 350px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
-    gap: 20px;
-    svg {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 24px;
-      cursor: pointer;
-    }
-    textarea {
-      width: 385px;
-      height: 160px;
-      border-radius: 10px;
-      padding: 20px;
-      background-color: var(--gray100);
-    }
-    input {
-      background-color: var(--gray100);
-      padding: 0 20px;
-      width: 385px;
-      height: 50px;
-      border-radius: 10px;
-    }
-  }
 `;
 
 export const Line = styled.div`
-  width: 80%;
-  border-top: 3px solid var(--purple300);
+  width: 98%;
+  max-width: 1280px;
+  border-top: 2px solid var(--purple200);
   margin: 20px auto;
   padding: 20px;
 `;

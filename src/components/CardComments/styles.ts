@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardComentStyle = styled.div`
+export const CardCommentStyle = styled.div`
   margin-top: 20px;
   width: 1280px;
   max-width: 300px;
@@ -16,7 +16,7 @@ export const CardComentStyle = styled.div`
     gap: 10px;
     align-items: baseline;
   }
-  .coment {
+  .comment {
     font-size: 10px;
   }
   .stars {

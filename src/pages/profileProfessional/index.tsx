@@ -9,8 +9,9 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import moment from "moment";
 import "moment/locale/pt-br";
-import { FaCheck, FaRegClock, FaTimes } from "react-icons/fa";
+import { FaRegClock, FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
+import ModalComment from "../../components/modalComment";
 interface DataProps {
   calendar: any;
   userId: number;
@@ -27,18 +28,13 @@ interface CommentsProps {
   professionalId: number;
 }
 
-interface CreateCommentsProps {
-  newComment: string;
-  newScore: number;
-}
-
 const ProfileProfessional = () => {
   const [calendar, setCalendar] = useState<DataProps[]>([]);
   const [comments, setComments] = useState<CommentsProps[]>([]);
   let ref: string[] = [];
-  const [newComment, setNewComment] = useState("");
-  const [newScore, setNewScore] = useState(5);
   const [show, setShow] = useState(false);
+  var now = new Date();
+
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZyZWRlcmljb0BtYXNvbWVuby5jb20iLCJpYXQiOjE2MzY3NTAwMzIsImV4cCI6MTYzNjc1MzYzMiwic3ViIjoiMSJ9.nX0oaY6W6_INLUy-DqC1SvpNUvpVNT-aEjG15hkmHPA";
 
@@ -64,8 +60,7 @@ const ProfileProfessional = () => {
       .catch((e) => console.log(e));
   };
 
-  const createComment = ({ newComment, newScore }: CreateCommentsProps) => {
-    console.log(newComment);
+  const createComment = (newComment: string, newScore: number) => {
     const newData = {
       comment: newComment,
       score: newScore,
@@ -125,8 +120,6 @@ const ProfileProfessional = () => {
   const formed = calendar
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
-
-  var now = new Date();
 
   return (
     <>
@@ -223,22 +216,11 @@ const ProfileProfessional = () => {
             return <CardComments comments={item} />;
           })}
           {show && (
-            <div className="modal">
-              <FaTimes onClick={() => setShow(!show)} />
-              <textarea
-                placeholder="Seu comentário..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-              ></textarea>
-              <input
-                placeholder="Sua Nota"
-                value={newScore}
-                onChange={(e) => setNewScore(Number(e.target.value))}
-              ></input>
-              <Button onClick={() => createComment({ newComment, newScore })}>
-                Comentar
-              </Button>
-            </div>
+            <ModalComment
+              show={show}
+              setShow={setShow}
+              createComment={createComment}
+            />
           )}
         </div>
       </Comments>
