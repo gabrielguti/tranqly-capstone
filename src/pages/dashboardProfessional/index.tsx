@@ -1,5 +1,12 @@
+import Bar from "../../components/bar";
+
 const DashboardProfessional = () => {
-  return <>Dashboard Professional</>;
+  return (
+  <>
+  <Bar/>
+  Dashboard Professional
+  </>
+  );
 };
 
 export default DashboardProfessional;
