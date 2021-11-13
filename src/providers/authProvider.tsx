@@ -53,8 +53,8 @@ const UseAuth = () => {
 const AutContext = createContext<AuthContextData>({} as AuthContextData);
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [data, setData] = useState<AuthState>(() => {
-    const accessToken = localStorage.getItem("@tranqly:accessToken");
-    const user = localStorage.getItem("@tranqly:user");
+    const accessToken = localStorage.getItem("@tranqyl:accessToken");
+    const user = localStorage.getItem("@tranqyl:user");
     if (accessToken && user) {
       return { accessToken, user: JSON.parse(user) };
     }
@@ -65,13 +65,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     const response = await api.post("/login", { email, password });
     const { accessToken, user } = response.data;
-    localStorage.setItem("@tranqly:accessToken", accessToken);
-    localStorage.setItem("@tranqly:user", JSON.stringify(user));
+    localStorage.setItem("@tranqyl:accessToken", accessToken);
+    localStorage.setItem("@tranqyy:user", JSON.stringify(user));
     setData({ accessToken, user });
   }, []);
   const signOut = useCallback(() => {
-    localStorage.removeItem("@tranqly:accessToken");
-    localStorage.removeItem("@tranqly:user");
+    localStorage.removeItem("@tranqyl:accessToken");
+    localStorage.removeItem("@tranqyl:user");
     setData({} as AuthState);
   }, []);
 
