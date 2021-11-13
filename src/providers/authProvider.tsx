@@ -14,6 +14,7 @@ interface User {
   email: string;
   id: string;
   name: string;
+  type:string;
 }
 interface AuthState {
   accessToken: string;
@@ -72,6 +73,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const signOut = useCallback(() => {
     localStorage.removeItem("@tranqyl:accessToken");
     localStorage.removeItem("@tranqyl:user");
+    localStorage.clear()
     setData({} as AuthState);
   }, []);
 

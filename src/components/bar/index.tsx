@@ -2,9 +2,28 @@ import { BarContainer } from "./styles";
 import logo from "../../assets/img/tranqyl.svg";
 import { slide as Menu } from "react-burger-menu";
 import Button from "../button";
+import { UseAuth } from "../../providers/authProvider";
+import { useHistory } from "react-router";
 
-export default function index() {
+
+const Index=()=> {
+  const{accessToken}=UseAuth()
+
+  const history = useHistory()
+  const {signOut}=UseAuth()
+
+  const changeLoginSignup=()=>{
+    if(accessToken){
+     signOut()
+    }else{
+      history.push("/signin")
+    }
+  }
+
+
   return (
+
+
     <>
       <BarContainer>
         <div className="barWidth">
@@ -19,9 +38,9 @@ export default function index() {
               <a href="/signupprofessional">Para especialistas</a>
               <a href="/signupclient">Para clientes</a>
               <a href="/dashboardfilter">Procurar especialista</a>
-              <a href="/signin">
-                <Button>Logar</Button>
-              </a>
+              
+                <Button onClick={()=>changeLoginSignup()}>{accessToken?"Deslogar": "Logar"}</Button>
+              
             </Menu>
           </div>
         </div>
@@ -29,3 +48,4 @@ export default function index() {
     </>
   );
 }
+export default Index
