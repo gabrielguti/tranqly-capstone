@@ -20,6 +20,7 @@ interface DataProps {
   type: boolean;
   date: any;
   id: number;
+  calendar: any;
 }
 
 interface CommentsProps {
@@ -128,6 +129,7 @@ const ProfileProfessional = () => {
     searchDate();
     searchComments();
   }, []);
+
 
   const formed = calendar
     .slice()

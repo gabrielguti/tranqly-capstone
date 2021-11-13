@@ -1,26 +1,65 @@
-import { MainContainer, FormContainer } from "./styles";
 import Bar from "../../components/bar";
-import LoginImg from "../../assets/img/IllustrationR18.svg";
+import { BoxForm, Container, FooterForm, Title } from "./styles";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { UseAuth } from "../../providers/authProvider";
+
+interface LoginData {
+  email: string;
+  password: string;
+}
 
 const Login = () => {
+  const { signIn } = UseAuth();
+
+  const Schema = yup.object().shape({
+    email: yup.string().email("email inválido").required("email obrigatório"),
+    password: yup
+      .string()
+      .required("senha obrigatória")
+      .min(4, "4 dígitos no mínimo"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(Schema),
+  });
+
+  function onSubmitFunction(data: LoginData) {
+    signIn(data);
+  }
+
   return (
-    <MainContainer>
+    <>
       <Bar />
-      <FormContainer>
-        <img src={LoginImg} alt={"LoginImg"} />
-        <div className="FormDiv">
+      <Container>
+        <Title>
           <h1>Entrar</h1>
-          <form>
-            <input placeholder="Email" />
-            <input placeholder="Senha" />
-            <button>Entrar</button>
+        </Title>
+        <BoxForm>
+          <form onSubmit={handleSubmit(onSubmitFunction)}>
+            <input placeholder="Email" {...register("email")} />
+            <span>{errors.email?.message}</span>
+            <input
+              placeholder="Senha"
+              type="password"
+              {...register("password")}
+            />
+
+            <span>{errors.password?.message}</span>
+
+            <button type="submit">Entrar</button>
           </form>
-          <p>
-            Não possui conta? <a href="/signupclient">Cadastre-se</a>
-          </p>
-        </div>
-      </FormContainer>
-    </MainContainer>
+        </BoxForm>
+        <FooterForm>
+          Não possui conta? <a href="/signupclient">Cadastre-se</a>
+        </FooterForm>
+      </Container>
+    </>
   );
 };
 
