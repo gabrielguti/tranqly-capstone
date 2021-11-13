@@ -12,12 +12,13 @@ import {
   PDescription,
   PProfession,
 } from "./styles";
-import { FaStar } from "react-icons/fa";
 import { useHistory } from "react-router";
 import { useContext } from "react";
 import { ProfessionalContext } from "../../providers/professionals";
+import StarsCount from "../stars";
 
 interface ProfessionalData {
+  id:number;
   name: string;
   profession: string;
   description: string;
@@ -27,11 +28,14 @@ interface ProfessionalData {
 
 interface CardProfessionalProps {
   professional: ProfessionalData;
+  average: number
 }
 
-const CardProfessional = ({ professional }: CardProfessionalProps) => {
+
+const CardProfessional = ({ professional, average}: CardProfessionalProps, ) => {
   const history = useHistory();
   const { renderization } = useContext(ProfessionalContext);
+  const {name, image, description, areas, profession}=professional
 
   const schedule = (name: string) => {
     renderization(name);
@@ -39,27 +43,26 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
     return history.push("/profileprofessional");
   };
   return (
+    <>
+    {}
+    
     <ContainerProfessional>
       <ContainerImgProfessional>
-        <img src={professional.image} alt={professional.name} />
+        <img src={image} alt={name} />
       </ContainerImgProfessional>
       <ContainerName>
-        <p>{professional.name}</p>
-        <FaStar />
-        <FaStar />
-        <FaStar />
-        <FaStar />
-        <FaStar />
+        <p>{name}</p>
+        <StarsCount stars={average}/>
       </ContainerName>
       <ContainerSkylls>
         <ContainerProfession>
-          <PProfession>{professional.profession}</PProfession>
+          <PProfession>{profession}</PProfession>
         </ContainerProfession>
         <ContainerAreas>
-          <PAreas>{professional.areas}</PAreas>
+          <PAreas>{areas}</PAreas>
         </ContainerAreas>
         <ContainerDescription>
-          <PDescription>{professional.description}</PDescription>
+          <PDescription>{description}</PDescription>
         </ContainerDescription>
       </ContainerSkylls>
       <ContainerButtonSchedule>
@@ -68,6 +71,7 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
         </ButtonSchedule>
       </ContainerButtonSchedule>
     </ContainerProfessional>
+    </>
   );
 };
 

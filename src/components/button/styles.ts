@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const ButtonContainer = styled.button`
   width: 100%;
-  max-width: 200px;
-  height: 35px;
+  max-width: 250px;
+  height: 50px;
   border-radius: 5px;
   background-color: var(--orange200);
   display: flex;
@@ -12,6 +12,6 @@ export const ButtonContainer = styled.button`
   color: white;
   font-size: 22px;
   :hover {
-    background-color: var(--orange100);
+    filter: brightness(1.2);
   }
 `;

@@ -70,7 +70,7 @@ export const Calendar = styled.div`
   align-items: center;
   .tittle {
     width: 100%;
-    max-width: 770px;
+    max-width: 940px;
     height: 70px;
     background-color: var(--purple300);
     font-size: 28px;
@@ -81,17 +81,20 @@ export const Calendar = styled.div`
   }
   .container {
     width: 100%;
-    max-width: 770px;
+    max-width: 940px;
     height: 625px;
     display: flex;
     background-color: var(--gray50);
     overflow-x: scroll;
   }
   .week {
+    height: 70px;
+    width: 100%;
   }
   .day {
     height: 70px;
-    width: 110px;
+    width: 100%;
+    min-width: 110px;
     background-color: var(--purple400);
     display: flex;
     align-items: center;
@@ -99,40 +102,37 @@ export const Calendar = styled.div`
     font-size: 18px;
   }
   .times {
-    width: 110px;
+    height: 70px;
+    min-width: 160px;
+    width: 100%;
     height: 485px;
     background-color: var(--gray50);
     display: flex;
     align-items: center;
     flex-direction: column;
+    border: 10px solid transparent;
   }
   .time {
-    width: 90px;
-    height: 50px;
+    min-width: 90px;
+    width: 100%;
+    font-weight: bold;
+    height: 60px;
     background-color: white;
     border-radius: 10px;
     margin: 5px 0;
-    color: black;
-    font-size: 14px;
+    color: white;
+    font-size: 16px;
     padding: 5px;
     cursor: pointer;
     background-color: var(--orange200);
-    p {
-      text-align: center;
-    }
-    div {
-      padding: 0 10px;
-      display: flex;
-      justify-content: space-between;
-      svg {
-        color: white;
-        :hover {
-          color: var(--purple200);
-        }
-      }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;  
     }
     :hover {
-      background-color: var(--orange100);
+      filter: brightness(1.2);
     }
   }
   .nothingHere {
@@ -147,7 +147,6 @@ export const Calendar = styled.div`
     svg {
       font-size: 80px;
     }
-  }
 `;
 
 export const Comments = styled.div`
@@ -155,7 +154,7 @@ export const Comments = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-bottom: 30px;
+  padding: 30px 0;
   .containerComment {
     display: grid;
     flex-wrap: wrap;
@@ -169,48 +168,12 @@ export const Comments = styled.div`
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
-  .modal {
-    background-color: white;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 450px;
-    height: 350px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
-    gap: 20px;
-    svg {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 24px;
-      cursor: pointer;
-    }
-    textarea {
-      width: 385px;
-      height: 160px;
-      border-radius: 10px;
-      padding: 20px;
-      background-color: var(--gray100);
-    }
-    input {
-      background-color: var(--gray100);
-      padding: 0 20px;
-      width: 385px;
-      height: 50px;
-      border-radius: 10px;
-    }
-  }
 `;
 
 export const Line = styled.div`
-  width: 80%;
-  border-top: 3px solid var(--purple300);
+  width: 98%;
+  max-width: 1280px;
+  border-top: 2px solid var(--purple200);
   margin: 20px auto;
   padding: 20px;
 `;
