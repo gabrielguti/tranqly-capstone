@@ -8,11 +8,11 @@ export const BarContainer = styled.div`
     width: 100%;
     height: inherit;
     max-width: 1280px;
-    padding: 0 10px;
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 20px;
     img {
       :hover {
         cursor: pointer;
@@ -33,7 +33,7 @@ export const BarContainer = styled.div`
       height: 30px;
     }
     .bm-burger-bars {
-      background: #373a47;
+      background: var(--black0);
     }
     .bm-cross {
       background: var(--gray200);
@@ -44,7 +44,7 @@ export const BarContainer = styled.div`
       top: 0;
     }
     .bm-menu {
-      background: #373a47;
+      background: var(--black0);
       padding: 2.5em 1.5em 0;
       font-size: 1.15em;
       opacity: 1;
@@ -71,8 +71,5 @@ export const BarContainer = styled.div`
       letter-spacing: 1px;
       font-weight: 400;
     }
-  }
-  @media (min-width: 700px) {
-    padding: 0 60px;
   }
 `;
