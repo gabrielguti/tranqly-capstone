@@ -8,11 +8,14 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import moment from "moment";
 import "moment/locale/pt-br";
+import toast from "react-hot-toast";
+import ModalComment from "../../components/modalComment";
 import { FaCheck, FaRegClock, FaTimes } from "react-icons/fa";
 import { UseAuth } from "../../providers/authProvider";
 import CardProfessionalData from "../../components/cardProfessionalData";
 
 interface DataProps {
+  calendar: any;
   userId: number;
   type: boolean;
   date: any;
@@ -28,22 +31,16 @@ interface CommentsProps {
   score:number
 }
 
-interface CreateCommentsProps {
-  newComment: string;
-  newScore: number;
-}
-
 const ProfileProfessional = () => {
   const [calendar, setCalendar] = useState<DataProps[]>([]);
   const [comments, setComments] = useState<CommentsProps[]>([]);
   let ref: string[] = [];
-  const [newComment, setNewComment] = useState("");
-  const [newScore, setNewScore] = useState(5);
-  const now = moment();
   const [show, setShow] = useState(false);
-  // const { accessToken, user } = UseAuth();
+  var now = new Date();
+
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZyZWRlcmljb0BtYXNvbWVuby5jb20iLCJpYXQiOjE2MzY3NTAwMzIsImV4cCI6MTYzNjc1MzYzMiwic3ViIjoiMSJ9.nX0oaY6W6_INLUy-DqC1SvpNUvpVNT-aEjG15hkmHPA";
+
   const searchDate = () => {
     api
       .get(`/users/${1}/professional`, {
@@ -66,12 +63,16 @@ const ProfileProfessional = () => {
       .catch((e) => console.log(e));
   };
 
-  const createComment = ({ newComment, newScore }: CreateCommentsProps) => {
+  const createComment = (newComment: string, newScore: number) => {
     const newData = {
       comment: newComment,
       score: newScore,
     };
-    if (newComment.length > 10 && newComment.length < 200) {
+    if (newComment.length <= 10) {
+      toast.error("Descreva com mais detalhes seu comentário.");
+    } else if (newComment.length > 200) {
+      toast.error("Descreva com menos detalhes seu comentário");
+    } else {
       api
         .post(`/professional/${1}/comments`, newData, {
           headers: {
@@ -84,7 +85,6 @@ const ProfileProfessional = () => {
         })
         .catch((e) => console.log(e));
     }
-    alert("");
   };
   let soma = 0;
   let averag = 0;
@@ -129,6 +129,9 @@ const ProfileProfessional = () => {
     searchComments();
   }, []);
 
+  const formed = calendar
+    .slice()
+    .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
   const getProfessionalStorage = JSON.parse(localStorage.getItem("@tranqyl:prof")||"")
 
@@ -144,33 +147,37 @@ const ProfileProfessional = () => {
           <p>Escolha seu horário</p>
         </div>
         <div className="container">
-          {calendar.length > 0 ? (
+          {formed.length > 0 ? (
             <>
-              {calendar
+              {formed
                 .sort((n) => n.date)
                 .map((item, index) => {
-                  if (!ref.includes(item.date) && ref.push(item.date)) {
+                  if (
+                    !ref.includes(item.date) &&
+                    ref.push(item.date) &&
+                    moment(now).format().replace(/\D/g, "") <=
+                      moment(item.date).format().replace(/\D/g, "")
+                  ) {
                     return (
                       <div key={index} className="week">
                         <div className="day">
                           <p>{moment(item.date).format("ddd")}</p>
                         </div>
                         <div className="times">
-                          {calendar
+                          {formed
                             .filter((f) => f.date === item.date)
                             .filter((fil) => fil.type === true)
                             .map((m, secoundIndex) => {
                               return (
-                                <div key={secoundIndex} className="time">
+                                <div
+                                  key={secoundIndex}
+                                  className="time"
+                                  onClick={() => check(m.id)}
+                                >
                                   <p>{moment(m.date).format("DD/MM/YYYY")}</p>
-                                  <div>
-                                    <span className="check">
-                                      {moment(m.date).format("LT")}
-                                    </span>
-                                    <span>
-                                      <FaCheck onClick={() => check(m.id)} />
-                                    </span>
-                                  </div>
+                                  <span className="check">
+                                    {moment(m.date).format("LT")}
+                                  </span>
                                 </div>
                               );
                             })}
@@ -196,22 +203,11 @@ const ProfileProfessional = () => {
             return <CardComments comments={item} />;
           })}
           {show && (
-            <div className="modal">
-              <FaTimes onClick={() => setShow(!show)} />
-              <textarea
-                placeholder="Seu comentário..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-              ></textarea>
-              <input
-                placeholder="Sua Nota"
-                value={newScore}
-                onChange={(e) => setNewScore(Number(e.target.value))}
-              ></input>
-              <Button onClick={() => createComment({ newComment, newScore })}>
-                Comentar
-              </Button>
-            </div>
+            <ModalComment
+              show={show}
+              setShow={setShow}
+              createComment={createComment}
+            />
           )}
         </div>
       </Comments>
@@ -221,11 +217,3 @@ const ProfileProfessional = () => {
 };
 
 export default ProfileProfessional;
-function type(
-  arg0: string,
-  type: any,
-  arg2: boolean,
-  arg3: { headers: { Authorization: string } }
-) {
-  throw new Error("Function not implemented.");
-}

@@ -1,144 +1,140 @@
 import styled from "styled-components";
 
-export const MainContainer = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export const HeaderContainer = styled.div`
-  width: 100vw;
-  height: 25vh;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  background: linear-gradient(
+    90deg,
+    rgba(69, 36, 122, 0.87) 0%,
+    #9677d9 98.95%
+  );
   display: flex;
-  align-items: center;
-  background: linear-gradient(90deg, rgba(69, 36, 122, 0.87) 0%, #9677d9 100%);
-  @media only screen and (max-width: 1023px) {
-    height: 40vh;
+  justify-content: center;
+  .header {
+    padding: 20px;
+    width: 100%;
+    max-width: 1280px;
+    display: flex;
+    justify-content: space-around;
+    color: var(--gray100);
   }
-
-  .InfoHeader {
-    width: 90%;
-    margin: 0 auto;
+  .info {
     display: flex;
     flex-direction: column;
+    display: flex;
     justify-content: space-around;
-    h1,
-    p {
-      color: var(--gray100);
-    }
-    button {
-      width: 150px;
-      height: 30px;
-      border-radius: 7px;
-      background: var(--orange100);
-      color: white;
-    }
-
-    @media only screen and (max-width: 767px) {
-      height: 100%;
-      h1 {
-        font-size: 1.5em;
-      }
-      p {
-        font-size: 0.7em;
-      }
-    }
-    @media only screen and (max-width: 1024px) {
-      height: 80%;
-    }
-
-    @media only screen and (min-width: 1024px) {
-      height: 70%;
-      width: 40%;
-      h1 {
-        font-size: 0.8em;
-      }
-      p {
-        font-size: 0.5em;
-      }
-    }
+    gap: 20px;
   }
-  > img {
-    height: 100%;
-    width: 25%;
-
-    @media only screen and (max-width: 1023px) {
-      display: none;
+  .img {
+    padding: 20px;
+    display: none;
+    justify-content: flex-end;
+    display: none;
+    @media (min-width: 800px) {
+      display: flex;
     }
   }
 `;
 
-export const MainInfoContainer = styled.div`
-  .mainTitle {
+export const MainContainer = styled.div`
+  text-align: center;
+  color: var(--black0);
+  width: 100%;
+  padding: 30px 0;
+`;
+
+export const Scroll = styled.div`
+  width: 100%;
+  min-height: 300px;
+  background-color: var(--gray50);
+  padding: 20px;
+  .containerSlick {
+    max-width: 1280px;
+    margin: auto;
+  }
+  .slick-slide {
+  }
+  .slick-prev,
+  .slick-next {
+    margin: 0 20px;
+    z-index: 1;
+    width: 40px;
+    height: 100%;
+    opacity: 0;
+    transition-duration: 0.5s;
+    ::before {
+      font-size: 40px;
+      color: var(--black0);
+    }
+  }
+  ::before {
+    color: var(--gray200);
+  }
+  :hover .slick-next,
+  :hover .slick-prev {
+    opacity: 0.5;
+    transition-duration: 0.5s;
+  }
+`;
+
+export const Comments = styled.div`
+  width: 100%;
+  height: 300px;
+  h1 {
     text-align: center;
-    padding: 10px;
+    padding: 30px;
   }
-
-  .Carousel {
-    padding: 10px;
-    background: var(--gray50);
-
-    @media only screen and (max-width: 425px) {
-      width: 90%;
-      margin: 0 auto;
-    }
+  div {
+    max-width: 1280px;
+    margin: auto;
   }
+`;
 
-  .RatingDiv {
-    h2 {
-      text-align: center;
-      padding: 10px;
-    }
-
-    .Ratings {
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      flex-wrap: wrap;
-      @media only screen and (min-width: 1024px) {
-        flex-direction: row;
-      }
-      .ratingInfo {
-        width: 80%;
-        max-width: 350px;
-        height: 20%;
-        max-height: 150px;
-        background: var(--purple100);
-        @media only screen and (min-width: 1024px) {
-          width: 28%;
-          height: 80%;
-        }
-      }
-    }
-  }
-
-  .LastInfo {
-    width: 90%;
-    height: 50vh;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    @media only screen and (min-width: 768px) {
-      height: 30vh;
-    }
-  }
-
-  .CreatorsInfo {
-    height: 20vh;
+export const FooterContainer = styled.div`
+  background-color: var(--gray50);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .containerProfile {
+    padding: 20px 0;
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
     display: flex;
     justify-content: space-around;
-    align-items: flex-end;
-    background: var(--gray50);
-    @media only screen and (max-width: 767px) {
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .profile {
+    width: 150px;
+    height: 150px;
+    font-weight: 300;
+    text-align: center;
+    img {
+      border-radius: 50%;
+      width: 90px;
+      height: 90px;
     }
-    .CardTeam {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      img {
-        width: 120px;
-        height: 120px;
-      }
-    }
+  }
+  p {
+    font-size: 13px;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 300;
+  }
+  a {
+    color: var(--black0);
+  }
+  svg {
+    margin: 0 8px;
+    font-size: 20px;
   }
 `;
