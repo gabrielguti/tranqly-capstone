@@ -1,64 +1,68 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerProfessionalData = styled.div`
-  background: linear-gradient(90deg, rgba(69, 36, 122, 0.87) 0%, #9677d9 100%);
-  width: 100%;
-  margin: auto;
-  .ProfessionalData {
-    max-width: 1280px;
+    background: linear-gradient(
+        90deg,
+        rgba(69, 36, 122, 0.87) 0%,
+        #9677d9 100%
+    );
+    width: 100%;
     margin: auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    @media (min-width: 700px) {
-      flex-direction: row;
-      align-items: flex-start;
-      text-align: start;
-    }
-    .img {
-      width: 100%;
-      height: 100%;
-      max-width: 350px;
-      display: flex;
-      justify-content: center;
-      img {
-        width: 230px;
-        height: 230px;
-      }
-    }
-    .data {
-      margin-bottom: 50px;
-      padding: 5px;
-      max-width: 600px;
-      width: 100%;
-      display: flex;
-      gap: 30px;
-      flex-direction: column;
-      color: var(--gray200);
-      div {
-        flex-direction: column;
-        svg {
-          font-size: 20px;
-          color: var(--yellow200);
-        }
-        span {
-          font-size: 14px;
-        }
-      }
-      .stars {
+    .ProfessionalData {
+        max-width: 1280px;
+        margin: auto;
         display: flex;
-        flex-direction: row;
-        gap: 3px;
-        margin-top: 5px;
-        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
         @media (min-width: 700px) {
-          justify-content: left;
+            flex-direction: row;
+            align-items: flex-start;
+            text-align: start;
         }
-      }
+        .img {
+            width: 100%;
+            height: 100%;
+            max-width: 350px;
+            display: flex;
+            justify-content: center;
+            img {
+                width: 230px;
+                height: 230px;
+            }
+        }
+        .data {
+            margin-bottom: 50px;
+            padding: 5px;
+            max-width: 600px;
+            width: 100%;
+            display: flex;
+            gap: 30px;
+            flex-direction: column;
+            color: var(--gray200);
+            div {
+                flex-direction: column;
+                svg {
+                    font-size: 20px;
+                    color: var(--yellow200);
+                }
+                span {
+                    font-size: 14px;
+                }
+            }
+            .stars {
+                display: flex;
+                flex-direction: row;
+                gap: 3px;
+                margin-top: 5px;
+                justify-content: center;
+                @media (min-width: 700px) {
+                    justify-content: left;
+                }
+            }
+        }
     }
-  }
-`;
+`
 
 export const Calendar = styled.div`
   width: 100%;
@@ -147,33 +151,33 @@ export const Calendar = styled.div`
     svg {
       font-size: 80px;
     }
-`;
+`
 
 export const Comments = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 30px 0;
-  .containerComment {
-    display: grid;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    @media (min-width: 700px) {
-      grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px 0;
+    .containerComment {
+        display: grid;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        @media (min-width: 700px) {
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (min-width: 1000px) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
     }
-    @media (min-width: 1000px) {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  }
-`;
+`
 
 export const Line = styled.div`
-  width: 98%;
-  max-width: 1280px;
-  border-top: 2px solid var(--purple200);
-  margin: 20px auto;
-  padding: 20px;
-`;
+    width: 98%;
+    max-width: 1280px;
+    border-top: 2px solid var(--purple200);
+    margin: 20px auto;
+    padding: 20px;
+`
