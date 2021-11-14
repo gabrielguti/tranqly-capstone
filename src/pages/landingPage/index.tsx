@@ -68,7 +68,7 @@ const LandingPage = () => {
           <Slider {...settings}>
             {allProfessionals
               .sort(() => 0.5 - Math.random())
-              .slice(0, 2)
+              .slice(0, 5)
               .map((item) => {
                 return <CardSlick item={item} />;
               })}

@@ -16,9 +16,17 @@ const Routes = () => {
       <Route path="/signin" component={Login} />
       <Route path="/signupclient" component={RegisterClient} />
       <Route path="/signupprofessional" component={RegisterProfessional} />
-      <Route path="/profileprofessional" component={ProfileProfessional} isPrivate/>
-      <Route path="/dashboardclient" component={DashboardPatient} isPrivate/>
-      <Route path="/dashboardprofessional" component={DashboardProfessional} isPrivate/>
+      <Route
+        path="/profileprofessional"
+        component={ProfileProfessional}
+        isPrivate
+      />
+      <Route path="/dashboardclient" component={DashboardPatient} isPrivate />
+      <Route
+        path="/dashboardprofessional"
+        component={DashboardProfessional}
+        isPrivate
+      />
       <Route path="/dashboardfilter" component={DashboardFilter} />
     </Switch>
   );

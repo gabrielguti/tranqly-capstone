@@ -11,6 +11,7 @@ export const CardCommentStyle = styled.div`
   justify-content: space-around;
   padding: 5px 10px;
   color: white;
+  text-align: left;
   .data {
     display: flex;
     gap: 10px;
