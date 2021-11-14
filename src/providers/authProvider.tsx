@@ -16,6 +16,7 @@ interface User {
   name: string;
   type:string;
   image: string
+
 }
 interface AuthState {
   accessToken: string;
@@ -74,13 +75,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const signOut = useCallback(() => {
     localStorage.removeItem("@tranqyl:accessToken");
     localStorage.removeItem("@tranqyl:user");
-    localStorage.clear()
+    localStorage.clear();
     setData({} as AuthState);
   }, []);
 
   const signUp = (data: SignUpCredentials) => {
-    api.post(`/users`, data)
-    .catch((e) => console.log(e));
+    api.post(`/users`, data).catch((e) => console.log(e));
     history.push("/signin");
   };
   return (
@@ -98,4 +98,3 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 };
 export { AuthProvider, UseAuth };
-

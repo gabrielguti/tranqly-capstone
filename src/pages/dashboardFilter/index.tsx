@@ -25,15 +25,17 @@ const DashboardFilter = () => {
         </div>
       </ContainerSearch>
       <ContainerProfessionals>
-        {professionals.map((professional, index) => {
-          return (
-            <CardProfessional
-              key={index}
-              professional={professional}
-              average={4}
-            />
-          );
-        })}
+        {professionals
+          .sort(() => 0.5 - Math.random())
+          .map((professional, index) => {
+            return (
+              <CardProfessional
+                key={index}
+                professional={professional}
+                average={4}
+              />
+            );
+          })}
       </ContainerProfessionals>
     </>
   );

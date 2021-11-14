@@ -28,6 +28,16 @@ const Index = () => {
             <img src={logo} alt="logo" />
           </Link>
         </div>
+        <div className="options">
+          <Link to="/signupprofessional">Para especialistas</Link>
+          <Link to="/signupclient">Para clientes</Link>
+          <Link to="/dashboardfilter">Procurar especialista</Link>
+          <Link to="/signin">
+            <Button onClick={() => changeLoginSignup()}>
+              {accessToken ? "Deslogar" : "Logar"}
+            </Button>
+          </Link>
+        </div>
         <div className="burguer">
           <Menu right>
             <Link to="/">

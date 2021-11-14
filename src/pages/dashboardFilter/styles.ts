@@ -30,14 +30,11 @@ export const ContainerSearch = styled.div`
     font-size: 24px;
   }
   p {
-    display: none;
-    @media (min-width: 767px) {
-      display: block;
-      font-size: 25px;
-      font-weight: lighter;
-      color: var(--gray200);
-      margin-bottom: 10px;
-    }
+    display: block;
+    font-size: 25px;
+    font-weight: lighter;
+    color: var(--gray200);
+    margin-bottom: 30px;
   }
 `;
 

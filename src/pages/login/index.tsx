@@ -50,15 +50,13 @@ const Login = () => {
                 type="password"
                 {...register("password")}
               />
-
               <span>{errors.password?.message}</span>
-
               <button type="submit">Entrar</button>
             </form>
-          Não possui conta? <Link to="/signupclient">Cadastre-se</Link>
+            <p>
+              Não possui conta? <Link to="/signupclient">Cadastre-se</Link>
+            </p>
           </BoxForm>
-          {/* <FooterForm> */}
-          {/* </FooterForm> */}
         </ContainerForm>
       </Container>
     </>

@@ -1,9 +1,10 @@
 import { ProfessionalContainer, Card } from "./styles";
 import { useHistory } from "react-router";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProfessionalContext } from "../../providers/professionals";
 import { FaStar } from "react-icons/fa";
 import Button from "../button";
+import api from "../../services/api";
 
 interface ProfessionalData {
   id: number;
@@ -29,6 +30,27 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
 
     return history.push("/profileprofessional");
   };
+
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    api
+      .get(
+        `https://testes-laudemir.herokuapp.com/comments?professionalId=${professional.id}`
+      )
+      .then((response) => setComments(response.data))
+      .catch((e) => console.log(e));
+  }, []);
+
+  const media =
+    comments.length > 0 &&
+    Math.round(
+      comments.reduce(
+        (total: any, atual: { score: any }) => total + atual.score,
+        0
+      ) / comments.length
+    );
+
   return (
     <ProfessionalContainer>
       <Card>
@@ -38,13 +60,13 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
         <div className="infos">
           <div>
             <h2>{professional.name}</h2>
-            <div className="stars">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-            </div>
+            {media > 0 && (
+              <div className="stars">
+                {[...Array(media)].map(() => (
+                  <FaStar />
+                ))}
+              </div>
+            )}
             <p>{professional.profession}</p>
             <p>{professional.areas}</p>
           </div>

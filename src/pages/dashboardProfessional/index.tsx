@@ -2,10 +2,10 @@ import Bar from "../../components/bar";
 
 const DashboardProfessional = () => {
   return (
-  <>
-  <Bar/>
-  Dashboard Professional
-  </>
+    <>
+      <Bar />
+      Dashboard Professional
+    </>
   );
 };
 

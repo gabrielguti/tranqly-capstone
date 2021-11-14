@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UseAuth } from "../../providers/authProvider";
 import { Link } from "react-router-dom";
+
 interface ClientData {
   name: string;
   email: string;
