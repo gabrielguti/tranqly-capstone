@@ -6,8 +6,30 @@ import Button from "../../components/button";
 import { CardsBox, ContaiinerProfileInfo, SectionInfo, Title } from "./styles";
 import DashboardCard from "../../components/dashboardCard";
 import { Line } from "../../components/dashboardCard/styles";
+import { useClientCard } from "../../providers/clientProvider";
+import { useEffect } from "react";
+import moment from "moment";
+import "moment/locale/pt-br";
 
 const DashboardPatient = () => {
+  const { conference, getConference } = useClientCard();
+  let now = new Date();
+  let ref: string[] = [];
+  let refTwo: string[] = [];
+
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhYnJpZWxAZ21haWwuY29tIiwiaWF0IjoxNjM2OTI0MDk0LCJleHAiOjE2MzY5Mjc2OTQsInN1YiI6IjE1In0.0ciyaG0ChIn_mOtAFi9xLEGNJoRnpUNssnoUHC61Mo8";
+
+  useEffect(() => {
+    getConference(token);
+  }, []);
+
+  const formed = conference
+    .slice()
+    .sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1));
+
+  console.log(formed);
+
   return (
     <>
       <Bar />
@@ -52,54 +74,51 @@ const DashboardPatient = () => {
           <h2>Próximos agendamentos</h2>
         </Title>
         <CardsBox>
-          <DashboardCard
-            isRemovable={true}
-            date={"data"}
-            name={"nome"}
-            time={"horário"}
-            info={"Info"}
-          />
-          <DashboardCard
-            isRemovable={true}
-            date={"data"}
-            name={"nome"}
-            time={"horário"}
-            info={"Info"}
-          />
-          <DashboardCard
-            isRemovable={true}
-            date={"data"}
-            name={"nome"}
-            time={"horário"}
-            info={"Info"}
-          />
+          {conference &&
+            conference
+              .filter((item) => item.cancel === false)
+              .map((filtered, index) => {
+                if (
+                  !ref.includes(filtered.date) &&
+                  ref.push(filtered.date) &&
+                  moment(now).format().replace(/\D/g, "") <=
+                    moment(filtered.date).format().replace(/\D/g, "")
+                )
+                  return (
+                    <DashboardCard
+                      isRemovable={filtered.cancel}
+                      date={moment(filtered.date).format("LL")}
+                      name={filtered.nameProfessional}
+                      time={moment(filtered.date).format("LT")}
+                      info={"info"}
+                    ></DashboardCard>
+                  );
+              })}
         </CardsBox>
         <Line />
         <Title>
           <h2>Últimos atendimentos</h2>
         </Title>
         <CardsBox>
-          <DashboardCard
-            isRemovable={false}
-            date={"data"}
-            name={"nome"}
-            time={"horário"}
-            info={"Info"}
-          />
-          <DashboardCard
-            isRemovable={false}
-            date={"data"}
-            name={"nome"}
-            time={"horário"}
-            info={"Info"}
-          />
-          <DashboardCard
-            isRemovable={false}
-            date={"data"}
-            name={"nome"}
-            time={"horário"}
-            info={"Info"}
-          />
+          {formed &&
+            formed.map((item, index) => {
+              if (
+                !refTwo.includes(item.date) &&
+                refTwo.push(item.date) &&
+                moment(now).format().replace(/\D/g, "") >
+                  moment(item.date).format().replace(/\D/g, "")
+              )
+                return (
+                  <DashboardCard
+                    date={moment(item.date).format("LL")}
+                    name={item.nameProfessional}
+                    time={moment(item.date).format("LT")}
+                    key={index}
+                    info={"info"}
+                    isRemovable={true}
+                  />
+                );
+            })}
         </CardsBox>
         <Line />
       </SectionInfo>

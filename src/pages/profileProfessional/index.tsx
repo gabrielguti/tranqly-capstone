@@ -29,7 +29,7 @@ const ProfileProfessional = () => {
 
   let ref: string[] = [];
   const [show, setShow] = useState(false);
-  var now = new Date();
+  let now = new Date();
 
   useEffect(() => {
     searchDate(Number(user.id), accessToken);
@@ -59,7 +59,6 @@ const ProfileProfessional = () => {
           {formed.length > 0 ? (
             <>
               {formed
-                .sort((n) => n.date)
                 .map((item, index) => {
                   if (
                     !ref.includes(item.date) &&

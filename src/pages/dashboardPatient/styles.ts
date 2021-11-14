@@ -27,10 +27,14 @@ export const CardsBox = styled.div`
   @media (min-width: 700px) {
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 80%;
     justify-content: space-between;
+    overflow-x: auto;
+    box-shadow: 0px 0px 20px var(--gray200);
+    border: 0;
+    border-radius: 5px;
   }
   @media (min-width: 940px) {
-    width: 900px;
+    /* width: 900px; */
   }
 `;

@@ -8,8 +8,9 @@ export const CardPro = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 5vh;
-  width: 250px;
+  min-width: 250px;
   margin-bottom: 7vh;
+  margin: 20px;
   button {
     background-color: var(--red50);
     width: 130px;
