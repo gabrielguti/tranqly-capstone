@@ -30,7 +30,28 @@ export const BarContainer = styled.div`
       }
     }
   }
+  .options {
+    display: none;
+    align-items: center;
+    gap: 20px;
+    margin-right: 10px;
+    @media (min-width: 900px) {
+      display: flex;
+    }
+    a {
+      color: var(--gray50);
+      font-size: 18px;
+      cursor: pointer;
+      :hover {
+        color: var(--gray200);
+      }
+    }
+  }
   .burguer {
+    display: flex;
+    @media (min-width: 900px) {
+      display: none;
+    }
     .bm-burger-button {
       position: relative;
       width: 36px;

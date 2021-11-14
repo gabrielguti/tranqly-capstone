@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
+
 interface SignUpProfessional {
   name: string;
   email: string;
@@ -101,10 +102,10 @@ const RegisterProfessional = () => {
             </form>
             <div>
               <p>
-            Já possui conta? <Link to="/signin">Entre aqui</Link>
+                Já possui conta? <Link to="/signin">Entre aqui</Link>
               </p>
               <p>
-            Cadastro para <Link to="/signupclient">Clientes</Link>
+                Cadastro para <Link to="/signupclient">Clientes</Link>
               </p>
             </div>
           </BoxForm>

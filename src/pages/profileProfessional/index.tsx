@@ -58,43 +58,41 @@ const ProfileProfessional = () => {
         <div className="container">
           {formed.length > 0 ? (
             <>
-              {formed
-                .sort((n) => n.date)
-                .map((item, index) => {
-                  if (
-                    !ref.includes(item.date) &&
-                    ref.push(item.date) &&
-                    moment(now).format().replace(/\D/g, "") <=
-                      moment(item.date).format().replace(/\D/g, "")
-                  ) {
-                    return (
-                      <div key={index} className="week">
-                        <div className="day">
-                          <p>{moment(item.date).format("ddd")}</p>
-                        </div>
-                        <div className="times">
-                          {formed
-                            .filter((f) => f.date === item.date)
-                            .filter((fil) => fil.type === true)
-                            .map((m, secondIndex) => {
-                              return (
-                                <div
-                                  key={secondIndex}
-                                  className="time"
-                                  onClick={() => check(m.id, accessToken)}
-                                >
-                                  <p>{moment(m.date).format("DD/MM/YYYY")}</p>
-                                  <span className="check">
-                                    {moment(m.date).format("LT")}
-                                  </span>
-                                </div>
-                              );
-                            })}
-                        </div>
+              {formed.map((item, index) => {
+                if (
+                  !ref.includes(item.date) &&
+                  ref.push(item.date) &&
+                  moment(now).format().replace(/\D/g, "") <=
+                    moment(item.date).format().replace(/\D/g, "")
+                ) {
+                  return (
+                    <div key={index} className="week">
+                      <div className="day">
+                        <p>{moment(item.date).format("ddd")}</p>
                       </div>
-                    );
-                  }
-                })}
+                      <div className="times">
+                        {formed
+                          .filter((f) => f.date === item.date)
+                          .filter((fil) => fil.type === true)
+                          .map((m, secondIndex) => {
+                            return (
+                              <div
+                                key={secondIndex}
+                                className="time"
+                                onClick={() => check(m.id, accessToken)}
+                              >
+                                <p>{moment(m.date).format("DD/MM/YYYY")}</p>
+                                <span className="check">
+                                  {moment(m.date).format("LT")}
+                                </span>
+                              </div>
+                            );
+                          })}
+                      </div>
+                    </div>
+                  );
+                }
+              })}
             </>
           ) : (
             <div className="nothingHere">
