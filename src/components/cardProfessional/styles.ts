@@ -1,97 +1,80 @@
 import styled from "styled-components";
 
-export const ContainerProfessional = styled.div`
+export const ProfessionalContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  margin: auto;
-  margin-top: 35px;
+  margin: 20px auto;
   width: 90%;
   max-width: 1280px;
   box-shadow: 0px 0px 15px 6px rgb(0 0 0 / 30%);
   padding: 10px;
-  @media (min-width: 767px) {
+  @media (min-width: 900px) {
     flex-direction: row;
-    height: 300px;
+    min-height: 350px;
   }
 `;
-export const ContainerImgProfessional = styled.div`
+
+export const Card = styled.div`
+  margin: auto;
+  width: 100%;
+  min-height: 300px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 90%;
-    border-radius: 100%;
-    @media (min-width: 767px) {
-      width: 70%;
+  flex-direction: column;
+  gap: 50px;
+  text-align: center;
+  .img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 250px;
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+    }
+    @media (min-width: 900px) {
+      width: 20%;
     }
   }
-  @media (min-width: 767px) {
-    width: 450px;
+  .infos {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    h1 {
+      font-size: 18px;
+    }
+    p {
+      font-size: 14px;
+      color: var(--gray200);
+    }
+    span {
+      font-size: 18px;
+    }
+    @media (min-width: 900px) {
+      width: 60%;
+    }
   }
-`;
-export const ContainerName = styled.div`
-  position: absolute;
-  left: 135px;
-  p {
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-  svg {
+  .stars {
     font-size: 20px;
     color: var(--yellow200);
   }
-  @media (min-width: 767px) {
-    left: 180px;
+  @media (min-width: 900px) {
+    flex-direction: row;
+    text-align: left;
   }
-  @media (min-width: 1023px) {
-    left: 470px;
-  }
-`;
-export const ContainerSkylls = styled.div`
-  margin-left: 20px;
-`;
-export const ContainerDescription = styled.div``;
-export const ContainerProfession = styled.div`
-  @media (min-width: 767px) {
-    margin: 80px 0 0 0;
-  }
-`;
-export const PProfession = styled.p`
-  margin-top: 20px;
-  font-size: 18px;
-  color: rgba(0, 0, 0, 0.7);
-`;
-export const PDescription = styled.p``;
-export const ContainerAreas = styled.div`
-  margin: 20px 0 20px 0;
-  @media (min-width: 767px) {
+  .button {
+    width: 100%;
     display: flex;
-    margin: 0 0 20px 0;
-  }
-`;
-export const PAreas = styled.p`
-  font-size: 15px;
-  font-weight: lighter;
-  color: rgba(0, 0, 0, 0.7);
-  margin-right: 10px;
-`;
-export const ContainerButtonSchedule = styled.div`
-  margin: 0 auto;
-`;
-export const ButtonSchedule = styled.button`
-  margin: 10px 0;
-  width: 200px;
-  max-width: 200px;
-  height: 35px;
-  border-radius: 5px;
-  background-color: var(--orange200);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 15px;
-  :hover {
-    background-color: var(--orange100);
+    justify-content: center;
+    button {
+      width: 100%;
+    }
+    @media (min-width: 900px) {
+      width: 20%;
+    }
   }
 `;

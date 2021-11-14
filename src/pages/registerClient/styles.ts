@@ -93,7 +93,8 @@ export const BoxForm = styled.div`
   button {
     background-color: var(--purple100);
     color: var(--gray100);
-    width: 80%;
+    width: 100%;
+    max-width: 320px;
     margin-top: 20px;
     padding: 10px;
     border-radius: 5px;

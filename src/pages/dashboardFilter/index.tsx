@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import CardProfessional from "../../components/cardProfessional";
 import { ProfessionalContext } from "../../providers/professionals";
 import Bar from "../../components/bar";
-import { ContainerSearch, Input, P } from "./styles";
+import { ContainerSearch, ContainerProfessionals } from "./styles";
 import { FaSearch } from "react-icons/fa";
 
 const DashboardFilter = () => {
@@ -13,26 +13,28 @@ const DashboardFilter = () => {
     <>
       <Bar />
       <ContainerSearch>
-        <P>Busque um profissional</P>
-        <Input value={value} onChange={(e) => setValue(e.target.value)} />
-        <button
-          onClick={() => {
-            filterProfessional(value);
-            setValue("");
-          }}
-        >
-          <FaSearch />
-        </button>
-      </ContainerSearch>
-      {professionals.map((professional, index) => {
-        return (
-          <CardProfessional
-            key={index}
-            professional={professional}
-            average={4}
+        <p>Busque um profissional</p>
+        <div className="input">
+          <input value={value} onChange={(e) => setValue(e.target.value)} />
+          <FaSearch
+            onClick={() => {
+              filterProfessional(value);
+              setValue("");
+            }}
           />
-        );
-      })}
+        </div>
+      </ContainerSearch>
+      <ContainerProfessionals>
+        {professionals.map((professional, index) => {
+          return (
+            <CardProfessional
+              key={index}
+              professional={professional}
+              average={4}
+            />
+          );
+        })}
+      </ContainerProfessionals>
     </>
   );
 };
