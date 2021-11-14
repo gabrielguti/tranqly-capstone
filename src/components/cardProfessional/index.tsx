@@ -1,24 +1,12 @@
-import {
-  ButtonSchedule,
-  ContainerAreas,
-  ContainerButtonSchedule,
-  ContainerDescription,
-  ContainerImgProfessional,
-  ContainerName,
-  ContainerProfession,
-  ContainerProfessional,
-  ContainerSkylls,
-  PAreas,
-  PDescription,
-  PProfession,
-} from "./styles";
+import { ProfessionalContainer, Card } from "./styles";
 import { useHistory } from "react-router";
 import { useContext } from "react";
 import { ProfessionalContext } from "../../providers/professionals";
-import StarsCount from "../stars";
+import { FaStar } from "react-icons/fa";
+import Button from "../button";
 
 interface ProfessionalData {
-  id:number;
+  id: number;
   name: string;
   profession: string;
   description: string;
@@ -28,14 +16,13 @@ interface ProfessionalData {
 
 interface CardProfessionalProps {
   professional: ProfessionalData;
-  average: number
+  average: number;
 }
 
-
-const CardProfessional = ({ professional, average}: CardProfessionalProps, ) => {
+const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
   const history = useHistory();
   const { renderization } = useContext(ProfessionalContext);
-  const {name, image, description, areas, profession}=professional
+  const { name, image, description, areas, profession } = professional;
 
   const schedule = (name: string) => {
     renderization(name);
@@ -43,35 +30,33 @@ const CardProfessional = ({ professional, average}: CardProfessionalProps, ) => 
     return history.push("/profileprofessional");
   };
   return (
-    <>
-    {}
-    
-    <ContainerProfessional>
-      <ContainerImgProfessional>
-        <img src={image} alt={name} />
-      </ContainerImgProfessional>
-      <ContainerName>
-        <p>{name}</p>
-        <StarsCount stars={average}/>
-      </ContainerName>
-      <ContainerSkylls>
-        <ContainerProfession>
-          <PProfession>{profession}</PProfession>
-        </ContainerProfession>
-        <ContainerAreas>
-          <PAreas>{areas}</PAreas>
-        </ContainerAreas>
-        <ContainerDescription>
-          <PDescription>{description}</PDescription>
-        </ContainerDescription>
-      </ContainerSkylls>
-      <ContainerButtonSchedule>
-        <ButtonSchedule onClick={() => schedule(professional.name)}>
-          Agendar horário
-        </ButtonSchedule>
-      </ContainerButtonSchedule>
-    </ContainerProfessional>
-    </>
+    <ProfessionalContainer>
+      <Card>
+        <div className="img">
+          <img src={professional.image} alt={professional.name} />
+        </div>
+        <div className="infos">
+          <div>
+            <h2>{professional.name}</h2>
+            <div className="stars">
+              <FaStar />
+              <FaStar />
+              <FaStar />
+              <FaStar />
+              <FaStar />
+            </div>
+            <p>{professional.profession}</p>
+            <p>{professional.areas}</p>
+          </div>
+          <div>
+            <span>{professional.description}</span>
+          </div>
+        </div>
+        <div className="button">
+          <Button onClick={() => schedule(professional.name)}>Agendar</Button>
+        </div>
+      </Card>
+    </ProfessionalContainer>
   );
 };
 

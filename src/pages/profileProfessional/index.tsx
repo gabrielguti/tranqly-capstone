@@ -12,7 +12,6 @@ import CardProfessionalData from "../../components/cardProfessionalData";
 import { useCalendar } from "../../providers/calendarProvider";
 import { UseAuth } from "../../providers/authProvider";
 
-
 const ProfileProfessional = () => {
   const {
     searchDate,

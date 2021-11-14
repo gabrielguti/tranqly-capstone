@@ -2,84 +2,116 @@ import styled from "styled-components";
 import ClientSingUpImg from "../../assets/img/IllustrationS19.svg";
 
 export const Container = styled.section`
-  a {
-    color: var(--purple200);
-  }
-  height: auto;
+  max-width: 1280px;
+  margin: auto;
+  height: 90vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (min-width: 1000px) {
+  justify-content: center;
+  @media (min-width: 900px) {
     background: url(${ClientSingUpImg});
     height: 90vh;
     background-repeat: no-repeat;
-    /* margin-right: -50%; */
     width: 100%;
     background-position: center;
     background-size: contain;
-    margin-top: 1vh;
+    margin-top: 10px;
   }
 `;
-export const Title = styled.div`
-  text-align: center;
-  margin-top: 5vh;
-  margin-bottom: 3vh;
-  @media (min-width: 1000px) {
-    margin-left: -50%;
-    margin-top: 1vh;
-  }
-`;
-export const BoxForm = styled.div`
-  box-shadow: 0px 0px 12px gray;
-  border-radius: 10px;
-  height: 430px;
-  padding: 10px;
-  width: 300px;
-  background-color: white;
+
+export const ContainerForm = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-items: center;
+  justify-content: center;
+  @media (min-width: 900px) {
+    width: 40%;
+  }
+`;
+export const ContainerImage = styled.div`
+  height: 100%;
+  width: 60%;
+  display: none;
+  @media (min-width: 900px) {
+    display: flex;
+  }
+`;
+
+export const BoxForm = styled.div`
+  text-align: center;
+  display: flex;
   align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  height: 600px;
+  margin-top: 50px;
+  width: 90%;
   form {
+    box-shadow: 0px 0px 12px gray;
+    border-radius: 10px;
+    height: 430px;
+    padding: 10px;
+    max-width: 400px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
     height: 100%;
-    span {
-      font-size: 0.7rem;
-      color: var(--red50);
-      height: 2vh;
-    }
   }
-  input {
-    width: 80%;
+  h1 {
+    font-size: 30px;
+  }
+  span {
+    font-size: 12px;
+    color: var(--red50);
+    margin: 5px 0;
+  }
+  input,
+  select {
+    max-width: 320px;
+    width: 100%;
     padding: 8px;
     border: 1px solid var(--purple100);
     border-radius: 5px;
-    margin: 1vh;
+    color: var(--purple200);
+  }
+  textarea {
+    max-width: 320px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--purple100);
+    border-radius: 5px;
+    margin: 10px;
     color: var(--purple200);
   }
   button {
     background-color: var(--purple100);
     color: var(--gray100);
-    width: 80%;
-    margin-top: 4vh;
-    padding: 6px;
+    width: 100%;
+    max-width: 320px;
+    margin-top: 20px;
+    padding: 10px;
     border-radius: 5px;
-    font-size: 1.2rem;
+    font-size: 20px;
   }
-  @media (min-width: 1000px) {
-    margin-left: -50%;
+  .containerInput {
+    display: flex;
+    max-width: 320px;
+    width: 100%;
+    justify-content: space-between;
   }
-`;
-
-export const FooterForm = styled.div`
-  margin-top: 1vh;
-  text-align: center;
-  margin-bottom: 2vh;
-  @media (min-width: 1000px) {
-    margin-left: -50%;
+  .input {
+    display: flex;
+    flex-direction: column;
+    :nth-child(1),
+    :nth-child(2) {
+      width: 100%;
+      max-width: 150px;
+      margin: 0;
+    }
   }
 `;
