@@ -11,10 +11,6 @@ import { FaRegClock } from "react-icons/fa";
 import CardProfessionalData from "../../components/cardProfessionalData";
 import { useCalendar } from "../../providers/calendarProvider";
 import { UseAuth } from "../../providers/authProvider";
-<<<<<<< HEAD
-=======
-
->>>>>>> e2fe27c800e0b98ecc793bfcfc5b4db3f167f19b
 
 const ProfileProfessional = () => {
   const {
