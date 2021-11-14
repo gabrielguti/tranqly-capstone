@@ -1,5 +1,5 @@
 import Bar from "../../components/bar";
-import { BoxForm, Container, FooterForm, Title } from "./styles";
+import { BoxForm, Container, ContainerImage, ContainerForm } from "./styles";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -37,27 +37,28 @@ const Login = () => {
     <>
       <Bar />
       <Container>
-        <Title>
-          <h1>Entrar</h1>
-        </Title>
-        <BoxForm>
-          <form onSubmit={handleSubmit(onSubmitFunction)}>
-            <input placeholder="Email" {...register("email")} />
-            <span>{errors.email?.message}</span>
-            <input
-              placeholder="Senha"
-              type="password"
-              {...register("password")}
-            />
+        <ContainerImage></ContainerImage>
+        <ContainerForm>
+          <BoxForm>
+            <h1>Entrar</h1>
+            <form onSubmit={handleSubmit(onSubmitFunction)}>
+              <input placeholder="Email" {...register("email")} />
+              <span>{errors.email?.message}</span>
+              <input
+                placeholder="Senha"
+                type="password"
+                {...register("password")}
+              />
 
-            <span>{errors.password?.message}</span>
+              <span>{errors.password?.message}</span>
 
-            <button type="submit">Entrar</button>
-          </form>
-        </BoxForm>
-        <FooterForm>
-          Não possui conta? <a href="/signupclient">Cadastre-se</a>
-        </FooterForm>
+              <button type="submit">Entrar</button>
+            </form>
+            <p>
+              Não possui conta? <a href="/signupclient">Cadastre-se</a>
+            </p>
+          </BoxForm>
+        </ContainerForm>
       </Container>
     </>
   );

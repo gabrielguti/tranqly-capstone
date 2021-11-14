@@ -4,6 +4,10 @@ export const BarContainer = styled.div`
   width: 100%;
   height: 70px;
   background: linear-gradient(90deg, rgba(69, 36, 122, 0.87) 0%, #9677d9 100%);
+  img {
+    margin-top: 10px;
+    width: 100px;
+  }
   .barWidth {
     width: 100%;
     height: inherit;

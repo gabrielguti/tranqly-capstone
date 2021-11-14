@@ -1,5 +1,5 @@
 import Bar from "../../components/bar";
-import { BoxForm, Container, FooterForm, Title } from "./styles";
+import { BoxForm, Container, ContainerForm, ContainerImage } from "./styles";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -49,34 +49,35 @@ const RegisterClient = () => {
     <>
       <Bar />
       <Container>
-        <Title>
-          <h1>Registre-se</h1>
-        </Title>
-        <BoxForm>
-          <form onSubmit={handleSubmit(onSubmitFunction)}>
-            <input placeholder="Nome" {...register("name")} />
-            <span>{errors.name?.message}</span>
-            <input placeholder="Email" {...register("email")} />
-            <span>{errors.email?.message}</span>
-            <input
-              placeholder="Senha"
-              type="password"
-              {...register("password")}
-            />
-            <span>{errors.password?.message}</span>
+        <ContainerForm>
+          <BoxForm>
+            <h1>Registre-se</h1>
+            <form onSubmit={handleSubmit(onSubmitFunction)}>
+              <input placeholder="Nome" {...register("name")} />
+              <span>{errors.name?.message}</span>
+              <input placeholder="Email" {...register("email")} />
+              <span>{errors.email?.message}</span>
+              <input
+                placeholder="Senha"
+                type="password"
+                {...register("password")}
+              />
+              <span>{errors.password?.message}</span>
 
-            <input
-              placeholder="Confirme sua senha"
-              type="password"
-              {...register("confirmPassword")}
-            />
-            <span>{errors.confirmPassword?.message}</span>
-            <button type="submit">Entrar</button>
-          </form>
-        </BoxForm>
-        <FooterForm>
-          Já possui conta? <a href="/signIn">Entrar</a>
-        </FooterForm>
+              <input
+                placeholder="Confirme sua senha"
+                type="password"
+                {...register("confirmPassword")}
+              />
+              <span>{errors.confirmPassword?.message}</span>
+              <button type="submit">Entrar</button>
+            </form>
+            <p>
+              Já possui conta? <a href="/signIn">Entre aqui</a>
+            </p>
+          </BoxForm>
+        </ContainerForm>
+        <ContainerImage></ContainerImage>
       </Container>
     </>
   );

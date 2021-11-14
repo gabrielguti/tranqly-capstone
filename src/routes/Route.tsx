@@ -9,10 +9,10 @@ interface Props extends RouteProps{
 
 const Routes = ({isPrivate = false, component: Component, ...rest}: Props) => {
 
-    const {accessToken}=UseAuth()
-
+    const {accessToken, user}=UseAuth()
+   
   return <>
-  <ReactRout {...rest} render={()=> isPrivate === !!accessToken ? (<Component/>):(<Redirect to={isPrivate ? "/": "/dashboard"}/>)}/>
+  <ReactRout {...rest} render={()=> isPrivate === !!accessToken ? (<Component/>):(<Redirect to={isPrivate ? "/": `/dashboard${user.type}`}/>)}/>
 
   </>;
 };

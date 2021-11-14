@@ -33,7 +33,7 @@ export default createGlobalStyle`
 	svg, svg path {
 		margin: 0;
 	}
-	input, textarea {
+	input, textarea, select {
 	border:none;
     background-image:none;
     background-color:transparent;
