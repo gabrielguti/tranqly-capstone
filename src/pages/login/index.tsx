@@ -50,9 +50,7 @@ const Login = () => {
                 type="password"
                 {...register("password")}
               />
-
               <span>{errors.password?.message}</span>
-
               <button type="submit">Entrar</button>
             </form>
             <p>

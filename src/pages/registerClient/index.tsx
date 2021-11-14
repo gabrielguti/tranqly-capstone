@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { UseAuth } from "../../providers/authProvider";
 import { Link } from "react-router-dom";
 
+
 interface ClientData {
   name: string;
   email: string;
@@ -64,7 +65,6 @@ const RegisterClient = () => {
                 {...register("password")}
               />
               <span>{errors.password?.message}</span>
-
               <input
                 placeholder="Confirme sua senha"
                 type="password"
