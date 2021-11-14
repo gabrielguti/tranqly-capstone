@@ -6,8 +6,8 @@ interface CardProps {
   date: string;
   time: string;
   name: string;
-  info: string;
-  isRemovable: boolean;
+  info?: string;
+  isRemovable: any;
 }
 
 const DashboardCard = ({ date, time, name, info, isRemovable }: CardProps) => {
@@ -17,18 +17,12 @@ const DashboardCard = ({ date, time, name, info, isRemovable }: CardProps) => {
       <Time>{time}</Time>
       <Info>
         <h4>{name}</h4>
-        <div>
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
-        </div>
+
         <div>
           <span>{info}</span>
         </div>
 
-        {isRemovable && (
+        {!isRemovable && (
           <BoxButton>
             {" "}
             <Button children={"Cancelar"} />{" "}

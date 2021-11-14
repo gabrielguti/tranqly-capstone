@@ -29,7 +29,7 @@ const ProfileProfessional = () => {
 
   let ref: string[] = [];
   const [show, setShow] = useState(false);
-  var now = new Date();
+  let now = new Date();
 
   useEffect(() => {
     searchDate(Number(user.id), accessToken);
