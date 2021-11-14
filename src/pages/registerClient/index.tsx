@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UseAuth } from "../../providers/authProvider";
-
+import {Link} from 'react-router-dom';
 interface ClientData {
   name: string;
   email: string;
@@ -64,20 +64,18 @@ const RegisterClient = () => {
               />
               <span>{errors.password?.message}</span>
 
-              <input
-                placeholder="Confirme sua senha"
-                type="password"
-                {...register("confirmPassword")}
-              />
-              <span>{errors.confirmPassword?.message}</span>
-              <button type="submit">Entrar</button>
-            </form>
-            <p>
-              Já possui conta? <a href="/signIn">Entre aqui</a>
-            </p>
-          </BoxForm>
-        </ContainerForm>
-        <ContainerImage></ContainerImage>
+            <input
+              placeholder="Confirme sua senha"
+              type="password"
+              {...register("confirmPassword")}
+            />
+            <span>{errors.confirmPassword?.message}</span>
+            <button type="submit">Entrar</button>
+          </form>
+        </BoxForm>
+        <FooterForm>
+          Já possui conta? <Link to="/signIn">Entrar</Link>
+        </FooterForm>
       </Container>
     </>
   );
