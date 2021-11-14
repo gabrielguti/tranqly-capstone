@@ -12,9 +12,11 @@ export const ContainerProfessionalData = styled.div`
     flex-direction: column;
     text-align: center;
     @media (min-width: 700px) {
-      flex-direction: row;
-      align-items: flex-start;
-      text-align: start;
+      flex-direction: column;
+     
+     justify-content: center;
+     align-items: center;
+     
     }
     .img {
       width: 100%;
@@ -23,14 +25,16 @@ export const ContainerProfessionalData = styled.div`
       display: flex;
       justify-content: center;
       img {
-        width: 230px;
-        height: 230px;
+        width: 150px;
+        height: 150px;
+        border-radius: 100%;
+        border: 4px solid var(--purple100);
       }
     }
     .data {
       margin-bottom: 50px;
       padding: 5px;
-      max-width: 600px;
+      max-width: 350px;
       width: 100%;
       display: flex;
       gap: 30px;
@@ -46,6 +50,12 @@ export const ContainerProfessionalData = styled.div`
           font-size: 14px;
         }
       }
+      h2{
+        color: var(--gray100);
+      }
+      h3{
+        color: var(--gray200);
+      }
       .stars {
         display: flex;
         flex-direction: row;
@@ -53,7 +63,7 @@ export const ContainerProfessionalData = styled.div`
         margin-top: 5px;
         justify-content: center;
         @media (min-width: 700px) {
-          justify-content: left;
+          /* justify-content: left; */
         }
       }
     }
