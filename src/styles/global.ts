@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
 
@@ -61,4 +61,4 @@ export default createGlobalStyle`
 		--red100:		rgba(221, 104, 104, 1);
 	}
 
-`
+`;
