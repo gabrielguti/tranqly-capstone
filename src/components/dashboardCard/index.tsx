@@ -8,9 +8,10 @@ interface CardProps {
   name: string;
   info?: string;
   isRemovable: any;
+  cancel: any
 }
 
-const DashboardCard = ({ date, time, name, info, isRemovable }: CardProps) => {
+const DashboardCard = ({ date, time, name, info, isRemovable, cancel }: CardProps) => {
   return (
     <CardPro>
       <Date>{date}</Date>
@@ -21,6 +22,9 @@ const DashboardCard = ({ date, time, name, info, isRemovable }: CardProps) => {
         <div>
           <span>{info}</span>
         </div>
+        <div>
+          <span id = "cancel">{cancel && "Atendimento cancelado"}</span>
+          </div>
 
         {!isRemovable && (
           <BoxButton>

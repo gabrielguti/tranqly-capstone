@@ -58,6 +58,9 @@ export const Info = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  #cancel {
+    color: var(--red50);
+  }
   @media (min-width: 900px) {
     margin-top: 30px;
   }

@@ -6,8 +6,9 @@ export const ContaiinerProfileInfo = styled.div`
   flex-direction: column;
   justify-content: space-between;
   h3 {
-    color:red;
+    color: red;
   }
+ 
   margin-bottom: 10vh;
 `;
 
