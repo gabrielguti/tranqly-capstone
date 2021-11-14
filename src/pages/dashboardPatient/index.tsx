@@ -24,7 +24,11 @@ const DashboardPatient = () => {
     .slice()
     .sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1));
 
-  console.log(user);
+  const reverseFormed = conference
+    .slice()
+    .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
+
+  console.log(conference);
 
   return (
     <>
@@ -37,7 +41,7 @@ const DashboardPatient = () => {
           <div className="data">
             <div>
               <h2>{user.name}</h2>
-            <h3>{user.email}</h3>
+              <h3>{user.email}</h3>
             </div>
           </div>
         </div>
@@ -48,8 +52,8 @@ const DashboardPatient = () => {
           <h2>Próximos agendamentos</h2>
         </Title>
         <CardsBox>
-          {conference &&
-            conference
+          {reverseFormed &&
+            reverseFormed
               .filter((item) => item.cancel === false)
               .map((filtered, index) => {
                 if (
@@ -65,6 +69,7 @@ const DashboardPatient = () => {
                       name={filtered.nameProfessional}
                       time={moment(filtered.date).format("LT")}
                       info={"info"}
+                      cancel={filtered.cancel}
                     ></DashboardCard>
                   );
               })}
@@ -90,6 +95,7 @@ const DashboardPatient = () => {
                     key={index}
                     info={"info"}
                     isRemovable={true}
+                    cancel={item.cancel}
                   />
                 );
             })}
