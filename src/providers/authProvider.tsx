@@ -97,3 +97,4 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 };
 export { AuthProvider, UseAuth };
+

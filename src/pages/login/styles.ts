@@ -2,7 +2,7 @@ import styled from "styled-components";
 import LoginImg from "../../assets/img/IllustrationR18.svg";
 
 export const Container = styled.section`
-a {
+  a {
     color: var(--purple200);
   }
   height: auto;
@@ -13,7 +13,6 @@ a {
     background: url(${LoginImg});
     height: 80vh;
     background-repeat: no-repeat;
-    /* margin-right: -50%; */
     width: 100%;
     background-position: center;
     background-size: contain;
@@ -31,8 +30,9 @@ export const Title = styled.div`
 export const BoxForm = styled.div`
   box-shadow: 0px 0px 12px gray;
   border-radius: 10px;
-  height: 280px;
-  width: 270px;
+  height: 300px;
+  max-width: 400px;
+  width: 100%;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@ export const BoxForm = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
-    span{
+    span {
       font-size: 0.7rem;
       color: var(--red50);
       height: 2vh;
@@ -58,7 +58,6 @@ export const BoxForm = styled.div`
     border-radius: 5px;
     margin: 1vh;
     color: var(--purple200);
-   
   }
   button {
     background-color: var(--purple100);

@@ -19,15 +19,15 @@ interface DataProps {
   calendar: any;
 }
 interface CreateCommentsProps {
-  newComment: string;
+  newComment: any;
   newScore: number;
-  id: number;
-  token: string;
+  user: any;
+  accessToken: string;
 }
 interface CommentsProps {
   namePatient: string;
   comment: string;
-  id: number;
+  id: any;
   patientId: number;
   professionalId: number;
 }
@@ -42,8 +42,8 @@ interface CalendarData {
   createComment: ({
     newComment,
     newScore,
-    id,
-    token,
+    user,
+    accessToken,
   }: CreateCommentsProps) => void;
   addMyCalendar: (data: any, id: number, token: string) => void;
   check: (id: number, token: string) => void;
@@ -57,8 +57,6 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
   const [newComment, setNewComment] = useState("");
   const [newScore, setNewScore] = useState(5);
   const [show, setShow] = useState<boolean>(false);
-  const now = moment();
-  let ref: string[] = [];
 
   const searchDate = (id: number, token: string) => {
     api
@@ -71,7 +69,7 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
       .catch((e) => console.log(e));
   };
 
-  const searchComments = (id: number, token: string) => {
+  const searchComments = (id: any, token: string) => {
     api
       .get(`/professional/${id}/comments`, {
         headers: {
@@ -85,8 +83,8 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
   const createComment = ({
     newComment,
     newScore,
-    id,
-    token,
+    user,
+    accessToken,
   }: CreateCommentsProps) => {
     const newData = {
       comment: newComment,
@@ -94,13 +92,13 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     };
     if (newComment.length > 10 && newComment.length < 200) {
       api
-        .post(`/professional/${id}/comments`, newData, {
+        .post(`/professional/${user}/comments`, newData, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         })
         .then((_) => {
-          searchComments(id, token);
+          searchComments(user, accessToken);
           setShow(!show);
         })
         .catch((e) => console.log(e));
@@ -135,11 +133,6 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
       .then((_) => searchDate(id, token))
       .catch((e) => console.log(e));
   };
-
-  //   useEffect(() => {
-  //     searchDate();
-  //     searchComments();
-  //   }, []);
 
   return (
     <CalendarContext.Provider
