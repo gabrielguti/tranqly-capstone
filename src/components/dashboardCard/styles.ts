@@ -3,21 +3,29 @@ import styled from "styled-components";
 export const CardPro = styled.div`
   box-shadow: 0px 0px 4px;
   border-radius: 5px;
-  height: 300px;
+  min-height: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 5vh;
   width: 250px;
   margin-bottom: 7vh;
+  button {
+    background-color: var(--red50);
+    width: 130px;
+    margin-top: 20px;
+    height: 40px;
+  }
   @media (min-width: 1000px) {
-    height: 350px;
+    button {
+    }
+    max-height: 550px;
   }
 `;
 
 export const Date = styled.div`
   width: 100%;
-  height: 8vh;
+  height: 80px;
   background-color: var(--purple200);
   color: var(--gray200);
   display: flex;
@@ -27,7 +35,7 @@ export const Date = styled.div`
 
 export const Time = styled.div`
   width: 100%;
-  height: 8vh;
+  height: 50px;
   background-color: var(--purple400);
   color: var(--gray200);
   display: flex;
@@ -44,22 +52,13 @@ export const BoxButton = styled.div`
 
 export const Info = styled.div`
   width: 90%;
-  margin-top: 5vh;
-  height: 15vh;
+  margin-top: 30px;
+  max-height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  button {
-    margin-top: 2vh;
-    background-color: var(--red50);
-    width: 60%;
-    :hover {
-      opacity: 0.8;
-      background-color: var(--red50);
-    }
-    @media (min-width: 900px) {
-      margin-top: 5vh;
-    }
+  @media (min-width: 900px) {
+    margin-top: 30px;
   }
 
   h4 {

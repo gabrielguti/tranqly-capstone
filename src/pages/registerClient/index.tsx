@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UseAuth } from "../../providers/authProvider";
-
+import {Link} from 'react-router-dom';
 interface ClientData {
   name: string;
   email: string;
@@ -75,7 +75,7 @@ const RegisterClient = () => {
           </form>
         </BoxForm>
         <FooterForm>
-          Já possui conta? <a href="/signIn">Entrar</a>
+          Já possui conta? <Link to="/signIn">Entrar</Link>
         </FooterForm>
       </Container>
     </>
