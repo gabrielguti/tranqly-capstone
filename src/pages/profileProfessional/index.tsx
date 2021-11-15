@@ -11,35 +11,37 @@ import { FaRegClock } from "react-icons/fa";
 import CardProfessionalData from "../../components/cardProfessionalData";
 import { useCalendar } from "../../providers/calendarProvider";
 import { UseAuth } from "../../providers/authProvider";
+import { useParams } from "react-router";
 
 const ProfileProfessional = () => {
   const {
     searchDate,
     searchComments,
     createComment,
-    addMyCalendar,
     check,
     calendar,
     comments,
     newComment,
     newScore,
   } = useCalendar();
-
+  const { id }: any = useParams();
+  console.log(id);
   const { accessToken, user } = UseAuth();
   const getProfessionalStorage = JSON.parse(
     localStorage.getItem("@tranqyl:prof") || ""
   );
-
+  let professionalId = Number(id);
   let ref: string[] = [];
   const [show, setShow] = useState(false);
   let now = new Date();
+  const userId = JSON.parse(localStorage.getItem("@tranqyl:user") || "");
 
   useEffect(() => {
     searchDate(Number(getProfessionalStorage[0].id), accessToken);
     searchComments(Number(getProfessionalStorage[0].id), accessToken);
     console.log(calendar);
   }, []);
-  console.log(calendar);
+
   const formed = calendar
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
@@ -80,7 +82,14 @@ const ProfileProfessional = () => {
                                 <div
                                   key={secondIndex}
                                   className="time"
-                                  onClick={() => check(m.id, accessToken)}
+                                  onClick={() =>
+                                    check(
+                                      m.id,
+                                      accessToken,
+                                      professionalId,
+                                      Number(userId)
+                                    )
+                                  }
                                 >
                                   <p>{moment(m.date).format("DD/MM/YYYY")}</p>
                                   <span className="check">

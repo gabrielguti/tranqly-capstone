@@ -17,7 +17,7 @@ const Routes = () => {
       <Route path="/signupclient" component={RegisterClient} />
       <Route path="/signupprofessional" component={RegisterProfessional} />
       <Route
-        path="/profileprofessional"
+        path="/profileprofessional/:id"
         component={ProfileProfessional}
         isPrivate
       />

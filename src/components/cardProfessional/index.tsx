@@ -25,10 +25,9 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
   const { renderization } = useContext(ProfessionalContext);
   const { name, image, description, areas, profession } = professional;
 
-  const schedule = (name: string) => {
-    renderization(name);
-
-    return history.push("/profileprofessional");
+  const schedule = (name: string, id: number) => {
+    renderization(name, Number(id));
+    return history.push(`/profileprofessional/${id}`);
   };
 
   const [comments, setComments] = useState([]);
@@ -75,7 +74,7 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
           </div>
         </div>
         <div className="button">
-          <Button onClick={() => schedule(professional.name)}>Agendar</Button>
+          <Button onClick={() => schedule(professional.name, professional.id)}>Agendar</Button>
         </div>
       </Card>
     </ProfessionalContainer>
