@@ -132,14 +132,7 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
       })
       .catch((e) => console.log(e));
   };
-  const getQualifications = () => {
-    api
-      .get(`/qualification`)
-      .then((response) => {
-        setQualifications(response.data);
-      })
-      .catch((e) => console.log(e));
-  };
+ 
   const renderization = (nameProfessional: string) => {
     const professionalStorage = sProfessionals.filter((professional) =>
       professional.name
@@ -156,7 +149,6 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
     getProfessional();
     getComments();
     getClients();
-    getQualifications();
   }, []);
   return (
     <ProfessionalContext.Provider
