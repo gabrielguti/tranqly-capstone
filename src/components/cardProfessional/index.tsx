@@ -75,7 +75,7 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
         </div>
         <div className="button">
 
-          <Button onClick={() => schedule(name)}>Agendar</Button>
+          <Button onClick={() => schedule(professional.name, professional.id)}>Agendar</Button>
 
         </div>
       </Card>
