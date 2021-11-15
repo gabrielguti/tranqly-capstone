@@ -7,7 +7,7 @@ import { UseAuth } from "../../providers/authProvider";
 import { useHistory } from "react-router";
 
 const Index = () => {
-  const { accessToken } = UseAuth();
+  const { accessToken, user } = UseAuth();
 
   const history = useHistory();
   const { signOut } = UseAuth();
@@ -29,9 +29,21 @@ const Index = () => {
           </Link>
         </div>
         <div className="options">
-          <Link to="/signupprofessional">Para especialistas</Link>
-          <Link to="/signupclient">Para clientes</Link>
+          {accessToken ? (
+          <Link to={`/dashboard${user.type}`}>Dashboard</Link> 
+          // ||<Link to="/dashboardfilter">Procurar especialista</Link>
+          ):(
+            <Link to="/signupprofessional">Para especialistas</Link>
+            // ||<Link to="/signupclient">Para clientes</Link>
+          )}
+          {accessToken ? (
+          // <Link to={`/dashboard${user.type}`}>Dashboard</Link> 
           <Link to="/dashboardfilter">Procurar especialista</Link>
+          ):(
+            // <Link to="/signupprofessional">Para especialistas</Link>
+            <Link to="/signupclient">Para clientes</Link>
+          )}
+          
           <Link to="/signin">
             <Button onClick={() => changeLoginSignup()}>
               {accessToken ? "Deslogar" : "Logar"}
