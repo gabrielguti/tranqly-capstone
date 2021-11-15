@@ -4,6 +4,7 @@ import { ProfessionalContext } from "../../providers/professionals";
 import Bar from "../../components/bar";
 import { ContainerSearch, ContainerProfessionals } from "./styles";
 import { FaSearch } from "react-icons/fa";
+import api from "../../services/api";
 
 interface dataProps {
   value: string;
@@ -12,21 +13,18 @@ interface dataProps {
 const DashboardFilter = () => {
   const { professionals, filterProfessional } = useContext(ProfessionalContext);
   const [value, setValue] = useState("");
-  const [fisrRender, setFisrRender] = useState(1);
-
-  useEffect(() => {
-    if (fisrRender === 1) {
-      // eslint-disable-next-line no-lone-blocks
-      {
-        professionals
-          .sort(() => 0.5 - Math.random())
-          .map((professional, index) => {
-            setFisrRender(0);
-            return <CardProfessional key={index} professional={professional} />;
-          });
-      }
-    }
-  });
+  const [fisrRender, setFisrRender]=useState(1)
+  const [comments, setComments]=useState([])
+    
+    useEffect(()=>{
+        if(fisrRender===1){
+            // eslint-disable-next-line no-lone-blocks
+            {professionals.sort(()=>0.5 - Math.random()).map((professional, index)=>{
+                setFisrRender(0)
+                return <CardProfessional key={index} professional={professional}/>
+            })}
+        }
+    })
 
   return (
     <>
@@ -44,9 +42,15 @@ const DashboardFilter = () => {
         </div>
       </ContainerSearch>
       <ContainerProfessionals>
-        {professionals.map((professional, index) => {
-          return <CardProfessional key={index} professional={professional} />;
-        })}
+        {professionals
+          .map((professional, index) => {
+            return (
+              <CardProfessional
+                key={index}
+                professional={professional}
+              />
+            );
+          })}
       </ContainerProfessionals>
     </>
   );
