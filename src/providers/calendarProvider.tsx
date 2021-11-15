@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
+import toast from "react-hot-toast";
 import api from "../services/api";
 
 interface CalendarProps {
@@ -97,20 +98,18 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
       comment: newComment,
       score: newScore,
     };
-    if (newComment.length > 10 && newComment.length < 200) {
-      api
-        .post(`/professional/${user}/comments`, newData, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then((_) => {
-          searchComments(user, accessToken);
-          setShow(!show);
-        })
-        .catch((e) => console.log(e));
-    }
-    // alert("");
+    console.log(newData);
+    api
+      .post(`/professional/${user}/comments`, newData, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((_) => {
+        searchComments(user, accessToken);
+        setShow(!show);
+      })
+      .catch((e) => console.log(e));
   };
 
   const addMyCalendar = (

@@ -1,4 +1,5 @@
 import { FaStar, FaUserAlt } from "react-icons/fa";
+import StarsCount from "../contStars";
 import { CardCommentStyle } from "./styles";
 interface CommentsProps {
   comments: any;
@@ -12,11 +13,7 @@ export default function CardComments({ comments }: CommentsProps) {
         {comments.namePatient}
       </div>
       <div className="comment">{comments.comment}</div>
-      <div className="stars">
-        {[...Array(star)].map(() => (
-          <FaStar />
-        ))}
-      </div>
+      <StarsCount stars={star} />
     </CardCommentStyle>
   );
 }

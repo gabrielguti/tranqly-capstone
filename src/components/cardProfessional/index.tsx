@@ -17,7 +17,7 @@ interface ProfessionalData {
   areas: string;
   language: string;
   gender: string;
-  price: string;
+  price: number;
   state: string;
   crp: string;
 }
@@ -29,37 +29,47 @@ interface CardProfessionalProps {
 const CardProfessional = ({ professional }: CardProfessionalProps) => {
   const history = useHistory();
   const { renderization } = useContext(ProfessionalContext);
-  const { name, image, description, areas, profession, id } = professional;
+  const {
+    name,
+    image,
+    description,
+    areas,
+    profession,
+    id,
+    state,
+    language,
+    crp,
+    price,
+  } = professional;
 
   const schedule = (name: string, id: number) => {
     renderization(name, Number(id));
     return history.push(`/profileprofessional/${id}`);
   };
 
-   const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([]);
 
+  useEffect(() => {
+    api
+      .get(
+        `https://testes-laudemir.herokuapp.com/comments?professionalId=${professional.id}`
+      )
+      .then((response) => setComments(response.data))
+      .catch((e) => console.log(e));
+  }, [professional.id]);
 
-   useEffect(() => {
-       api
-       .get(
-         `https://testes-laudemir.herokuapp.com/comments?professionalId=${professional.id}`
-         )
-         .then((response) => setComments(response.data))
-         .catch((e) => console.log(e));
-       
-   }, [professional.id]);
+  let media =
+    comments.length > 0 &&
+    Math.round(
+      comments.reduce(
+        (total: any, atual: { score: any }) => total + atual.score,
+        0
+      ) / comments.length
+    );
+  if (media === false) {
+    media = 0;
+  }
 
-   let media =
-     comments.length > 0 &&
-     Math.round(
-       comments.reduce(
-         (total: any, atual: { score: any }) => total + atual.score,
-         0
-       ) / comments.length
-     );
-     if(media===false){
-       media=0
-     }
   return (
     <ProfessionalContainer>
       <Card>
@@ -69,8 +79,13 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
         <div className="infos">
           <div>
             <h2>{name}</h2>
-                <StarsCount stars={media}/>
-            <p>{profession}</p>
+            <StarsCount stars={media} />
+            <h3>
+              {profession} | <b>{crp}</b>
+            </h3>
+            <h4>
+              {state} | {language}
+            </h4>
             <p>{areas}</p>
           </div>
           <div>
@@ -78,7 +93,10 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
           </div>
         </div>
         <div className="button">
-          <Button onClick={() => schedule(professional.name, professional.id)}>Agendar</Button>
+          <h1>R$ {price},00</h1>
+          <Button onClick={() => schedule(professional.name, professional.id)}>
+            Agendar
+          </Button>
         </div>
       </Card>
     </ProfessionalContainer>

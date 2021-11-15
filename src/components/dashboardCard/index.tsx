@@ -35,14 +35,12 @@ const DashboardCard = ({
       <Time>{time}</Time>
       <Info>
         <h4>{name}</h4>
-
         <div>
           <span>{info}</span>
         </div>
         <div>
           <span id="cancel">{cancel && "Atendimento cancelado"}</span>
         </div>
-
         {!isRemovable && (
           <BoxButton>
             {" "}

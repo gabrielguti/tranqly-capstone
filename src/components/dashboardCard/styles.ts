@@ -12,6 +12,8 @@ export const CardPro = styled.div`
   margin-bottom: 7vh;
   margin: 20px;
   button {
+    position: relative;
+    bottom: -100px;
     background-color: var(--red50);
     width: 130px;
     margin-top: 20px;

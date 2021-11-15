@@ -27,7 +27,7 @@ interface IProfessionalData {
   areas: string;
   language: string;
   gender: string;
-  price: string;
+  price: number;
   state: string;
   crp: string;
 }
@@ -137,7 +137,7 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
       })
       .catch((e) => console.log(e));
   };
- 
+
   const renderization = (nameProfessional: string) => {
     const professionalStorage = sProfessionals.filter((professional) =>
       professional.name

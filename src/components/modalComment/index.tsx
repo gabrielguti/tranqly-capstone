@@ -21,8 +21,9 @@ export default function ModalComment({
   createComment,
 }: ModalCommentProps) {
   const [newComment, setNewComment] = useState("");
-  const [newScore, setNewScore] = useState(5);
+  const [newScore, setNewScore] = useState(0);
   const { accessToken, user } = UseAuth();
+  console.log(newComment, newScore);
 
   return (
     <ModalCommentStyle>
