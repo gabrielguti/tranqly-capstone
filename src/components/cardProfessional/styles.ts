@@ -34,8 +34,13 @@ export const Card = styled.div`
       height: 200px;
       border-radius: 50%;
     }
+<<<<<<< Updated upstream
     @media (min-width: 900px) {
       width: 20%;
+=======
+    @media(min-width:767px){
+        width: 20%;
+>>>>>>> Stashed changes
     }
   }
   .infos {
@@ -51,8 +56,23 @@ export const Card = styled.div`
       font-size: 14px;
       color: var(--gray200);
     }
+<<<<<<< Updated upstream
     span {
       font-size: 18px;
+=======
+`
+export const ContainerSkylls=styled.div`
+    margin-left: 35px;
+    width: 60%;
+`
+export const ContainerDescription=styled.div`
+
+`
+export const ContainerProfession=styled.div`
+    @media(min-width:767px){
+        margin: 80px 0 0 0;
+        
+>>>>>>> Stashed changes
     }
     @media (min-width: 900px) {
       width: 60%;
