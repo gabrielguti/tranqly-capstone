@@ -1,4 +1,6 @@
-import { FaStar } from "react-icons/fa";
+// import { FaStar } from "react-icons/fa";
+// import { UseAuth } from "../../providers/authProvider";
+import { useClientCard } from "../../providers/clientProvider";
 import Button from "../button";
 import { BoxButton, CardPro, Date, Info, Time } from "./styles";
 
@@ -8,10 +10,25 @@ interface CardProps {
   name: string;
   info?: string;
   isRemovable: any;
-  cancel: any
+  cancel: any;
+  token?: any;
+  id?: any;
+  ownerId?: number;
 }
 
-const DashboardCard = ({ date, time, name, info, isRemovable, cancel }: CardProps) => {
+const DashboardCard = ({
+  date,
+  time,
+  name,
+  info,
+  isRemovable,
+  cancel,
+  token,
+  id,
+  ownerId,
+}: CardProps) => {
+  const { cancelConference } = useClientCard();
+
   return (
     <CardPro>
       <Date>{date}</Date>
@@ -23,13 +40,16 @@ const DashboardCard = ({ date, time, name, info, isRemovable, cancel }: CardProp
           <span>{info}</span>
         </div>
         <div>
-          <span id = "cancel">{cancel && "Atendimento cancelado"}</span>
-          </div>
+          <span id="cancel">{cancel && "Atendimento cancelado"}</span>
+        </div>
 
         {!isRemovable && (
           <BoxButton>
             {" "}
-            <Button children={"Cancelar"} />{" "}
+            <Button
+              children={"Cancelar"}
+              onClick={() => cancelConference(token, id, Number(ownerId))}
+            />{" "}
           </BoxButton>
         )}
       </Info>
@@ -38,3 +58,6 @@ const DashboardCard = ({ date, time, name, info, isRemovable, cancel }: CardProp
 };
 
 export default DashboardCard;
+// function cancelConference(): void {
+//   throw new Error("Function not implemented.");
+// }

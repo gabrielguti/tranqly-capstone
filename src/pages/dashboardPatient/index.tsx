@@ -28,8 +28,6 @@ const DashboardPatient = () => {
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
-  console.log(reverseFormed);
-
   return (
     <>
       <Bar />
@@ -70,6 +68,9 @@ const DashboardPatient = () => {
                       time={moment(filtered.date).format("LT")}
                       info={filtered.areas}
                       cancel={filtered.cancel}
+                      token={accessToken}
+                      id={filtered.id}
+                      ownerId={Number(user.id)}
                     ></DashboardCard>
                   );
               })}
