@@ -8,8 +8,25 @@ export default createGlobalStyle`
 		outline: 0;
 		box-sizing: border-box;
 		font-family: 'Poppins', sans-serif;
+    scrollbar-width: auto;
+    scrollbar-color: var(--purple300) rgba(0, 0, 0, 0);
+  }
 
-	}
+  /* Chrome, Edge, and Safari */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--purple300);
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+  }
+
   
 	html, body {
 		max-width: 100vw;

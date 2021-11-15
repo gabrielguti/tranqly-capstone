@@ -2,7 +2,6 @@ import {
   createContext,
   ReactNode,
   useContext,
-  useEffect,
   useState,
 } from "react";
 import api from "../services/api";
@@ -44,8 +43,9 @@ interface CalendarData {
     user,
     accessToken,
   }: CreateCommentsProps) => void;
-  addMyCalendar: (data: any, id: number, token: string) => void;
-  check: (id: number, token: string) => void;
+  addMyCalendar: (data: any,   professionalId:number,token: string, userId: number) => void;
+  check: (id: number, token: string, professionalId: number, userId: number) => void;
+  
 }
 
 const CalendarContext = createContext<CalendarData>({} as CalendarData);
@@ -56,7 +56,8 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
   const [newComment, setNewComment] = useState("");
   const [newScore, setNewScore] = useState(5);
   const [show, setShow] = useState<boolean>(false);
-
+  
+  
   const searchDate = (id: number, token: string) => {
     api
       .get(`/users/${id}/professional`, {
@@ -105,19 +106,24 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     // alert("");
   };
 
-  const addMyCalendar = (data: any, id: number, token: string) => {
-    const newTime = { ...data, patientId: id };
+  const addMyCalendar = (data: any, professionalId:any ,token:string, userId: number) => {
+    console.log(token)
+    const newTime = { ...data, cancel: false };
     api
       .post(`/patient`, newTime, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((_) => searchDate(id, token))
+      .then((response) => {
+        searchDate(professionalId, token);
+        console.log(response.data);
+      })
       .catch((e) => console.log(e));
   };
 
-  const check = (id: number, token: string) => {
+  const check = (id: number, token: string, professionalId: any, userId: number) => {
+    console.log(token)
     api
       .patch(
         `/professional/${id}`,
@@ -128,8 +134,10 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
           },
         }
       )
-      .then((response) => addMyCalendar(response.data, id, token))
-      .then((_) => searchDate(id, token))
+      .then((response) => {
+        addMyCalendar(response.data, professionalId, token, userId);
+        console.log(response.data);
+      })
       .catch((e) => console.log(e));
   };
 
