@@ -25,7 +25,6 @@ const ProfileProfessional = () => {
     newScore,
   } = useCalendar();
   const { id }: any = useParams();
-  console.log(id);
   const { accessToken, user } = UseAuth();
   const getProfessionalStorage = JSON.parse(
     localStorage.getItem("@tranqyl:prof") || ""
@@ -39,12 +38,13 @@ const ProfileProfessional = () => {
   useEffect(() => {
     searchDate(Number(getProfessionalStorage[0].id), accessToken);
     searchComments(Number(getProfessionalStorage[0].id), accessToken);
-    console.log(calendar);
   }, []);
 
   const formed = calendar
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
+
+  const filters = formed.filter((item) => item.type === true);
 
   return (
     <>
@@ -58,7 +58,7 @@ const ProfileProfessional = () => {
           <p>Escolha seu horário</p>
         </div>
         <div className="container">
-          {formed.every((item) => item.type === true) ? (
+          {filters.length > 0 ? (
             <>
               {formed
                 .filter((f) => f.type === true)

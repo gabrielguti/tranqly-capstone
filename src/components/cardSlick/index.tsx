@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import api from "../../services/api";
+import StarsCount from "../contStars";
 import { Card } from "./styles";
 
 export default function CardSlick({ item }: any) {
@@ -15,7 +16,7 @@ export default function CardSlick({ item }: any) {
       .catch((e) => console.log(e));
   }, []);
 
-  const media =
+  let media =
     comments.length > 0 &&
     Math.round(
       comments.reduce(
@@ -23,6 +24,9 @@ export default function CardSlick({ item }: any) {
         0
       ) / comments.length
     );
+  if (media === false) {
+    media = 0;
+  }
 
   return (
     <Card>
@@ -32,13 +36,7 @@ export default function CardSlick({ item }: any) {
       <div className="infos">
         <div>
           <h2>{item.name}</h2>
-          {media > 0 && (
-            <div className="stars">
-              {[...Array(media)].map(() => (
-                <FaStar />
-              ))}
-            </div>
-          )}
+          <StarsCount stars={media} />
           <p>{item.profession}</p>
           <p>{item.areas}</p>
         </div>

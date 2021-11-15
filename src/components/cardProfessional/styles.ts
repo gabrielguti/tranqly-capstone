@@ -47,6 +47,13 @@ export const Card = styled.div`
     h1 {
       font-size: 18px;
     }
+    h3 {
+      font-weight: 400;
+      font-size: 14px;
+    }
+    b {
+      font-weight: 500;
+    }
     p {
       font-size: 14px;
       color: var(--gray200);
@@ -69,7 +76,14 @@ export const Card = styled.div`
   .button {
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    h1 {
+      color: var(--purple200);
+      font-weight: 500;
+      font-size: 20px;
+    }
     button {
       width: 100%;
     }

@@ -8,28 +8,32 @@ interface CardProps {
   name: string;
   info?: string;
   isRemovable: any;
-  cancel: any
+  cancel: any;
 }
 
-const DashboardCard = ({ date, time, name, info, isRemovable, cancel }: CardProps) => {
+const DashboardCard = ({
+  date,
+  time,
+  name,
+  info,
+  isRemovable,
+  cancel,
+}: CardProps) => {
   return (
     <CardPro>
       <Date>{date}</Date>
       <Time>{time}</Time>
       <Info>
         <h4>{name}</h4>
-
         <div>
           <span>{info}</span>
         </div>
         <div>
-          <span id = "cancel">{cancel && "Atendimento cancelado"}</span>
-          </div>
-
+          <span id="cancel">{cancel && "Atendimento cancelado"}</span>
+        </div>
         {!isRemovable && (
           <BoxButton>
-            {" "}
-            <Button children={"Cancelar"} />{" "}
+            <Button children={"Cancelar"} />
           </BoxButton>
         )}
       </Info>
