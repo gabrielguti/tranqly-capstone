@@ -28,7 +28,7 @@ const DashboardPatient = () => {
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
-  console.log(conference);
+  console.log(reverseFormed);
 
   return (
     <>
@@ -66,9 +66,9 @@ const DashboardPatient = () => {
                     <DashboardCard
                       isRemovable={filtered.cancel}
                       date={moment(filtered.date).format("LL")}
-                      name={filtered.nameProfessional}
+                      name={filtered.name}
                       time={moment(filtered.date).format("LT")}
-                      info={"info"}
+                      info={filtered.areas}
                       cancel={filtered.cancel}
                     ></DashboardCard>
                   );
@@ -90,10 +90,10 @@ const DashboardPatient = () => {
                 return (
                   <DashboardCard
                     date={moment(item.date).format("LL")}
-                    name={item.nameProfessional}
+                    name={item.name}
                     time={moment(item.date).format("LT")}
                     key={index}
-                    info={"info"}
+                    info={item.areas}
                     isRemovable={true}
                     cancel={item.cancel}
                   />
