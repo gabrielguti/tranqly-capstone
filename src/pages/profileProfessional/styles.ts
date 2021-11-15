@@ -34,12 +34,13 @@ export const ContainerProfessionalData = styled.div`
     .data {
       margin-bottom: 50px;
       padding: 5px;
-      max-width: 350px;
+      /* max-width: 350px; */
       width: 100%;
       display: flex;
       gap: 30px;
       flex-direction: column;
       color: var(--gray200);
+
       div {
         flex-direction: column;
         svg {
@@ -157,6 +158,7 @@ export const Calendar = styled.div`
     svg {
       font-size: 80px;
     }
+    width: 100%;
 `;
 
 export const Comments = styled.div`
