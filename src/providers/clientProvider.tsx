@@ -11,11 +11,11 @@ interface DataProps {
   date: string;
   patientId: number;
   cancel: boolean;
-  nameProfessional: string
+  nameProfessional: string;
 }
 interface ClientData {
   conference: DataProps[];
-  getConference: (token: string) => void;
+  getConference: (token: string, id: any) => void;
 }
 
 const ClientCardContext = createContext<ClientData>({} as ClientData);
@@ -23,9 +23,9 @@ const ClientCardContext = createContext<ClientData>({} as ClientData);
 export const ClientCardProvider = ({ children }: ClientProps) => {
   const [conference, setConference] = useState([]);
 
-  const getConference = (token: string) => {
+  const getConference = (token: string, id: any) => {
     api
-      .get(`patient?patientId=15`, {
+      .get(`patient?patientId=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
