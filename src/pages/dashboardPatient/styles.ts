@@ -29,7 +29,7 @@ export const CardsBox = styled.div`
     display: flex;
     flex-direction: row;
     width: 80%;
-    justify-content: space-between;
+    justify-content: flex-start;
     overflow-x: auto;
     box-shadow: 0px 0px 20px var(--gray200);
     border: 0;
