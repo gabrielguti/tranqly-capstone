@@ -6,15 +6,14 @@ import { ContainerSearch, ContainerProfessionals } from "./styles";
 import { FaSearch } from "react-icons/fa";
 import api from "../../services/api";
 
-interface dataProps{
-    value:string;
+interface dataProps {
+  value: string;
 }
 
 const DashboardFilter = () => {
   const { professionals, filterProfessional } = useContext(ProfessionalContext);
   const [value, setValue] = useState("");
   const [fisrRender, setFisrRender]=useState(1)
-
   const [comments, setComments]=useState([])
     
     useEffect(()=>{

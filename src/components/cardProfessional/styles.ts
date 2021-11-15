@@ -10,7 +10,7 @@ export const ProfessionalContainer = styled.div`
   box-shadow: 0px 0px 15px 6px rgb(0 0 0 / 30%);
   padding: 10px;
   @media (min-width: 900px) {
-    flex-direction: row ;
+    flex-direction: row;
     min-height: 350px;
   }
 `;

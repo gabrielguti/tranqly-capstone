@@ -24,7 +24,12 @@ interface IProfessionalData {
   type: string;
   profession: string;
   description: string;
-  areas: [];
+  areas: string;
+  language: string;
+  gender: string;
+  price: string;
+  state: string;
+  crp: string;
 }
 interface IClientData {
   id: number;

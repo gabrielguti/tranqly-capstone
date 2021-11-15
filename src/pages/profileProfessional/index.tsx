@@ -58,7 +58,7 @@ const ProfileProfessional = () => {
           <p>Escolha seu horário</p>
         </div>
         <div className="container">
-          {formed.length > 0 ? (
+          {formed.every((item) => item.type === true) ? (
             <>
               {formed
                 .filter((f) => f.type === true)

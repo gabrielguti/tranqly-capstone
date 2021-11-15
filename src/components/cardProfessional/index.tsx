@@ -10,18 +10,23 @@ import StarsCount from "../contStars";
 interface ProfessionalData {
   id: number;
   name: string;
+  image: string;
+  type: string;
   profession: string;
   description: string;
-  image: string;
-  areas: [];
+  areas: string;
+  language: string;
+  gender: string;
+  price: string;
+  state: string;
+  crp: string;
 }
 
 interface CardProfessionalProps {
   professional: ProfessionalData;
-  average?: number;
 }
 
-const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
+const CardProfessional = ({ professional }: CardProfessionalProps) => {
   const history = useHistory();
   const { renderization } = useContext(ProfessionalContext);
   const { name, image, description, areas, profession, id } = professional;
@@ -33,9 +38,8 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
 
    const [comments, setComments] = useState([]);
 
-   useEffect(() => {
-    
 
+   useEffect(() => {
        api
        .get(
          `https://testes-laudemir.herokuapp.com/comments?professionalId=${professional.id}`
@@ -74,9 +78,7 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
           </div>
         </div>
         <div className="button">
-
           <Button onClick={() => schedule(professional.name, professional.id)}>Agendar</Button>
-
         </div>
       </Card>
     </ProfessionalContainer>
