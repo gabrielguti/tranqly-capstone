@@ -42,13 +42,17 @@ interface CalendarData {
     data: any,
     professionalId: number,
     token: string,
-    userId: number
+    // userId: number,
+    areas: string,
+    name: string
   ) => void;
   check: (
     id: number,
     token: string,
     professionalId: number,
-    userId: number
+    // userId: number,
+    areas: string,
+    name: string
   ) => void;
 }
 
@@ -113,10 +117,11 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     data: any,
     professionalId: any,
     token: string,
-    userId: number
+    areas: string,
+    name: string
   ) => {
     console.log(token);
-    const newTime = { ...data, cancel: false };
+    const newTime = { ...data, cancel: false, areas: areas, name: name };
     api
       .post(`/patient`, newTime, {
         headers: {
@@ -134,7 +139,8 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     id: number,
     token: string,
     professionalId: any,
-    userId: number
+    areas: string,
+    name: string
   ) => {
     console.log(token);
     api
@@ -148,7 +154,7 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         }
       )
       .then((response) => {
-        addMyCalendar(response.data, professionalId, token, userId);
+        addMyCalendar(response.data, professionalId, token, areas, name);
         console.log(response.data);
       })
       .catch((e) => console.log(e));

@@ -9,9 +9,10 @@ interface DataProps {
   userId: number;
   type: boolean;
   date: string;
-  patientId: number;
+  patientId?: number;
   cancel: boolean;
-  nameProfessional: string;
+  name: string;
+  areas: string
 }
 interface ClientData {
   conference: DataProps[];
