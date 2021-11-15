@@ -31,16 +31,12 @@ const Index = () => {
         <div className="options">
           {accessToken ? (
           <Link to={`/dashboard${user.type}`}>Dashboard</Link> 
-          // ||<Link to="/dashboardfilter">Procurar especialista</Link>
           ):(
             <Link to="/signupprofessional">Para especialistas</Link>
-            // ||<Link to="/signupclient">Para clientes</Link>
           )}
-          {accessToken ? (
-          // <Link to={`/dashboard${user.type}`}>Dashboard</Link> 
+          {accessToken ? ( 
           <Link to="/dashboardfilter">Procurar especialista</Link>
           ):(
-            // <Link to="/signupprofessional">Para especialistas</Link>
             <Link to="/signupclient">Para clientes</Link>
           )}
           
