@@ -48,7 +48,7 @@ interface IProfessional {
   clients: IClientData[];
   qualifications: IQualificationData[];
   sProfess: IProfessionalData[];
-  renderization: (nameProfessional: string) => void;
+  renderization: (nameProfessional: string, idProfessional: number) => void;
 }
 export const ProfessionalContext = createContext<IProfessional>(
   {} as IProfessional
