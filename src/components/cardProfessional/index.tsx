@@ -9,21 +9,25 @@ import api from "../../services/api";
 interface ProfessionalData {
   id: number;
   name: string;
+  image: string;
+  type: string;
   profession: string;
   description: string;
-  image: string;
-  areas: [];
+  areas: string;
+  language: string;
+  gender: string;
+  price: string;
+  state: string;
+  crp: string;
 }
 
 interface CardProfessionalProps {
   professional: ProfessionalData;
-  average: number;
 }
 
-const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
+const CardProfessional = ({ professional }: CardProfessionalProps) => {
   const history = useHistory();
   const { renderization } = useContext(ProfessionalContext);
-  const { name, image, description, areas, profession } = professional;
 
   const schedule = (name: string, id: number) => {
     renderization(name, Number(id));
@@ -39,7 +43,7 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
       )
       .then((response) => setComments(response.data))
       .catch((e) => console.log(e));
-  }, []);
+  }, [professional.id]);
 
   const media =
     comments.length > 0 &&
@@ -74,7 +78,9 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
           </div>
         </div>
         <div className="button">
-          <Button onClick={() => schedule(professional.name, professional.id)}>Agendar</Button>
+          <Button onClick={() => schedule(professional.name, professional.id)}>
+            Agendar
+          </Button>
         </div>
       </Card>
     </ProfessionalContainer>

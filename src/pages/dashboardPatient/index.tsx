@@ -16,12 +16,10 @@ const DashboardPatient = () => {
   let refTwo: string[] = [];
   const { user, accessToken } = UseAuth();
 
-
   useEffect(() => {
     getConference(accessToken, user.id);
   }, []);
 
-  
   const formed = conference
     .slice()
     .sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1));
