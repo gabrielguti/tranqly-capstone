@@ -18,6 +18,7 @@ export const ContainerSearch = styled.div`
     align-items: center;
     border-radius: 10px;
     overflow: hidden;
+    padding-left: 10px;
   }
   input {
     height: 40px;
