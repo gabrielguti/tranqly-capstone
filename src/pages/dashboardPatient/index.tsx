@@ -15,6 +15,8 @@ import { UseAuth } from "../../providers/authProvider";
 import Button from "../../components/button";
 import { useCalendar } from "../../providers/calendarProvider";
 import ModalCommentPage from "../../components/modalCommentPage";
+import Profile from "../../assets/img/profile.png";
+
 
 const DashboardPatient = () => {
   const { conference, getConference } = useClientCard();
@@ -35,18 +37,19 @@ const DashboardPatient = () => {
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
-<<<<<<< HEAD
   const { show, setShow } = useCalendar();
 
-=======
->>>>>>> 458b0516c0579be328729f70f74251c3dfd0a7ed
   return (
     <>
       <Bar />
       <ContainerProfessionalData>
         <div className="ProfessionalData">
           <div className="img">
-            <img src={user.image} alt="imgProfile" />
+            {user.image ? (
+              <img src={user.image} alt="imgProfile" />
+            ) : (
+              <img src={Profile} alt="imgProfile" />
+            )}
           </div>
           <div className="data">
             <h2>{user.name}</h2>
@@ -64,7 +67,6 @@ const DashboardPatient = () => {
           {reverseFormed &&
             reverseFormed
               .filter((item) => item.cancel === false)
-              // eslint-disable-next-line array-callback-return
               .map((filtered) => {
                 if (
                   !ref.includes(filtered.date) &&
@@ -93,7 +95,6 @@ const DashboardPatient = () => {
         </Title>
         <CardsBox>
           {formed &&
-            // eslint-disable-next-line array-callback-return
             formed.map((item, index) => {
               if (
                 !refTwo.includes(item.date) &&

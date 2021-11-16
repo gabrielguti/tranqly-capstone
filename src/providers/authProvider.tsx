@@ -37,11 +37,11 @@ interface SignUpCredentials {
   name: string;
   email: string;
   password: string;
-  type: string;
+  type?: string;
   phone?: string;
   profession?: string;
   gender?: string;
-  areas?: string[];
+  areas?: string;
   description?: string;
 }
 
@@ -79,9 +79,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   const signUp = (data: SignUpCredentials) => {
-    api.post(`/users`, data).catch((e) => console.log(e));
+    api.post(`/register`, data).catch((e) => console.log(e));
     history.push("/signin");
   };
+
   return (
     <AutContext.Provider
       value={{
