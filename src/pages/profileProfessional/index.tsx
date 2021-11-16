@@ -37,9 +37,9 @@ const ProfileProfessional = () => {
 
   useEffect(() => {
     searchDate(id, accessToken);
-    searchComments(id, accessToken);
+    searchComments(professionalId, accessToken);
   }, [id]);
-
+  console.log(comments)
   const formed = calendar
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
@@ -48,7 +48,7 @@ const ProfileProfessional = () => {
   console.log(getProfessionalStorage[0].areas);
   const areas = getProfessionalStorage[0].areas;
   const name = getProfessionalStorage[0].name;
-  console.log(formed)
+  console.log(formed);
   return (
     <>
       <Bar />
@@ -61,8 +61,7 @@ const ProfileProfessional = () => {
           <p>Escolha seu horário</p>
         </div>
         <div className="container">
-
-        {filters.length > 0 ? (
+          {filters.length > 0 ? (
             <>
               {formed
                 .filter((f) => f.type === true)
@@ -73,7 +72,6 @@ const ProfileProfessional = () => {
                     moment(now).format().replace(/\D/g, "") <=
                       moment(item.date).format().replace(/\D/g, "")
                   ) {
-
                     return (
                       <div key={index} className="week">
                         <div className="day">

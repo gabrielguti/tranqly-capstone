@@ -137,19 +137,11 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
       .catch((e) => console.log(e));
   };
 
-<<<<<<< HEAD
   const createCommentPage = (
     newComment: string,
     newScore: number,
     id: number,
     accessToken: string,
-=======
-  const addMyCalendar = (
-    data: any,
-    professionalId: any,
-    token: string,
-    areas: string,
->>>>>>> 458b0516c0579be328729f70f74251c3dfd0a7ed
     name: string
   ) => {
     const newData = {
@@ -177,7 +169,13 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     }
   };
 
-  const addMyCalendar = (data: any, professionalId: any, token: string) => {
+  const addMyCalendar = (
+    data: any,
+    professionalId: any,
+    token: string,
+    areas: string,
+    name: string
+  ) => {
     console.log(token);
     const newTime = { ...data, cancel: false, areas: areas, name: name };
     api
@@ -211,11 +209,7 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         }
       )
       .then((response) => {
-<<<<<<< HEAD
-        addMyCalendar(response.data, professionalId, token);
-=======
         addMyCalendar(response.data, professionalId, token, areas, name);
->>>>>>> 458b0516c0579be328729f70f74251c3dfd0a7ed
         console.log(response.data);
       })
       .catch((e) => console.log(e));
