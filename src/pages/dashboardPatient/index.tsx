@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import moment from "moment";
 import "moment/locale/pt-br";
 import { UseAuth } from "../../providers/authProvider";
-
+import Profile from "../../assets/img/profile.png";
 const DashboardPatient = () => {
   const { conference, getConference } = useClientCard();
   let now = new Date();
@@ -34,7 +34,11 @@ const DashboardPatient = () => {
       <ContainerProfessionalData>
         <div className="ProfessionalData">
           <div className="img">
-            <img src={user.image} alt="imgProfile" />
+            {user.image ? (
+              <img src={user.image} alt="imgProfile" />
+            ) : (
+              <img src={Profile} alt="imgProfile" />
+            )}
           </div>
           <div className="data">
             <div>
