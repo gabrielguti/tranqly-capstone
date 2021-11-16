@@ -43,7 +43,6 @@ const DashboardCard = ({
         </div>
         {!isRemovable && (
           <BoxButton>
-            {" "}
             <Button
               children={"Cancelar"}
               onClick={() => cancelConference(token, id, Number(ownerId))}

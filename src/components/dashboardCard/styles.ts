@@ -12,11 +12,9 @@ export const CardPro = styled.div`
   margin-bottom: 7vh;
   margin: 20px;
   button {
-    position: relative;
-    bottom: -100px;
     background-color: var(--red50);
     width: 130px;
-    margin-top: 20px;
+    margin-top: 65px;
     height: 40px;
   }
   @media (min-width: 1000px) {
@@ -79,12 +77,10 @@ export const Info = styled.div`
   }
 `;
 
-export const Line = styled.hr`
-  width: 90%;
-  background-color: var(--purple400);
-  height: 3px;
-  margin-bottom: 5vh;
-  @media (min-width: 700px) {
-    width: 900px;
-  }
+export const Line = styled.div`
+  width: 98%;
+  max-width: 1280px;
+  border-top: 2px solid var(--purple200);
+  margin: 20px auto;
+  padding: 30px;
 `;

@@ -5,6 +5,7 @@ import Button from "../button";
 import { Link } from "react-router-dom";
 import { UseAuth } from "../../providers/authProvider";
 import { useHistory } from "react-router";
+import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 
 const Index = () => {
   const { accessToken, user } = UseAuth();
@@ -41,9 +42,9 @@ const Index = () => {
           )}
 
           <Link to="/signin">
-            <Button onClick={() => changeLoginSignup()}>
-              {accessToken ? "Deslogar" : "Logar"}
-            </Button>
+            <div className="icons" onClick={() => changeLoginSignup()}>
+              {accessToken ? <FaSignInAlt /> : <FaSignOutAlt />}
+            </div>
           </Link>
         </div>
         <div className="burguer">
@@ -59,9 +60,9 @@ const Index = () => {
               <Link to="/dashboardfilter">Procurar especialista</Link>
             )}
             <Link to="/signin">
-              <Button onClick={() => changeLoginSignup()}>
-                {accessToken ? "Deslogar" : "Logar"}
-              </Button>
+              <div className="icons" onClick={() => changeLoginSignup()}>
+                {accessToken ? <FaSignInAlt /> : <FaSignOutAlt />}
+              </div>
             </Link>
           </Menu>
         </div>

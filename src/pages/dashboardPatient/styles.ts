@@ -8,7 +8,6 @@ export const ContaiinerProfileInfo = styled.div`
   h3 {
     color: red;
   }
-
   margin-bottom: 10vh;
 `;
 
@@ -53,7 +52,8 @@ export const CardsBox = styled.div`
   @media (min-width: 700px) {
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 90%;
+    max-width: 1280px;
     justify-content: flex-start;
     overflow-x: auto;
     box-shadow: 0px 0px 20px var(--gray200);

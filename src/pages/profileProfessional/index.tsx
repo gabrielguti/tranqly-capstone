@@ -1,9 +1,9 @@
 /* eslint-disable array-callback-return */
-import { Calendar, ContainerProfessionalData, Comments, Line } from "./styles";
+import { Calendar, ContainerProfessionalData, Comments } from "./styles";
 import Bar from "../../components/bar";
 import Button from "../../components/button";
 import CardComments from "../../components/CardComments";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import moment from "moment";
 import "moment/locale/pt-br";
 import ModalComment from "../../components/modalComment";
@@ -12,34 +12,26 @@ import CardProfessionalData from "../../components/cardProfessionalData";
 import { useCalendar } from "../../providers/calendarProvider";
 import { UseAuth } from "../../providers/authProvider";
 import { useParams } from "react-router";
+import { Line } from "../../components/dashboardCard/styles";
 
 const ProfileProfessional = () => {
-  const {
-    searchDate,
-    searchComments,
-    createComment,
-    check,
-    calendar,
-    comments,
-    newComment,
-    newScore,
-  } = useCalendar();
+  const { searchDate, searchComments, check, calendar, comments } =
+    useCalendar();
   const { id }: any = useParams();
-  const { accessToken, user } = UseAuth();
+  const { accessToken } = UseAuth();
   const getProfessionalStorage = JSON.parse(
     localStorage.getItem("@tranqyl:prof") || ""
   );
   let professionalId = Number(id);
   let ref: string[] = [];
   let now = new Date();
-  const userId = JSON.parse(localStorage.getItem("@tranqyl:user") || "");
   const { show, setShow } = useCalendar();
 
   useEffect(() => {
     searchDate(id, accessToken);
     searchComments(professionalId, accessToken);
   }, [id]);
-  console.log(comments)
+
   const formed = calendar
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
