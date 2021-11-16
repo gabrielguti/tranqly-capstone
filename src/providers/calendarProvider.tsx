@@ -38,13 +38,17 @@ interface CalendarData {
     data: any,
     professionalId: number,
     token: string,
-    userId: number
+    // userId: number,
+    areas: string,
+    name: string
   ) => void;
   check: (
     id: number,
     token: string,
     professionalId: number,
-    userId: number
+    // userId: number,
+    areas: string,
+    name: string
   ) => void;
   show: boolean;
   setShow: any;
@@ -133,11 +137,19 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
       .catch((e) => console.log(e));
   };
 
+<<<<<<< HEAD
   const createCommentPage = (
     newComment: string,
     newScore: number,
     id: number,
     accessToken: string,
+=======
+  const addMyCalendar = (
+    data: any,
+    professionalId: any,
+    token: string,
+    areas: string,
+>>>>>>> 458b0516c0579be328729f70f74251c3dfd0a7ed
     name: string
   ) => {
     const newData = {
@@ -167,7 +179,7 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
 
   const addMyCalendar = (data: any, professionalId: any, token: string) => {
     console.log(token);
-    const newTime = { ...data, cancel: false };
+    const newTime = { ...data, cancel: false, areas: areas, name: name };
     api
       .post(`/patient`, newTime, {
         headers: {
@@ -185,7 +197,8 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     id: number,
     token: string,
     professionalId: any,
-    userId: number
+    areas: string,
+    name: string
   ) => {
     api
       .patch(
@@ -198,7 +211,11 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         }
       )
       .then((response) => {
+<<<<<<< HEAD
         addMyCalendar(response.data, professionalId, token);
+=======
+        addMyCalendar(response.data, professionalId, token, areas, name);
+>>>>>>> 458b0516c0579be328729f70f74251c3dfd0a7ed
         console.log(response.data);
       })
       .catch((e) => console.log(e));
