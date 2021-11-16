@@ -31,14 +31,14 @@ const ProfileProfessional = () => {
   );
   let professionalId = Number(id);
   let ref: string[] = [];
-  const [show, setShow] = useState(false);
   let now = new Date();
   const userId = JSON.parse(localStorage.getItem("@tranqyl:user") || "");
+  const { show, setShow } = useCalendar();
 
   useEffect(() => {
-    searchDate(Number(getProfessionalStorage[0].id), accessToken);
-    searchComments(Number(getProfessionalStorage[0].id), accessToken);
-  }, []);
+    searchDate(id, accessToken);
+    searchComments(id, accessToken);
+  }, [id]);
 
   const formed = calendar
     .slice()
@@ -119,13 +119,7 @@ const ProfileProfessional = () => {
           {comments.map((item) => {
             return <CardComments comments={item} />;
           })}
-          {show && (
-            <ModalComment
-              show={show}
-              setShow={setShow}
-              createComment={createComment}
-            />
-          )}
+          {show && <ModalComment />}
         </div>
       </Comments>
       <Line />

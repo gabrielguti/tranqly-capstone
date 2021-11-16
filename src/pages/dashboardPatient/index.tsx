@@ -1,6 +1,10 @@
 import Bar from "../../components/bar";
-import { ContainerProfessionalData } from "../profileProfessional/styles";
-import { CardsBox, SectionInfo, Title } from "./styles";
+import {
+  ContainerProfessionalData,
+  CardsBox,
+  SectionInfo,
+  Title,
+} from "./styles";
 import DashboardCard from "../../components/dashboardCard";
 import { Line } from "../../components/dashboardCard/styles";
 import { useClientCard } from "../../providers/clientProvider";
@@ -8,6 +12,9 @@ import { useEffect } from "react";
 import moment from "moment";
 import "moment/locale/pt-br";
 import { UseAuth } from "../../providers/authProvider";
+import Button from "../../components/button";
+import { useCalendar } from "../../providers/calendarProvider";
+import ModalCommentPage from "../../components/modalCommentPage";
 
 const DashboardPatient = () => {
   const { conference, getConference } = useClientCard();
@@ -28,7 +35,7 @@ const DashboardPatient = () => {
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
-  console.log(conference);
+  const { show, setShow } = useCalendar();
 
   return (
     <>
@@ -39,10 +46,9 @@ const DashboardPatient = () => {
             <img src={user.image} alt="imgProfile" />
           </div>
           <div className="data">
-            <div>
-              <h2>{user.name}</h2>
-              <h3>{user.email}</h3>
-            </div>
+            <h2>{user.name}</h2>
+            <h3>{user.email}</h3>
+            <Button onClick={() => setShow(!show)}>Feedback</Button>
           </div>
         </div>
       </ContainerProfessionalData>
@@ -55,7 +61,8 @@ const DashboardPatient = () => {
           {reverseFormed &&
             reverseFormed
               .filter((item) => item.cancel === false)
-              .map((filtered, index) => {
+              // eslint-disable-next-line array-callback-return
+              .map((filtered) => {
                 if (
                   !ref.includes(filtered.date) &&
                   ref.push(filtered.date) &&
@@ -80,6 +87,7 @@ const DashboardPatient = () => {
         </Title>
         <CardsBox>
           {formed &&
+            // eslint-disable-next-line array-callback-return
             formed.map((item, index) => {
               if (
                 !refTwo.includes(item.date) &&
@@ -102,6 +110,7 @@ const DashboardPatient = () => {
         </CardsBox>
         <Line />
       </SectionInfo>
+      {show && <ModalCommentPage />}
     </>
   );
 };

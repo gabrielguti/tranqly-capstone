@@ -93,7 +93,12 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
           </div>
         </div>
         <div className="button">
-          <h1>R$ {price},00</h1>
+          <h1>
+            {price.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </h1>
           <Button onClick={() => schedule(professional.name, professional.id)}>
             Agendar
           </Button>

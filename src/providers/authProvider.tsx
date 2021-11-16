@@ -14,9 +14,8 @@ interface User {
   email: string;
   id: string;
   name: string;
-  type:string;
-  image: string
-
+  type: string;
+  image: string;
 }
 interface AuthState {
   accessToken: string;
