@@ -10,7 +10,7 @@ import landingImg from "../../assets/img/IllustrationO15.svg";
 import Bar from "../../components/bar";
 import Button from "../../components/button";
 import Slider from "react-slick";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ProfessionalContext,
   UseProfessionalContext,
@@ -19,11 +19,12 @@ import CardSlick from "../../components/cardSlick";
 import { FaLinkedin, FaGithubSquare } from "react-icons/fa";
 import CardKnowMore from "../../components/cardKnowMore";
 import CardComments from "../../components/CardComments";
+import { useCalendar } from "../../providers/calendarProvider";
 
 const LandingPage = () => {
   const { allProfessionals } = useContext(ProfessionalContext);
   const [show, setShow] = useState(false);
-  const { professionalComments } = UseProfessionalContext();
+  const { getCommentPage, commentsPage } = useCalendar();
 
   var settings = {
     speed: 200,
@@ -35,6 +36,10 @@ const LandingPage = () => {
     autoplaySpeed: 4000,
     cssEase: "linear",
   };
+
+  useEffect(() => {
+    getCommentPage();
+  }, []);
 
   const showCard = () => {
     setShow(!show);
@@ -53,7 +58,7 @@ const LandingPage = () => {
               making it over 2000 years old. Richard McClintock, a Latin
               professor at Hampden-Sydney College in Virginia.
             </p>
-            <Button onClick={showCard}>Saiba mais</Button>
+            <Button onClick={() => setShow(!show)}>Saiba mais</Button>
           </div>
           <div className="img">
             <img src={landingImg} alt="landingImg" />
@@ -78,10 +83,10 @@ const LandingPage = () => {
       <div className="allComments">
         <h1>Nossas avaliações</h1>
         <Comments>
-          {professionalComments
+          {commentsPage
             .sort(() => 0.5 - Math.random())
             .slice(0, 6)
-            .map((item) => {
+            .map((item: any) => {
               return <CardComments comments={item} />;
             })}
         </Comments>

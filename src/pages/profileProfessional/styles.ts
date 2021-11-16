@@ -12,11 +12,10 @@ export const ContainerProfessionalData = styled.div`
     flex-direction: column;
     text-align: center;
     @media (min-width: 700px) {
-      flex-direction: column;
-     
-     justify-content: center;
-     align-items: center;
-     
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
     }
     .img {
       width: 100%;
@@ -51,10 +50,10 @@ export const ContainerProfessionalData = styled.div`
           font-size: 14px;
         }
       }
-      h2{
+      h2 {
         color: var(--gray100);
       }
-      h3{
+      h3 {
         color: var(--gray200);
       }
       .stars {
@@ -141,9 +140,6 @@ export const Calendar = styled.div`
     align-items: center;
     flex-direction: column;
     text-align: center;  
-    }
-    :hover {
-      filter: brightness(1.2);
     }
   }
   .nothingHere {

@@ -8,8 +8,33 @@ export const ContaiinerProfileInfo = styled.div`
   h3 {
     color: red;
   }
- 
+
   margin-bottom: 10vh;
+`;
+
+export const ContainerProfessionalData = styled.div`
+  background: linear-gradient(90deg, rgba(69, 36, 122, 0.87) 0%, #9677d9 100%);
+  width: 100%;
+  margin: auto;
+  .ProfessionalData {
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    img {
+      width: 150px;
+      border-radius: 50%;
+    }
+  }
+  .data {
+    color: var(--gray100);
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }
 `;
 
 export const SectionInfo = styled.section`
@@ -34,8 +59,5 @@ export const CardsBox = styled.div`
     box-shadow: 0px 0px 20px var(--gray200);
     border: 0;
     border-radius: 5px;
-  }
-  @media (min-width: 940px) {
-    /* width: 900px; */
   }
 `;

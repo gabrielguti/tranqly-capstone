@@ -4,14 +4,12 @@ import { FaTimes } from "react-icons/fa";
 import Button from "../button";
 import { UseAuth } from "../../providers/authProvider";
 import { useCalendar } from "../../providers/calendarProvider";
-import { useParams } from "react-router";
 
-export default function ModalComment() {
-  const { createComment } = useCalendar();
+export default function ModalCommentPage() {
+  const { createCommentPage } = useCalendar();
   const [newComment, setNewComment] = useState("");
   const [newScore, setNewScore] = useState(0);
   const { accessToken, user } = UseAuth();
-  const { id }: any = useParams();
   const { show, setShow } = useCalendar();
 
   return (
@@ -30,7 +28,13 @@ export default function ModalComment() {
         ></input>
         <Button
           onClick={() =>
-            createComment(newComment, newScore, id, accessToken, user.name)
+            createCommentPage(
+              newComment,
+              newScore,
+              Number(user.id),
+              accessToken,
+              user.name
+            )
           }
         >
           Comentar

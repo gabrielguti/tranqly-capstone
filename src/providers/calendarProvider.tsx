@@ -12,12 +12,6 @@ interface DataProps {
   id: number;
   calendar: any;
 }
-interface CreateCommentsProps {
-  newComment: any;
-  newScore: number;
-  user: any;
-  accessToken: string;
-}
 interface CommentsProps {
   namePatient: string;
   comment: string;
@@ -33,12 +27,13 @@ interface CalendarData {
   newScore: number;
   searchDate: (id: number, token: string) => void;
   searchComments: (id: number, token: string) => void;
-  createComment: ({
-    newComment,
-    newScore,
-    user,
-    accessToken,
-  }: CreateCommentsProps) => void;
+  createComment: (
+    newComment: string,
+    newScore: number,
+    user: number,
+    accessToken: string,
+    name: string
+  ) => void;
   addMyCalendar: (
     data: any,
     professionalId: number,
@@ -55,6 +50,17 @@ interface CalendarData {
     areas: string,
     name: string
   ) => void;
+  show: boolean;
+  setShow: any;
+  createCommentPage: (
+    newComment: string,
+    newScore: number,
+    id: number,
+    accessToken: string,
+    name: string
+  ) => void;
+  getCommentPage: () => void;
+  commentsPage: any;
 }
 
 const CalendarContext = createContext<CalendarData>({} as CalendarData);
@@ -63,6 +69,7 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
   const [calendar, setCalendar] = useState([]);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [commentsPage, setCommentsPage] = useState<any>([]);
   const [newScore, setNewScore] = useState(5);
   const [show, setShow] = useState<boolean>(false);
 
@@ -84,41 +91,93 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => setComments(response.data))
+      .then((response) => {
+        setComments(response.data);
+        console.log(response);
+      })
       .catch((e) => console.log(e));
   };
 
-  const createComment = ({
-    newComment,
-    newScore,
-    user,
-    accessToken,
-  }: CreateCommentsProps) => {
+  const createComment = (
+    newComment: string,
+    newScore: number,
+    user: number,
+    accessToken: string,
+    name: string
+  ) => {
     const newData = {
       comment: newComment,
       score: newScore,
+      namePatient: name,
     };
-    console.log(newData);
+    if (newComment.length < 10) {
+      toast.error("Descreva com mais detalhes seu comentário");
+    } else if (newComment.length > 100) {
+      toast.error("Descreva com menos detalhes seu comentário");
+    } else {
+      api
+        .post(`/professional/${user}/comments`, newData, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((_) => {
+          searchComments(user, accessToken);
+          setShow(!show);
+          toast.success("Comentário criado com sucesso");
+        })
+        .catch((e) => toast.error("Erro ao criar o comentário"));
+    }
+  };
+
+  const getCommentPage = () => {
     api
-      .post(`/professional/${user}/comments`, newData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((_) => {
-        searchComments(user, accessToken);
-        setShow(!show);
-      })
+      .get(`/commentsPage`)
+      .then((response) => setCommentsPage(response.data))
       .catch((e) => console.log(e));
   };
 
+<<<<<<< HEAD
+  const createCommentPage = (
+    newComment: string,
+    newScore: number,
+    id: number,
+    accessToken: string,
+=======
   const addMyCalendar = (
     data: any,
     professionalId: any,
     token: string,
     areas: string,
+>>>>>>> 458b0516c0579be328729f70f74251c3dfd0a7ed
     name: string
   ) => {
+    const newData = {
+      userId: id,
+      comment: newComment,
+      score: newScore,
+      namePatient: name,
+    };
+    if (newComment.length < 10) {
+      toast.error("Descreva com mais detalhes seu comentário");
+    } else if (newComment.length > 100) {
+      toast.error("Descreva com menos detalhes seu comentário");
+    } else {
+      api
+        .post(`/commentsPage`, newData, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((_) => {
+          setShow(false);
+          toast.success("Comentário criado com sucesso");
+        })
+        .catch((_) => toast.error("Erro ao criar o comentário"));
+    }
+  };
+
+  const addMyCalendar = (data: any, professionalId: any, token: string) => {
     console.log(token);
     const newTime = { ...data, cancel: false, areas: areas, name: name };
     api
@@ -141,7 +200,6 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     areas: string,
     name: string
   ) => {
-    console.log(token);
     api
       .patch(
         `/professional/${id}`,
@@ -153,7 +211,11 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         }
       )
       .then((response) => {
+<<<<<<< HEAD
+        addMyCalendar(response.data, professionalId, token);
+=======
         addMyCalendar(response.data, professionalId, token, areas, name);
+>>>>>>> 458b0516c0579be328729f70f74251c3dfd0a7ed
         console.log(response.data);
       })
       .catch((e) => console.log(e));
@@ -171,6 +233,11 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         comments,
         newComment,
         newScore,
+        show,
+        setShow,
+        createCommentPage,
+        getCommentPage,
+        commentsPage,
       }}
     >
       {children}

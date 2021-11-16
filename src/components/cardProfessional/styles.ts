@@ -78,7 +78,8 @@ export const Card = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    gap: 10px;
     h1 {
       color: var(--purple200);
       font-weight: 500;
@@ -89,6 +90,7 @@ export const Card = styled.div`
     }
     @media (min-width: 900px) {
       width: 20%;
+      align-items: flex-end;
     }
   }
 `;
