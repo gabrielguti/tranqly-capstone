@@ -30,16 +30,16 @@ const Index = () => {
         </div>
         <div className="options">
           {accessToken ? (
-          <Link to={`/dashboard${user.type}`}>Dashboard</Link> 
-          ):(
+            <Link to={`/dashboard${user.type}`}>Dashboard</Link>
+          ) : (
             <Link to="/signupprofessional">Para especialistas</Link>
           )}
-          {accessToken ? ( 
-          <Link to="/dashboardfilter">Procurar especialista</Link>
-          ):(
+          {accessToken ? (
+            <Link to="/dashboardfilter">Procurar especialista</Link>
+          ) : (
             <Link to="/signupclient">Para clientes</Link>
           )}
-          
+
           <Link to="/signin">
             <Button onClick={() => changeLoginSignup()}>
               {accessToken ? "Deslogar" : "Logar"}
@@ -51,9 +51,13 @@ const Index = () => {
             <Link to="/">
               <img src={logo} alt="logo" />
             </Link>
-            <Link to="/signupprofessional">Para especialistas</Link>
-            <Link to="/signupclient">Para clientes</Link>
-            <Link to="/dashboardfilter">Procurar especialista</Link>
+            {!accessToken && (
+              <Link to="/signupprofessional">Para especialistas</Link>
+            )}
+            {!accessToken && <Link to="/signupclient">Para clientes</Link>}
+            {accessToken && (
+              <Link to="/dashboardfilter">Procurar especialista</Link>
+            )}
             <Link to="/signin">
               <Button onClick={() => changeLoginSignup()}>
                 {accessToken ? "Deslogar" : "Logar"}
