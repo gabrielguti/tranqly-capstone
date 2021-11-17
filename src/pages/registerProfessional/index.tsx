@@ -27,7 +27,7 @@ const RegisterProfessional = () => {
     password: yup
       .string()
       .required("Senha Obrigatória")
-      .min(4, "4 dígitos no mínimo"),
+      .min(4, "Mínimo de 4 dígitos"),
     confirmPassword: yup
       .string()
       .required("Senhas Diferentes")
