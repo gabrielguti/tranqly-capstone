@@ -209,6 +209,7 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         }
       )
       .then((response) => {
+
         addMyCalendar(response.data, professionalId, token, areas, name);
         console.log(response.data);
       })
