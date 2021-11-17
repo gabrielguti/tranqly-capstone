@@ -16,6 +16,7 @@ import Button from "../../components/button";
 import { useCalendar } from "../../providers/calendarProvider";
 import ModalCommentPage from "../../components/modalCommentPage";
 import Profile from "../../assets/img/profile.png";
+import UserEditModal from "../../components/userEditModal";
 
 const DashboardPatient = () => {
   const { conference, getConference } = useClientCard();
@@ -38,7 +39,7 @@ const DashboardPatient = () => {
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
   const { show, setShow } = useCalendar();
-  const { userEdit, setUserEdit, editUserFunction } = useClientCard();
+  const { userEdit, setUserEdit } = useClientCard();
 
   return (
     <>
@@ -122,6 +123,9 @@ const DashboardPatient = () => {
         <Line />
         <Button onClick={() => setShow(!show)}>Feedback</Button>
       </SectionInfo>
+      {userEdit && (
+        <UserEditModal userEdit={userEdit} setUserEdit={setUserEdit} />
+      )}
       {show && <ModalCommentPage />}
     </>
   );

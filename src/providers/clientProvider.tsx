@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 import api from "../services/api";
+import { UseAuth } from "./authProvider";
 // import { UseAuth } from "./authProvider";
 interface ClientProps {
   children: ReactNode;
@@ -22,7 +23,7 @@ interface ClientData {
   cancelConference: (token: string, id: number, ownerId: number) => void;
   userEdit: boolean;
   setUserEdit: any;
-  editUserFunction: (token: string, id: number, data: EditDataProps) => void;
+  editUserFunction: (token: string, id: string, data: EditDataProps) => void;
 }
 interface EditDataProps {
   name?: string;
@@ -35,6 +36,10 @@ const ClientCardContext = createContext<ClientData>({} as ClientData);
 export const ClientCardProvider = ({ children }: ClientProps) => {
   const [conference, setConference] = useState([]);
   const [userEdit, setUserEdit] = useState<boolean>(false);
+
+  const user = JSON.parse(localStorage.getItem("@tranqyl:user") || "{}");
+
+  console.log(user);
 
   const getConference = (token: string, id: any) => {
     api
@@ -62,12 +67,18 @@ export const ClientCardProvider = ({ children }: ClientProps) => {
       .catch((err) => console.log(err));
   };
 
-  const editUserFunction = (token: string, id: number, data: EditDataProps) => {
+  const editUserFunction = (token: string, id: string, data: EditDataProps) => {
     api
       .patch(`users/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+      })
+      .then((_) => {
+        user.email = data.email || user.email;
+        user.name = data.name || user.name;
+        localStorage.setItem("@tranqyl:user", JSON.stringify(user));
+        document.location.reload();
       })
       .catch((err) => console.log(err));
   };

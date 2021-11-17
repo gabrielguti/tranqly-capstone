@@ -19,7 +19,7 @@ const Login = () => {
     password: yup
       .string()
       .required("senha obrigatória")
-      .min(4, "4 dígitos no mínimo"),
+      .min(4, "Mínimo de 4 dígitos"),
   });
 
   const {

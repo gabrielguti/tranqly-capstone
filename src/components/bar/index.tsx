@@ -43,15 +43,19 @@ const Index = () => {
 
           <Link to="/signin">
             <div className="icons" onClick={() => changeLoginSignup()}>
-              {accessToken ? <FaSignInAlt /> : <FaSignOutAlt />}
+              {accessToken ? <FaSignOutAlt /> : <FaSignInAlt />}
             </div>
           </Link>
         </div>
         <div className="burguer">
           <Menu right>
-            <Link to="/">
-              <img src={logo} alt="logo" />
-            </Link>
+            {accessToken ? (
+              <Link to={`/`}>Dashboard</Link>
+            ) : (
+              <Link to="/">
+                <img src={logo} alt="logo" />
+              </Link>
+            )}
             {!accessToken && (
               <Link to="/signupprofessional">Para especialistas</Link>
             )}
