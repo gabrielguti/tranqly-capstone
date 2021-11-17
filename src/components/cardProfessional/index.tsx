@@ -52,7 +52,7 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
   useEffect(() => {
     api
       .get(
-        `https://testes-laudemir.herokuapp.com/comments?professionalId=${professional.id}`
+        `https://tranqly.herokuapp.com/comments?professionalId=${professional.id}`
       )
       .then((response) => setComments(response.data))
       .catch((e) => console.log(e));
