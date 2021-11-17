@@ -12,10 +12,7 @@ import Bar from "../../components/bar";
 import Button from "../../components/button";
 import Slider from "react-slick";
 import { useContext, useEffect, useState } from "react";
-import {
-  ProfessionalContext,
-  UseProfessionalContext,
-} from "../../providers/professionals";
+import { ProfessionalContext } from "../../providers/professionals";
 import CardSlick from "../../components/cardSlick";
 import { FaLinkedin, FaGithubSquare } from "react-icons/fa";
 import CardKnowMore from "../../components/cardKnowMore";
@@ -38,7 +35,7 @@ const LandingPage = () => {
     isPaused: false,
   });
   useEffect(() => {
-    Aos.init({ duration: 2000, delay: 400 });
+    Aos.init({});
   }, []);
 
   const defaultOptions = {
@@ -132,7 +129,7 @@ const LandingPage = () => {
         </Comments>
       </div>
       <Line />
-      <Text data-aos="fade-left" className="boxes">
+      <Text data-aos="fade-left" data-aos-duration="1000" className="boxes">
         <div>
           <h1>Atendimento remoto no contexto da Pandemia</h1>
           <p>
@@ -156,7 +153,7 @@ const LandingPage = () => {
           isPaused={animationState.isPaused}
         />
       </Text>
-      <Text data-aos="fade-right" className="boxes">
+      <Text data-aos="fade-right" data-aos-duration="1000" className="boxes">
         <Lottie
           options={defaultOptionsTwo}
           height={350}
@@ -175,7 +172,7 @@ const LandingPage = () => {
           </p>
         </div>
       </Text>
-      <Text data-aos="fade-left" className="boxes">
+      <Text data-aos="fade-left" data-aos-duration="1000" className="boxes">
         <div>
           <h1>Benefícios do atendimento online</h1>
           <ul>
@@ -197,7 +194,7 @@ const LandingPage = () => {
         />
       </Text>
       <Line />
-      <FooterContainer>
+      <FooterContainer data-aos="fade-down" data-aos-duration="800">
         <h1>Desenvolvedores</h1>
         <div className="containerProfile">
           <div className="profile">
@@ -229,7 +226,7 @@ const LandingPage = () => {
             />
             <p>Quality Assurance</p>
             <h1>Kaueh P.</h1>
-            <a href="" target="_blank" rel="noreferrer">
+            <a href="/" target="_blank" rel="noreferrer">
               <FaLinkedin />
             </a>
             <a
@@ -314,6 +311,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-function componentDidMount() {
-  throw new Error("Function not implemented.");
-}

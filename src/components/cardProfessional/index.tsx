@@ -2,10 +2,11 @@ import { ProfessionalContainer, Card } from "./styles";
 import { useHistory } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { ProfessionalContext } from "../../providers/professionals";
-import { FaStar } from "react-icons/fa";
 import Button from "../button";
 import api from "../../services/api";
 import StarsCount from "../contStars";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 interface ProfessionalData {
   id: number;
@@ -35,7 +36,6 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
     description,
     areas,
     profession,
-    id,
     state,
     language,
     crp,
@@ -58,11 +58,15 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
       .catch((e) => console.log(e));
   }, [professional.id]);
 
+  useEffect(() => {
+    Aos.init({ duration: 600});
+  }, []);
+
   let media =
     comments.length > 0 &&
     Math.round(
       comments.reduce(
-        (total: any, atual: { score: any }) => total + atual.score,
+        (total: number, atual: { score: number }) => total + atual.score,
         0
       ) / comments.length
     );
@@ -71,7 +75,7 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
   }
 
   return (
-    <ProfessionalContainer>
+    <ProfessionalContainer data-aos="fade-up">
       <Card>
         <div className="img">
           <img src={image} alt={name} />

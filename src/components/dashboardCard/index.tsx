@@ -1,5 +1,3 @@
-// import { FaStar } from "react-icons/fa";
-// import { UseAuth } from "../../providers/authProvider";
 import { useClientCard } from "../../providers/clientProvider";
 import Button from "../button";
 import { BoxButton, CardPro, Date, Info, Time } from "./styles";
@@ -57,6 +55,3 @@ const DashboardCard = ({
 };
 
 export default DashboardCard;
-// function cancelConference(): void {
-//   throw new Error("Function not implemented.");
-// }

@@ -27,7 +27,7 @@ const DashboardPatient = () => {
 
   useEffect(() => {
     getConference(accessToken, user.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // esclearlint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formed = conference

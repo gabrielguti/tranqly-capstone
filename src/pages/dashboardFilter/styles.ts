@@ -29,6 +29,7 @@ export const ContainerSearch = styled.div`
   svg {
     margin-right: 10px;
     font-size: 24px;
+    cursor: pointer;
   }
   p {
     display: block;

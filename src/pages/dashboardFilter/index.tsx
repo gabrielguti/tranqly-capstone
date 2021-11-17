@@ -9,7 +9,8 @@ const DashboardFilter = () => {
   const { professionals, filterProfessional } = useContext(ProfessionalContext);
   const [value, setValue] = useState("");
   const [fisrRender, setFisrRender] = useState(1);
-  const [comments, setComments] = useState([]);
+
+  
 
   useEffect(() => {
     if (fisrRender === 1) {

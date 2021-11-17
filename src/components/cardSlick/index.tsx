@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
 import api from "../../services/api";
 import StarsCount from "../contStars";
 import { Card } from "./styles";
 import AltImg from "../../assets/img/profile.png";
 
-export default function CardSlick({ item }: any) {
+
+export default function CardSlick({item}:any) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function CardSlick({ item }: any) {
     comments.length > 0 &&
     Math.round(
       comments.reduce(
-        (total: any, atual: { score: any }) => total + atual.score,
+        (total:number, atual: { score: number }) => total + atual.score,
         0
       ) / comments.length
     );

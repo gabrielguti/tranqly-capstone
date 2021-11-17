@@ -1,7 +1,6 @@
 import { BarContainer } from "./styles";
 import logo from "../../assets/img/tranqyl.svg";
 import { slide as Menu } from "react-burger-menu";
-import Button from "../button";
 import { Link } from "react-router-dom";
 import { UseAuth } from "../../providers/authProvider";
 import { useHistory } from "react-router";

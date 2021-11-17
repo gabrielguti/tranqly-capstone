@@ -37,10 +37,8 @@ const ProfileProfessional = () => {
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
   const filters = formed.filter((item) => item.type === true);
-  console.log(getProfessionalStorage[0].areas);
   const areas = getProfessionalStorage[0].areas;
   const name = getProfessionalStorage[0].name;
-  console.log(formed);
   return (
     <>
       <Bar />

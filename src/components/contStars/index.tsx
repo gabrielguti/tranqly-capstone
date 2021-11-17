@@ -1,4 +1,3 @@
-import { FaStar } from "react-icons/fa";
 import { FiStar } from "react-icons/fi"
 import { Star } from "./styles";
 

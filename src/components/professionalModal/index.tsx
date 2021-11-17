@@ -21,8 +21,7 @@ export const ProfessionalModal = ({
   const [stars, setStars] = useState<Number>(0);
   const [displayStar, setDisplayStar] = useState<Number>(0);
   const [startDate, setStartDate] = useState<Date>(new Date());
-  const [publicType, setPublicType] = useState<boolean>(true);
-  const { accessToken, user } = UseAuth();
+  const { accessToken } = UseAuth();
 
   const enterHoverStar = (currentStar: Number) => {
     setDisplayStar(currentStar);

@@ -12,7 +12,6 @@ export default createGlobalStyle`
     scrollbar-color: var(--purple300) rgba(0, 0, 0, 0);
   }
 
-  /* Chrome, Edge, and Safari */
   ::-webkit-scrollbar {
     width: 10px;
   }
