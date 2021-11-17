@@ -1,16 +1,28 @@
 import { useState } from "react";
 import { Container, ModalBox } from "./styles";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ptBR from "date-fns/locale/pt-BR";
+import moment from "moment";
+import api from "../../services/api";
+import { UseAuth } from "../../providers/authProvider";
 
 interface ModalProps {
   activateModal: (value: string) => void;
+  searchDate: (id: number, token: string) => void;
   modalType: string;
 }
 
-export const ProfessionalModal = ({ activateModal, modalType }: ModalProps) => {
+export const ProfessionalModal = ({
+  activateModal,
+  modalType,
+  searchDate,
+}: ModalProps) => {
   const [stars, setStars] = useState<Number>(0);
   const [displayStar, setDisplayStar] = useState<Number>(0);
   const [startDate, setStartDate] = useState<Date>(new Date());
+  const [publicType, setPublicType] = useState<boolean>(true);
+  const { accessToken, user } = UseAuth();
 
   const enterHoverStar = (currentStar: Number) => {
     setDisplayStar(currentStar);
@@ -25,9 +37,31 @@ export const ProfessionalModal = ({ activateModal, modalType }: ModalProps) => {
     setStartDate(newDate);
   };
 
+  const setNewAvailability = (e: any) => {
+    e.preventDefault();
+    const userData = JSON.parse(localStorage.getItem("@tranqyl:user") || "");
+    const data = {
+      type: true,
+      date: moment(startDate).format(),
+      userId: userData.id,
+    };
+    api
+      .post("/professional", data, {
+        headers: {
+          Authorization: `Bearer ${
+            localStorage.getItem("@tranqyl:accessToken") || ""
+          }`,
+        },
+      })
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+    searchDate(userData.id, accessToken);
+    activateModal(modalType);
+  };
+
   return (
     <Container>
-      <ModalBox>
+      <ModalBox onSubmit={setNewAvailability}>
         {modalType === "event" && (
           <>
             <h3>Descreva este evento</h3>
@@ -88,14 +122,13 @@ export const ProfessionalModal = ({ activateModal, modalType }: ModalProps) => {
         {modalType === "availability" && (
           <>
             <h3>Nova disponibilidade</h3>
-            {/* <input
-              type="datetime-local"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleOnChange(e.target.value)
-              }
-            /> */}
             <DatePicker
               selected={startDate}
+              locale={ptBR}
+              showTimeSelect
+              timeFormat="p"
+              dateFormat="Pp"
+              timeIntervals={60}
               onChange={(e: Date) => handleOnChange(e)}
             />
           </>
@@ -107,7 +140,9 @@ export const ProfessionalModal = ({ activateModal, modalType }: ModalProps) => {
           >
             Cancelar
           </button>
-          <button className="confirmButton">Confirmar</button>
+          <button className="confirmButton" type="submit">
+            Confirmar
+          </button>
         </div>
       </ModalBox>
     </Container>

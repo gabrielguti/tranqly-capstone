@@ -1,11 +1,12 @@
 import styled from "styled-components";
 export const Container = styled.div`
   position: fixed;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
-  /* width: 100vw; */
+  height: 100vh;
+  width: 100vw;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.2);
 
@@ -38,7 +39,7 @@ export const Container = styled.div`
   }
 `;
 
-export const ModalBox = styled.div`
+export const ModalBox = styled.form`
   background-color: white;
   border-radius: 8px;
   display: flex;
@@ -86,5 +87,15 @@ export const ModalBox = styled.div`
     border-radius: 5px;
     width: 40%;
     background-color: var(--orange200);
+  }
+
+  .react-datepicker__input-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .react-datepicker__tab-loop {
+    position: fixed;
+    width: 100%;
   }
 `;

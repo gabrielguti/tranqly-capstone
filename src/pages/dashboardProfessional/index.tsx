@@ -21,7 +21,7 @@ const DashboardProfessional = () => {
     newScore,
   } = useCalendar();
 
-  const [showModal, setShowModal] = useState<boolean>(true);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [modalType, setModalType] = useState<string>("event");
 
   const { accessToken, user } = UseAuth();
@@ -35,9 +35,8 @@ const DashboardProfessional = () => {
   useEffect(() => {
     searchDate(Number(getProfessionalStorage.id), accessToken);
     searchComments(Number(getProfessionalStorage.id), accessToken);
-    console.log(calendar);
   }, []);
-  console.log(calendar);
+
   const formed = calendar
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
@@ -69,10 +68,10 @@ const DashboardProfessional = () => {
             <>
               {formed.map((item, index) => {
                 if (
-                  !ref.includes(item.date) &&
-                  ref.push(item.date) &&
-                  moment(now).format().replace(/\D/g, "") <=
-                    moment(item.date).format().replace(/\D/g, "")
+                  !ref.includes(moment(item.date).format("l")) &&
+                  ref.push(moment(item.date).format("l")) &&
+                  moment(now).format("l").replace(/\D/g, "") <=
+                    moment(item.date).format("l").replace(/\D/g, "")
                 ) {
                   return (
                     <div key={index} className="week">
@@ -81,7 +80,18 @@ const DashboardProfessional = () => {
                       </div>
                       <div className="times">
                         {formed
-                          .filter((f) => f.date === item.date)
+                          .filter(
+                            (newFiltered) =>
+                              moment(newFiltered.date).format("L") ===
+                              moment(item.date).format("L")
+                          )
+                          .filter(
+                            (filteredTimes) =>
+                              moment(filteredTimes.date)
+                                .format()
+                                .replace(/\D/g, "") >
+                              moment(now).format().replace(/\D/g, "")
+                          )
                           .map((m, secondIndex) => {
                             return (
                               <div
@@ -114,6 +124,7 @@ const DashboardProfessional = () => {
         <ProfessionalModal
           activateModal={activateModal}
           modalType={modalType}
+          searchDate={searchDate}
         />
       )}
     </>
