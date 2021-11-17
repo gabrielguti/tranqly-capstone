@@ -56,10 +56,9 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
   const [newComment, setNewComment] = useState("");
   const [newScore, setNewScore] = useState(5);
   const [show, setShow] = useState<boolean>(false);
-  const getProfessionalStorage = JSON.parse(
-    localStorage.getItem("@tranqyl:prof") || ""
-  );
-
+  // const getProfessionalStorage = JSON.parse(
+  //   localStorage.getItem("@tranqyl:prof") || ""
+  // );
 
   const searchDate = (id: number, token: string) => {
     api
@@ -135,7 +134,10 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
           },
         }
       )
-      .then((response) => {addMyCalendar(response.data, id, token); console.log(response.data)})
+      .then((response) => {
+        addMyCalendar(response.data, id, token);
+        console.log(response.data);
+      })
       // .then((_) => searchDate(getProfessionalStorage[0].id, token))
       .catch((e) => console.log(e));
   };

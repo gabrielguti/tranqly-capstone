@@ -27,7 +27,7 @@ const Routes = () => {
         component={DashboardProfessional}
         isPrivate
       />
-      <Route path="/dashboardfilter" component={DashboardFilter} isPrivate/>
+      <Route path="/dashboardfilter" component={DashboardFilter} isPrivate />
     </Switch>
   );
 };
