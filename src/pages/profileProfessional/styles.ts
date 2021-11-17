@@ -4,6 +4,7 @@ export const ContainerProfessionalData = styled.div`
   background: linear-gradient(90deg, rgba(69, 36, 122, 0.87) 0%, #9677d9 100%);
   width: 100%;
   margin: auto;
+  padding-top: 10px;
   .ProfessionalData {
     max-width: 1280px;
     margin: auto;
@@ -12,11 +13,10 @@ export const ContainerProfessionalData = styled.div`
     flex-direction: column;
     text-align: center;
     @media (min-width: 700px) {
-      flex-direction: column;
-     
-     justify-content: center;
-     align-items: center;
-     
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
     }
     .img {
       width: 100%;
@@ -51,10 +51,10 @@ export const ContainerProfessionalData = styled.div`
           font-size: 14px;
         }
       }
-      h2{
+      h2 {
         color: var(--gray100);
       }
-      h3{
+      h3 {
         color: var(--gray200);
       }
       .stars {
@@ -142,9 +142,6 @@ export const Calendar = styled.div`
     flex-direction: column;
     text-align: center;  
     }
-    :hover {
-      filter: brightness(1.2);
-    }
   }
   .nothingHere {
     display: flex;
@@ -180,12 +177,4 @@ export const Comments = styled.div`
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
-`;
-
-export const Line = styled.div`
-  width: 98%;
-  max-width: 1280px;
-  border-top: 2px solid var(--purple200);
-  margin: 20px auto;
-  padding: 20px;
 `;

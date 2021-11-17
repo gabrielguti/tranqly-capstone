@@ -1,9 +1,9 @@
 /* eslint-disable array-callback-return */
-import { Calendar, ContainerProfessionalData, Comments, Line } from "./styles";
+import { Calendar, ContainerProfessionalData, Comments } from "./styles";
 import Bar from "../../components/bar";
 import Button from "../../components/button";
 import CardComments from "../../components/CardComments";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import moment from "moment";
 import "moment/locale/pt-br";
 import ModalComment from "../../components/modalComment";
@@ -11,39 +11,36 @@ import { FaRegClock } from "react-icons/fa";
 import CardProfessionalData from "../../components/cardProfessionalData";
 import { useCalendar } from "../../providers/calendarProvider";
 import { UseAuth } from "../../providers/authProvider";
+import { useParams } from "react-router";
+import { Line } from "../../components/dashboardCard/styles";
 
 const ProfileProfessional = () => {
-  const {
-    searchDate,
-    searchComments,
-    createComment,
-    addMyCalendar,
-    check,
-    calendar,
-    comments,
-    newComment,
-    newScore,
-  } = useCalendar();
-
-  const { accessToken, user } = UseAuth();
+  const { searchDate, searchComments, check, calendar, comments } =
+    useCalendar();
+  const { id }: any = useParams();
+  const { accessToken } = UseAuth();
   const getProfessionalStorage = JSON.parse(
     localStorage.getItem("@tranqyl:prof") || ""
   );
-
+  let professionalId = Number(id);
   let ref: string[] = [];
-  const [show, setShow] = useState(false);
   let now = new Date();
+  const { show, setShow } = useCalendar();
 
   useEffect(() => {
-    searchDate(Number(getProfessionalStorage[0].id), accessToken);
-    searchComments(Number(getProfessionalStorage[0].id), accessToken);
-    console.log(calendar);
-  }, []);
-  console.log(calendar);
+    searchDate(id, accessToken);
+    searchComments(professionalId, accessToken);
+  }, [id]);
+
   const formed = calendar
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
+  const filters = formed.filter((item) => item.type === true);
+  console.log(getProfessionalStorage[0].areas);
+  const areas = getProfessionalStorage[0].areas;
+  const name = getProfessionalStorage[0].name;
+  console.log(formed);
   return (
     <>
       <Bar />
@@ -56,7 +53,7 @@ const ProfileProfessional = () => {
           <p>Escolha seu horário</p>
         </div>
         <div className="container">
-          {formed.length > 0 ? (
+          {filters.length > 0 ? (
             <>
               {formed
                 .filter((filtered) => filtered.type === true)
@@ -91,7 +88,16 @@ const ProfileProfessional = () => {
                                 <div
                                   key={secondIndex}
                                   className="time"
-                                  onClick={() => check(m.id, accessToken)}
+                                  onClick={() =>
+                                    check(
+                                      m.id,
+                                      accessToken,
+                                      professionalId,
+                                      // Number(userId),
+                                      areas,
+                                      name
+                                    )
+                                  }
                                 >
                                   <p>{moment(m.date).format("DD/MM/YYYY")}</p>
                                   <span className="check">
@@ -121,13 +127,7 @@ const ProfileProfessional = () => {
           {comments.map((item) => {
             return <CardComments comments={item} />;
           })}
-          {show && (
-            <ModalComment
-              show={show}
-              setShow={setShow}
-              createComment={createComment}
-            />
-          )}
+          {show && <ModalComment />}
         </div>
       </Comments>
       <Line />

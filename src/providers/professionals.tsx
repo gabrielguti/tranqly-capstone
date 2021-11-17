@@ -24,7 +24,12 @@ interface IProfessionalData {
   type: string;
   profession: string;
   description: string;
-  areas: [];
+  areas: string;
+  language: string;
+  gender: string;
+  price: number;
+  state: string;
+  crp: string;
 }
 interface IClientData {
   id: number;
@@ -48,7 +53,7 @@ interface IProfessional {
   clients: IClientData[];
   qualifications: IQualificationData[];
   sProfess: IProfessionalData[];
-  renderization: (nameProfessional: string) => void;
+  renderization: (nameProfessional: string, idProfessional: number) => void;
 }
 export const ProfessionalContext = createContext<IProfessional>(
   {} as IProfessional
@@ -132,14 +137,7 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
       })
       .catch((e) => console.log(e));
   };
-  const getQualifications = () => {
-    api
-      .get(`/qualification`)
-      .then((response) => {
-        setQualifications(response.data);
-      })
-      .catch((e) => console.log(e));
-  };
+
   const renderization = (nameProfessional: string) => {
     const professionalStorage = sProfessionals.filter((professional) =>
       professional.name
@@ -156,7 +154,6 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
     getProfessional();
     getComments();
     getClients();
-    getQualifications();
   }, []);
   return (
     <ProfessionalContext.Provider

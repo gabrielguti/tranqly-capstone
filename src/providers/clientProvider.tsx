@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 import api from "../services/api";
+// import { UseAuth } from "./authProvider";
 interface ClientProps {
   children: ReactNode;
 }
@@ -9,19 +10,31 @@ interface DataProps {
   userId: number;
   type: boolean;
   date: string;
-  patientId: number;
+  patientId?: number;
   cancel: boolean;
-  nameProfessional: string;
+  name: string;
+  areas: string;
+  ownerId: number;
 }
 interface ClientData {
   conference: DataProps[];
   getConference: (token: string, id: any) => void;
+  cancelConference: (token: string, id: number, ownerId: number) => void;
+  userEdit: boolean;
+  setUserEdit: any;
+  editUserFunction: (token: string, id: number, data: EditDataProps) => void;
+}
+interface EditDataProps {
+  name?: string;
+  email?: string;
+  password?: string;
 }
 
 const ClientCardContext = createContext<ClientData>({} as ClientData);
 
 export const ClientCardProvider = ({ children }: ClientProps) => {
   const [conference, setConference] = useState([]);
+  const [userEdit, setUserEdit] = useState<boolean>(false);
 
   const getConference = (token: string, id: any) => {
     api
@@ -34,11 +47,40 @@ export const ClientCardProvider = ({ children }: ClientProps) => {
       .catch((err) => console.log(err));
   };
 
+  const cancelConference = (token: string, id: number, ownerId: number) => {
+    api
+      .patch(
+        `patient/${id}`,
+        { cancel: true },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((_) => getConference(token, ownerId))
+      .catch((err) => console.log(err));
+  };
+
+  const editUserFunction = (token: string, id: number, data: EditDataProps) => {
+    api
+      .patch(`users/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <ClientCardContext.Provider
       value={{
         conference,
         getConference,
+        cancelConference,
+        userEdit,
+        setUserEdit,
+        editUserFunction,
       }}
     >
       {children}

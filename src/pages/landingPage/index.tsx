@@ -5,12 +5,13 @@ import {
   MainContainer,
   FooterContainer,
   Comments,
+  Text,
 } from "./styles";
 import landingImg from "../../assets/img/IllustrationO15.svg";
 import Bar from "../../components/bar";
 import Button from "../../components/button";
 import Slider from "react-slick";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ProfessionalContext,
   UseProfessionalContext,
@@ -19,13 +20,52 @@ import CardSlick from "../../components/cardSlick";
 import { FaLinkedin, FaGithubSquare } from "react-icons/fa";
 import CardKnowMore from "../../components/cardKnowMore";
 import CardComments from "../../components/CardComments";
+import { useCalendar } from "../../providers/calendarProvider";
+import { Line } from "../../components/dashboardCard/styles";
+import Lottie from "react-lottie";
+import animationData from "../../assets/img/lf30_editor_vipqfut6.json";
+import animationDataTwo from "../../assets/img/lf30_editor_4tsm6nna.json";
+import animationDataThree from "../../assets/img/lf30_editor_pwgh8ycu.json";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const LandingPage = () => {
   const { allProfessionals } = useContext(ProfessionalContext);
   const [show, setShow] = useState(false);
-  const { professionalComments } = UseProfessionalContext();
+  const { getCommentPage, commentsPage } = useCalendar();
+  const [animationState] = useState({
+    isStopped: false,
+    isPaused: false,
+  });
+  useEffect(() => {
+    Aos.init({ duration: 2000, delay: 400 });
+  }, []);
 
-  var settings = {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  const defaultOptionsTwo = {
+    loop: true,
+    autoplay: true,
+    animationData: animationDataTwo,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  const defaultOptionsThree = {
+    loop: true,
+    autoplay: true,
+    animationData: animationDataThree,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  let settings = {
     speed: 200,
     dots: true,
     infinite: true,
@@ -35,6 +75,11 @@ const LandingPage = () => {
     autoplaySpeed: 4000,
     cssEase: "linear",
   };
+
+  useEffect(() => {
+    getCommentPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const showCard = () => {
     setShow(!show);
@@ -53,7 +98,7 @@ const LandingPage = () => {
               making it over 2000 years old. Richard McClintock, a Latin
               professor at Hampden-Sydney College in Virginia.
             </p>
-            <Button onClick={showCard}>Saiba mais</Button>
+            <Button onClick={() => setShow(!show)}>Saiba mais</Button>
           </div>
           <div className="img">
             <img src={landingImg} alt="landingImg" />
@@ -69,8 +114,8 @@ const LandingPage = () => {
             {allProfessionals
               .sort(() => 0.5 - Math.random())
               .slice(0, 5)
-              .map((item) => {
-                return <CardSlick item={item} />;
+              .map((item, index) => {
+                return <CardSlick key={index} item={item} />;
               })}
           </Slider>
         </div>
@@ -78,14 +123,80 @@ const LandingPage = () => {
       <div className="allComments">
         <h1>Nossas avaliações</h1>
         <Comments>
-          {professionalComments
+          {commentsPage
             .sort(() => 0.5 - Math.random())
             .slice(0, 6)
-            .map((item) => {
-              return <CardComments comments={item} />;
+            .map((item: any, index: number) => {
+              return <CardComments key={index} comments={item} />;
             })}
         </Comments>
       </div>
+      <Line />
+      <Text data-aos="fade-left" className="boxes">
+        <div>
+          <h1>Atendimento remoto no contexto da Pandemia</h1>
+          <p>
+            Diante da sociedade conteporânea e o avanço das tecnologias de
+            informação, novas formas de comunicação e de relações surgem, dando
+            espaço para atendimentos online em diversos âmbitos, incluindo o
+            tratamento psicoterápico. Desse modo, o atendimento online pode ser
+            considerado um avanço que acompanha a demanda da vida moderna. Sendo
+            assim, um meio que permite o acesso de diversos profissionais de
+            diferentes áreas com os mesmos benefícios do atendimento presencial.
+            .
+          </p>
+        </div>
+
+        <Lottie
+          options={defaultOptions}
+          height={300}
+          width={300}
+          speed={1}
+          isStopped={animationState.isStopped}
+          isPaused={animationState.isPaused}
+        />
+      </Text>
+      <Text data-aos="fade-right" className="boxes">
+        <Lottie
+          options={defaultOptionsTwo}
+          height={350}
+          width={350}
+          speed={1}
+          isStopped={animationState.isStopped}
+          isPaused={animationState.isPaused}
+        />
+        <div id="secoundBox">
+          <h1>Aumento na procura de atendimentos psicológicos</h1>
+          <p>
+            De acordo com a pesquisa realizada pelo website <b>CostaNorte</b>,
+            entre março e setembro de 2020, período que corresponde aos seis
+            primeiros meses da pandemia, houve um aumento de <span>32%</span>{" "}
+            nos atendimentos psicológicos online.
+          </p>
+        </div>
+      </Text>
+      <Text data-aos="fade-left" className="boxes">
+        <div>
+          <h1>Benefícios do atendimento online</h1>
+          <ul>
+            <li>É ideal no período de quarentena;</li>
+            <li>Horários mais flexíveis para os respectivos agendamentos;</li>
+            <li>Oferece mais praticidade e dinamismo;</li>
+            <li>Pode ser feita de forma individual, em casal ou em grupo;</li>
+            <li>Mais liberdade na conversa;</li>
+          </ul>
+        </div>
+
+        <Lottie
+          options={defaultOptionsThree}
+          height={200}
+          width={200}
+          speed={1}
+          isStopped={animationState.isStopped}
+          isPaused={animationState.isPaused}
+        />
+      </Text>
+      <Line />
       <FooterContainer>
         <h1>Desenvolvedores</h1>
         <div className="containerProfile">
@@ -203,3 +314,6 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+function componentDidMount() {
+  throw new Error("Function not implemented.");
+}

@@ -97,4 +97,9 @@ export const BarContainer = styled.div`
       font-weight: 400;
     }
   }
+  .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;

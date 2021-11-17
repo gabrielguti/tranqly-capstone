@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
+import { UseAuth } from "../../providers/authProvider";
 
 interface SignUpProfessional {
   name: string;
@@ -14,9 +15,12 @@ interface SignUpProfessional {
   profession: string;
   areas: string;
   description: string;
+  type?: string;
 }
 
 const RegisterProfessional = () => {
+  const { signUp } = UseAuth();
+
   const Schema = yup.object().shape({
     name: yup.string().required("Nome Obrigatório"),
     email: yup.string().email("Email Inválido").required("Email Obrigatório"),
@@ -43,7 +47,21 @@ const RegisterProfessional = () => {
   });
 
   function onSubmitFunction(data: SignUpProfessional) {
-    console.log(data);
+    const { name, email, password, gender, profession, areas, description } =
+      data;
+
+    const userData = {
+      name,
+      email,
+      password,
+      gender,
+      profession,
+      areas,
+      description,
+      type: "professional",
+    } as SignUpProfessional;
+
+    signUp(userData);
   }
 
   return (

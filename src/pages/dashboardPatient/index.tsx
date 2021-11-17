@@ -1,6 +1,10 @@
 import Bar from "../../components/bar";
-import { ContainerProfessionalData } from "../profileProfessional/styles";
-import { CardsBox, SectionInfo, Title } from "./styles";
+import {
+  ContainerProfessionalData,
+  CardsBox,
+  SectionInfo,
+  Title,
+} from "./styles";
 import DashboardCard from "../../components/dashboardCard";
 import { Line } from "../../components/dashboardCard/styles";
 import { useClientCard } from "../../providers/clientProvider";
@@ -8,6 +12,10 @@ import { useEffect } from "react";
 import moment from "moment";
 import "moment/locale/pt-br";
 import { UseAuth } from "../../providers/authProvider";
+import Button from "../../components/button";
+import { useCalendar } from "../../providers/calendarProvider";
+import ModalCommentPage from "../../components/modalCommentPage";
+import Profile from "../../assets/img/profile.png";
 
 const DashboardPatient = () => {
   const { conference, getConference } = useClientCard();
@@ -16,12 +24,11 @@ const DashboardPatient = () => {
   let refTwo: string[] = [];
   const { user, accessToken } = UseAuth();
 
-
   useEffect(() => {
     getConference(accessToken, user.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  
   const formed = conference
     .slice()
     .sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1));
@@ -30,7 +37,8 @@ const DashboardPatient = () => {
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
-  console.log(conference);
+  const { show, setShow } = useCalendar();
+  const { userEdit, setUserEdit, editUserFunction } = useClientCard();
 
   return (
     <>
@@ -38,13 +46,18 @@ const DashboardPatient = () => {
       <ContainerProfessionalData>
         <div className="ProfessionalData">
           <div className="img">
-            <img src={user.image} alt="imgProfile" />
+            {user.image ? (
+              <img src={user.image} alt="imgProfile" />
+            ) : (
+              <img src={Profile} alt="imgProfile" />
+            )}
           </div>
           <div className="data">
-            <div>
-              <h2>{user.name}</h2>
-              <h3>{user.email}</h3>
-            </div>
+            <h2>{user.name}</h2>
+            <h3>{user.email}</h3>
+            <Button onClick={() => setUserEdit(!userEdit)}>
+              Editar usuário
+            </Button>
           </div>
         </div>
       </ContainerProfessionalData>
@@ -68,10 +81,14 @@ const DashboardPatient = () => {
                     <DashboardCard
                       isRemovable={filtered.cancel}
                       date={moment(filtered.date).format("LL")}
-                      name={filtered.nameProfessional}
+                      name={filtered.name}
                       time={moment(filtered.date).format("LT")}
-                      info={"info"}
+                      key={index}
+                      info={filtered.areas}
                       cancel={filtered.cancel}
+                      token={accessToken}
+                      id={filtered.id}
+                      ownerId={Number(user.id)}
                     ></DashboardCard>
                   );
               })}
@@ -92,10 +109,10 @@ const DashboardPatient = () => {
                 return (
                   <DashboardCard
                     date={moment(item.date).format("LL")}
-                    name={item.nameProfessional}
+                    name={item.name}
                     time={moment(item.date).format("LT")}
                     key={index}
-                    info={"info"}
+                    info={item.areas}
                     isRemovable={true}
                     cancel={item.cancel}
                   />
@@ -103,7 +120,9 @@ const DashboardPatient = () => {
             })}
         </CardsBox>
         <Line />
+        <Button onClick={() => setShow(!show)}>Feedback</Button>
       </SectionInfo>
+      {show && <ModalCommentPage />}
     </>
   );
 };

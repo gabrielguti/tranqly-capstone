@@ -10,7 +10,7 @@ export const ProfessionalContainer = styled.div`
   box-shadow: 0px 0px 15px 6px rgb(0 0 0 / 30%);
   padding: 10px;
   @media (min-width: 900px) {
-    flex-direction: row ;
+    flex-direction: row;
     min-height: 350px;
   }
 `;
@@ -47,6 +47,13 @@ export const Card = styled.div`
     h1 {
       font-size: 18px;
     }
+    h3 {
+      font-weight: 400;
+      font-size: 14px;
+    }
+    b {
+      font-weight: 500;
+    }
     p {
       font-size: 14px;
       color: var(--gray200);
@@ -69,12 +76,21 @@ export const Card = styled.div`
   .button {
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    h1 {
+      color: var(--purple200);
+      font-weight: 500;
+      font-size: 20px;
+    }
     button {
       width: 100%;
     }
     @media (min-width: 900px) {
       width: 20%;
+      align-items: flex-end;
     }
   }
 `;

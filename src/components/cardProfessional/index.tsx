@@ -5,30 +5,46 @@ import { ProfessionalContext } from "../../providers/professionals";
 import { FaStar } from "react-icons/fa";
 import Button from "../button";
 import api from "../../services/api";
+import StarsCount from "../contStars";
 
 interface ProfessionalData {
   id: number;
   name: string;
+  image: string;
+  type: string;
   profession: string;
   description: string;
-  image: string;
-  areas: [];
+  areas: string;
+  language: string;
+  gender: string;
+  price: number;
+  state: string;
+  crp: string;
 }
 
 interface CardProfessionalProps {
   professional: ProfessionalData;
-  average: number;
 }
 
-const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
+const CardProfessional = ({ professional }: CardProfessionalProps) => {
   const history = useHistory();
   const { renderization } = useContext(ProfessionalContext);
-  const { name, image, description, areas, profession } = professional;
+  const {
+    name,
+    image,
+    description,
+    areas,
+    profession,
+    id,
+    state,
+    language,
+    crp,
+    price,
+  } = professional;
 
-  const schedule = (name: string) => {
-    renderization(name);
-
-    return history.push("/profileprofessional");
+  const schedule = (name: string, id: number) => {
+    renderization(name, Number(id));
+    return history.push(`/profileprofessional/${id}`);
   };
 
   const [comments, setComments] = useState([]);
@@ -36,13 +52,13 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
   useEffect(() => {
     api
       .get(
-        `https://testes-laudemir.herokuapp.com/comments?professionalId=${professional.id}`
+        `https://tranqly.herokuapp.com/comments?professionalId=${professional.id}`
       )
       .then((response) => setComments(response.data))
       .catch((e) => console.log(e));
-  }, []);
+  }, [professional.id]);
 
-  const media =
+  let media =
     comments.length > 0 &&
     Math.round(
       comments.reduce(
@@ -50,32 +66,42 @@ const CardProfessional = ({ professional, average }: CardProfessionalProps) => {
         0
       ) / comments.length
     );
+  if (media === false) {
+    media = 0;
+  }
 
   return (
     <ProfessionalContainer>
       <Card>
         <div className="img">
-          <img src={professional.image} alt={professional.name} />
+          <img src={image} alt={name} />
         </div>
         <div className="infos">
           <div>
-            <h2>{professional.name}</h2>
-            {media > 0 && (
-              <div className="stars">
-                {[...Array(media)].map(() => (
-                  <FaStar />
-                ))}
-              </div>
-            )}
-            <p>{professional.profession}</p>
-            <p>{professional.areas}</p>
+            <h2>{name}</h2>
+            <StarsCount stars={media} />
+            <h3>
+              {profession} | <b>{crp}</b>
+            </h3>
+            <h4>
+              {state} | {language}
+            </h4>
+            <p>{areas}</p>
           </div>
           <div>
-            <span>{professional.description}</span>
+            <span>{description}</span>
           </div>
         </div>
         <div className="button">
-          <Button onClick={() => schedule(professional.name)}>Agendar</Button>
+          <h1>
+            {price.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </h1>
+          <Button onClick={() => schedule(professional.name, professional.id)}>
+            Agendar
+          </Button>
         </div>
       </Card>
     </ProfessionalContainer>

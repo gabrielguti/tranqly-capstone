@@ -5,6 +5,7 @@ export const CardPro = styled.div`
   border-radius: 5px;
   min-height: 350px;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
   margin-top: 5vh;
@@ -14,8 +15,8 @@ export const CardPro = styled.div`
   button {
     background-color: var(--red50);
     width: 130px;
-    margin-top: 20px;
     height: 40px;
+    margin-bottom: 10px;
   }
   @media (min-width: 1000px) {
     button {
@@ -53,7 +54,7 @@ export const BoxButton = styled.div`
 
 export const Info = styled.div`
   width: 90%;
-  margin-top: 30px;
+  margin: 10px;
   max-height: 100px;
   display: flex;
   flex-direction: column;
@@ -77,12 +78,10 @@ export const Info = styled.div`
   }
 `;
 
-export const Line = styled.hr`
-  width: 90%;
-  background-color: var(--purple400);
-  height: 3px;
-  margin-bottom: 5vh;
-  @media (min-width: 700px) {
-    width: 900px;
-  }
+export const Line = styled.div`
+  width: 98%;
+  max-width: 1280px;
+  border-top: 2px solid var(--purple200);
+  margin: 20px auto;
+  padding: 30px;
 `;

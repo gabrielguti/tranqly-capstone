@@ -38,7 +38,7 @@ export const Container = styled.div`
       cursor: pointer;
     }
     p {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
     @media (min-width: 800px) {
       font-size: 1rem;

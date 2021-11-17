@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import api from "../../services/api";
+import StarsCount from "../contStars";
 import { Card } from "./styles";
+import AltImg from "../../assets/img/profile.png";
 
 export default function CardSlick({ item }: any) {
   const [comments, setComments] = useState([]);
@@ -9,13 +11,13 @@ export default function CardSlick({ item }: any) {
   useEffect(() => {
     api
       .get(
-        `https://testes-laudemir.herokuapp.com/comments?professionalId=${item.id}`
+        `https://tranqly.herokuapp.com/comments?professionalId=${item.id}`
       )
       .then((response) => setComments(response.data))
       .catch((e) => console.log(e));
   }, []);
 
-  const media =
+  let media =
     comments.length > 0 &&
     Math.round(
       comments.reduce(
@@ -23,22 +25,19 @@ export default function CardSlick({ item }: any) {
         0
       ) / comments.length
     );
+  if (media === false) {
+    media = 0;
+  }
 
   return (
     <Card>
       <div className="img">
-        <img src={item.image} alt={item.name} />
+        <img src={item.image || AltImg} alt={item.name} />
       </div>
       <div className="infos">
         <div>
           <h2>{item.name}</h2>
-          {media > 0 && (
-            <div className="stars">
-              {[...Array(media)].map(() => (
-                <FaStar />
-              ))}
-            </div>
-          )}
+          <StarsCount stars={media} />
           <p>{item.profession}</p>
           <p>{item.areas}</p>
         </div>

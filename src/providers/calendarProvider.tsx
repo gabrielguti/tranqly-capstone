@@ -1,10 +1,5 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
+import toast from "react-hot-toast";
 import api from "../services/api";
 
 interface CalendarProps {
@@ -16,12 +11,6 @@ interface DataProps {
   date: any;
   id: number;
   calendar: any;
-}
-interface CreateCommentsProps {
-  newComment: any;
-  newScore: number;
-  user: any;
-  accessToken: string;
 }
 interface CommentsProps {
   namePatient: string;
@@ -38,14 +27,40 @@ interface CalendarData {
   newScore: number;
   searchDate: (id: number, token: string) => void;
   searchComments: (id: number, token: string) => void;
-  createComment: ({
-    newComment,
-    newScore,
-    user,
-    accessToken,
-  }: CreateCommentsProps) => void;
-  addMyCalendar: (data: any, id: number, token: string) => void;
-  check: (id: number, token: string) => void;
+  createComment: (
+    newComment: string,
+    newScore: number,
+    user: number,
+    accessToken: string,
+    name: string
+  ) => void;
+  addMyCalendar: (
+    data: any,
+    professionalId: number,
+    token: string,
+    // userId: number,
+    areas: string,
+    name: string
+  ) => void;
+  check: (
+    id: number,
+    token: string,
+    professionalId: number,
+    // userId: number,
+    areas: string,
+    name: string
+  ) => void;
+  show: boolean;
+  setShow: any;
+  createCommentPage: (
+    newComment: string,
+    newScore: number,
+    id: number,
+    accessToken: string,
+    name: string
+  ) => void;
+  getCommentPage: () => void;
+  commentsPage: any;
 }
 
 const CalendarContext = createContext<CalendarData>({} as CalendarData);
@@ -54,11 +69,9 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
   const [calendar, setCalendar] = useState([]);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [commentsPage, setCommentsPage] = useState<any>([]);
   const [newScore, setNewScore] = useState(5);
   const [show, setShow] = useState<boolean>(false);
-  // const getProfessionalStorage = JSON.parse(
-  //   localStorage.getItem("@tranqyl:prof") || ""
-  // );
 
   const searchDate = (id: number, token: string) => {
     api
@@ -78,21 +91,30 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => setComments(response.data))
+      .then((response) => {
+        setComments(response.data);
+        console.log(response);
+      })
       .catch((e) => console.log(e));
   };
 
-  const createComment = ({
-    newComment,
-    newScore,
-    user,
-    accessToken,
-  }: CreateCommentsProps) => {
+  const createComment = (
+    newComment: string,
+    newScore: number,
+    user: number,
+    accessToken: string,
+    name: string
+  ) => {
     const newData = {
       comment: newComment,
       score: newScore,
+      namePatient: name,
     };
-    if (newComment.length > 10 && newComment.length < 200) {
+    if (newComment.length < 10) {
+      toast.error("Descreva com mais detalhes seu comentário");
+    } else if (newComment.length > 100) {
+      toast.error("Descreva com menos detalhes seu comentário");
+    } else {
       api
         .post(`/professional/${user}/comments`, newData, {
           headers: {
@@ -102,14 +124,60 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         .then((_) => {
           searchComments(user, accessToken);
           setShow(!show);
+          toast.success("Comentário criado com sucesso");
         })
-        .catch((e) => console.log(e));
+        .catch((e) => toast.error("Erro ao criar o comentário"));
     }
-    // alert("");
   };
 
-  const addMyCalendar = (data: any, id: number, token: string) => {
-    const newTime = { ...data, patientId: id };
+  const getCommentPage = () => {
+    api
+      .get(`/commentsPage`)
+      .then((response) => setCommentsPage(response.data))
+      .catch((e) => console.log(e));
+  };
+
+  const createCommentPage = (
+    newComment: string,
+    newScore: number,
+    id: number,
+    accessToken: string,
+    name: string
+  ) => {
+    const newData = {
+      userId: id,
+      comment: newComment,
+      score: newScore,
+      namePatient: name,
+    };
+    if (newComment.length < 10) {
+      toast.error("Descreva com mais detalhes seu comentário");
+    } else if (newComment.length > 100) {
+      toast.error("Descreva com menos detalhes seu comentário");
+    } else {
+      api
+        .post(`/commentsPage`, newData, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((_) => {
+          setShow(false);
+          toast.success("Comentário criado com sucesso");
+        })
+        .catch((_) => toast.error("Erro ao criar o comentário"));
+    }
+  };
+
+  const addMyCalendar = (
+    data: any,
+    professionalId: any,
+    token: string,
+    areas: string,
+    name: string
+  ) => {
+    console.log(token);
+    const newTime = { ...data, cancel: false, areas: areas, name: name };
     api
       .post(`/patient`, newTime, {
         headers: {
@@ -117,13 +185,19 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         },
       })
       .then((response) => {
-        searchDate(id, token);
+        searchDate(professionalId, token);
         console.log(response.data);
       })
       .catch((e) => console.log(e));
   };
 
-  const check = (id: number, token: string) => {
+  const check = (
+    id: number,
+    token: string,
+    professionalId: any,
+    areas: string,
+    name: string
+  ) => {
     api
       .patch(
         `/professional/${id}`,
@@ -135,10 +209,10 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         }
       )
       .then((response) => {
-        addMyCalendar(response.data, id, token);
+
+        addMyCalendar(response.data, professionalId, token, areas, name);
         console.log(response.data);
       })
-      // .then((_) => searchDate(getProfessionalStorage[0].id, token))
       .catch((e) => console.log(e));
   };
 
@@ -154,6 +228,11 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         comments,
         newComment,
         newScore,
+        show,
+        setShow,
+        createCommentPage,
+        getCommentPage,
+        commentsPage,
       }}
     >
       {children}
