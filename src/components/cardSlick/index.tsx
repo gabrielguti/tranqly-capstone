@@ -10,7 +10,7 @@ export default function CardSlick({ item }: any) {
   useEffect(() => {
     api
       .get(
-        `https://testes-laudemir.herokuapp.com/comments?professionalId=${item.id}`
+        `https://tranqly.herokuapp.com/comments?professionalId=${item.id}`
       )
       .then((response) => setComments(response.data))
       .catch((e) => console.log(e));

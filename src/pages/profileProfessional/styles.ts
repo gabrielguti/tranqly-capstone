@@ -4,6 +4,7 @@ export const ContainerProfessionalData = styled.div`
   background: linear-gradient(90deg, rgba(69, 36, 122, 0.87) 0%, #9677d9 100%);
   width: 100%;
   margin: auto;
+  padding-top: 10px;
   .ProfessionalData {
     max-width: 1280px;
     margin: auto;
