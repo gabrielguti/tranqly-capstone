@@ -58,6 +58,7 @@ const RegisterProfessional = () => {
       profession,
       areas,
       description,
+      type: "professional",
     } as SignUpProfessional;
 
     signUp(userData);

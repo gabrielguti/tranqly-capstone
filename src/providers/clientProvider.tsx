@@ -20,12 +20,22 @@ interface ClientData {
   conference: DataProps[];
   getConference: (token: string, id: any) => void;
   cancelConference: (token: string, id: number, ownerId: number) => void;
+  userEdit: boolean;
+  setUserEdit: any;
+  editUserFunction: (token: string, id: number, data: EditDataProps) => void;
+}
+interface EditDataProps {
+  name?: string;
+  email?: string;
+  password?: string;
 }
 
 const ClientCardContext = createContext<ClientData>({} as ClientData);
 
 export const ClientCardProvider = ({ children }: ClientProps) => {
   const [conference, setConference] = useState([]);
+  const [userEdit, setUserEdit] = useState<boolean>(false);
+
   const getConference = (token: string, id: any) => {
     api
       .get(`patient?patientId=${id}`, {
@@ -52,12 +62,25 @@ export const ClientCardProvider = ({ children }: ClientProps) => {
       .catch((err) => console.log(err));
   };
 
+  const editUserFunction = (token: string, id: number, data: EditDataProps) => {
+    api
+      .patch(`users/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <ClientCardContext.Provider
       value={{
         conference,
         getConference,
         cancelConference,
+        userEdit,
+        setUserEdit,
+        editUserFunction,
       }}
     >
       {children}

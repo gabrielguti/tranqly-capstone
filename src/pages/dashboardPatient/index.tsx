@@ -17,7 +17,6 @@ import { useCalendar } from "../../providers/calendarProvider";
 import ModalCommentPage from "../../components/modalCommentPage";
 import Profile from "../../assets/img/profile.png";
 
-
 const DashboardPatient = () => {
   const { conference, getConference } = useClientCard();
   let now = new Date();
@@ -27,6 +26,7 @@ const DashboardPatient = () => {
 
   useEffect(() => {
     getConference(accessToken, user.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formed = conference
@@ -38,6 +38,7 @@ const DashboardPatient = () => {
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
   const { show, setShow } = useCalendar();
+  const { userEdit, setUserEdit, editUserFunction } = useClientCard();
 
   return (
     <>
@@ -54,7 +55,9 @@ const DashboardPatient = () => {
           <div className="data">
             <h2>{user.name}</h2>
             <h3>{user.email}</h3>
-            <Button onClick={() => setShow(!show)}>Feedback</Button>
+            <Button onClick={() => setUserEdit(!userEdit)}>
+              Editar usuário
+            </Button>
           </div>
         </div>
       </ContainerProfessionalData>
@@ -67,7 +70,7 @@ const DashboardPatient = () => {
           {reverseFormed &&
             reverseFormed
               .filter((item) => item.cancel === false)
-              .map((filtered) => {
+              .map((filtered, index) => {
                 if (
                   !ref.includes(filtered.date) &&
                   ref.push(filtered.date) &&
@@ -80,6 +83,7 @@ const DashboardPatient = () => {
                       date={moment(filtered.date).format("LL")}
                       name={filtered.name}
                       time={moment(filtered.date).format("LT")}
+                      key={index}
                       info={filtered.areas}
                       cancel={filtered.cancel}
                       token={accessToken}
@@ -116,6 +120,7 @@ const DashboardPatient = () => {
             })}
         </CardsBox>
         <Line />
+        <Button onClick={() => setShow(!show)}>Feedback</Button>
       </SectionInfo>
       {show && <ModalCommentPage />}
     </>
