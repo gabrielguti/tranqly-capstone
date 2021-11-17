@@ -36,9 +36,9 @@ interface CalendarData {
   ) => void;
   addMyCalendar: (
     data: any,
-    professionalId: number,
+    professionalId: any,
+    patientId: any,
     token: string,
-    // userId: number,
     areas: string,
     name: string
   ) => void;
@@ -46,7 +46,7 @@ interface CalendarData {
     id: number,
     token: string,
     professionalId: number,
-    // userId: number,
+    patientId: number,
     areas: string,
     name: string
   ) => void;
@@ -68,9 +68,9 @@ const CalendarContext = createContext<CalendarData>({} as CalendarData);
 export const CalendarProvider = ({ children }: CalendarProps) => {
   const [calendar, setCalendar] = useState([]);
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
+  const [newComment] = useState("");
   const [commentsPage, setCommentsPage] = useState<any>([]);
-  const [newScore, setNewScore] = useState(5);
+  const [newScore] = useState(5);
   const [show, setShow] = useState<boolean>(false);
 
   const searchDate = (id: number, token: string) => {
@@ -93,7 +93,6 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
       })
       .then((response) => {
         setComments(response.data);
-        console.log(response);
       })
       .catch((e) => console.log(e));
   };
@@ -172,21 +171,29 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
   const addMyCalendar = (
     data: any,
     professionalId: any,
+    patientId: any,
     token: string,
     areas: string,
     name: string
   ) => {
-    console.log(token);
-    const newTime = { ...data, cancel: false, areas: areas, name: name };
+    const newTime = {
+      patientId: patientId,
+      type: data.type,
+      userId: data.userId,
+      date: data.date,
+      cancel: false,
+      areas: areas,
+      name: name,
+    };
+    console.log(newTime);
     api
       .post(`/patient`, newTime, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
+      .then((_) => {
         searchDate(professionalId, token);
-        console.log(response.data);
       })
       .catch((e) => console.log(e));
   };
@@ -194,7 +201,8 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
   const check = (
     id: number,
     token: string,
-    professionalId: any,
+    professionalId: number,
+    patientId: number,
     areas: string,
     name: string
   ) => {
@@ -209,9 +217,18 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         }
       )
       .then((response) => {
-
-        addMyCalendar(response.data, professionalId, token, areas, name);
-        console.log(response.data);
+        // eslint-disable-next-line no-lone-blocks
+        {
+          console.log(response.data);
+          addMyCalendar(
+            response.data,
+            professionalId,
+            patientId,
+            token,
+            areas,
+            name
+          );
+        }
       })
       .catch((e) => console.log(e));
   };
