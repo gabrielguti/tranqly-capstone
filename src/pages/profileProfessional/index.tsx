@@ -18,7 +18,7 @@ const ProfileProfessional = () => {
   const { searchDate, searchComments, check, calendar, comments } =
     useCalendar();
   const { id }: any = useParams();
-  const { accessToken } = UseAuth();
+  const { accessToken, user } = UseAuth();
   const getProfessionalStorage = JSON.parse(
     localStorage.getItem("@tranqyl:prof") || ""
   );
@@ -56,13 +56,13 @@ const ProfileProfessional = () => {
           {filters.length > 0 ? (
             <>
               {formed
-                .filter((filtered) => filtered.type === true)
+                .filter((f) => f.type === true)
                 .map((item, index) => {
                   if (
-                    !ref.includes(moment(item.date).format("l")) &&
-                    ref.push(moment(item.date).format("l")) &&
-                    moment(now).format("l").replace(/\D/g, "") <=
-                      moment(item.date).format("l").replace(/\D/g, "")
+                    !ref.includes(item.date) &&
+                    ref.push(item.date) &&
+                    moment(now).format().replace(/\D/g, "") <=
+                      moment(item.date).format().replace(/\D/g, "")
                   ) {
                     return (
                       <div key={index} className="week">
@@ -71,18 +71,7 @@ const ProfileProfessional = () => {
                         </div>
                         <div className="times">
                           {formed
-                            .filter(
-                              (newFiltered) =>
-                                moment(newFiltered.date).format("L") ===
-                                moment(item.date).format("L")
-                            )
-                            .filter(
-                              (filteredTimes) =>
-                                moment(filteredTimes.date)
-                                  .format()
-                                  .replace(/\D/g, "") >
-                                moment(now).format().replace(/\D/g, "")
-                            )
+                            .filter((f) => f.date === item.date)
                             .map((m, secondIndex) => {
                               return (
                                 <div
@@ -93,7 +82,7 @@ const ProfileProfessional = () => {
                                       m.id,
                                       accessToken,
                                       professionalId,
-                                      // Number(userId),
+                                      Number(user.id),
                                       areas,
                                       name
                                     )
