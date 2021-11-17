@@ -1,8 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 import api from "../services/api";
-import { UseAuth } from "./authProvider";
-// import { UseAuth } from "./authProvider";
 interface ClientProps {
   children: ReactNode;
 }
@@ -38,8 +36,6 @@ export const ClientCardProvider = ({ children }: ClientProps) => {
   const [userEdit, setUserEdit] = useState<boolean>(false);
 
   const user = JSON.parse(localStorage.getItem("@tranqyl:user") || "{}");
-
-  console.log(user);
 
   const getConference = (token: string, id: any) => {
     api

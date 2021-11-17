@@ -1,4 +1,4 @@
-import { FaStar, FaUserAlt } from "react-icons/fa";
+import { FaUserAlt } from "react-icons/fa";
 import StarsCount from "../contStars";
 import { CardCommentStyle } from "./styles";
 interface CommentsProps {

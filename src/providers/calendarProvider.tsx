@@ -23,8 +23,6 @@ interface CommentsProps {
 interface CalendarData {
   calendar: DataProps[];
   comments: CommentsProps[];
-  newComment: string;
-  newScore: number;
   searchDate: (id: number, token: string) => void;
   searchComments: (id: number, token: string) => void;
   createComment: (
@@ -68,9 +66,7 @@ const CalendarContext = createContext<CalendarData>({} as CalendarData);
 export const CalendarProvider = ({ children }: CalendarProps) => {
   const [calendar, setCalendar] = useState([]);
   const [comments, setComments] = useState([]);
-  const [newComment] = useState("");
   const [commentsPage, setCommentsPage] = useState<any>([]);
-  const [newScore] = useState(5);
   const [show, setShow] = useState<boolean>(false);
 
   const searchDate = (id: number, token: string) => {
@@ -243,8 +239,6 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
         check,
         calendar,
         comments,
-        newComment,
-        newScore,
         show,
         setShow,
         createCommentPage,

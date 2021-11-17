@@ -1,5 +1,17 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import ClientSingUpImg from "../../assets/img/IllustrationR18.svg";
+
+const apear = keyframes`
+  from{
+    opacity:0;
+    transform: translateX(200px);
+
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+`;
 
 export const Container = styled.section`
   max-width: 1280px;
@@ -8,6 +20,7 @@ export const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden;
   @media (min-width: 900px) {
     background: url(${ClientSingUpImg});
     height: 90vh;
@@ -101,5 +114,8 @@ export const BoxForm = styled.div`
     padding: 10px;
     border-radius: 5px;
     font-size: 20px;
+  }
+  @media (min-width: 1080px) {
+    animation: ${apear} 1.2s;
   }
 `;

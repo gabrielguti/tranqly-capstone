@@ -12,19 +12,13 @@ const DashboardProfessional = () => {
   const {
     searchDate,
     searchComments,
-    createComment,
-    addMyCalendar,
-    check,
     calendar,
-    comments,
-    newComment,
-    newScore,
   } = useCalendar();
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalType, setModalType] = useState<string>("event");
 
-  const { accessToken, user } = UseAuth();
+  const { accessToken } = UseAuth();
   const getProfessionalStorage = JSON.parse(
     localStorage.getItem("@tranqyl:user") || ""
   );
