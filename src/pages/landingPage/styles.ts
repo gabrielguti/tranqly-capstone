@@ -10,6 +10,9 @@ export const Container = styled.div`
       color: var(--black0);
     }
   }
+  .boxes {
+    width: 60%;
+  }
 `;
 
 export const HeaderContainer = styled.div`
@@ -158,4 +161,47 @@ export const Text = styled.div`
   max-width: 1280px;
   width: 90%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  div {
+    h1 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    text-align: center;
+    li {
+      list-style: none;
+      position: relative;
+      margin-bottom: 0.5em;
+    }
+    li:before {
+      content: "•";
+      display: inline-block;
+      position: absolute;
+      left: -1em;
+      color: var(--purple300);
+    }
+  }
+  #secoundBox {
+    text-align: center;
+  }
+  @media (min-width: 1080px) {
+    flex-direction: row;
+    div {
+      width: 60%;
+      text-align: start;
+      h1 {
+        font-size: 2rem;
+      }
+    }
+    align-items: center;
+    #secoundBox {
+      text-align: end;
+    }
+  }
+  span {
+    color: var(--purple200);
+    font-weight: bolder;
+    font-size: 1.2rem;
+  }
 `;
