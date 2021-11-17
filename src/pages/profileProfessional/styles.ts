@@ -177,11 +177,3 @@ export const Comments = styled.div`
     }
   }
 `;
-
-export const Line = styled.div`
-  width: 98%;
-  max-width: 1280px;
-  border-top: 2px solid var(--purple200);
-  margin: 20px auto;
-  padding: 20px;
-`;
