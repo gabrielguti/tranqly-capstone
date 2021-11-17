@@ -3,6 +3,7 @@ import { FaStar } from "react-icons/fa";
 import api from "../../services/api";
 import StarsCount from "../contStars";
 import { Card } from "./styles";
+import AltImg from "../../assets/img/profile.png";
 
 export default function CardSlick({ item }: any) {
   const [comments, setComments] = useState([]);
@@ -31,7 +32,7 @@ export default function CardSlick({ item }: any) {
   return (
     <Card>
       <div className="img">
-        <img src={item.image} alt={item.name} />
+        <img src={item.image || AltImg} alt={item.name} />
       </div>
       <div className="infos">
         <div>

@@ -40,6 +40,7 @@ const LandingPage = () => {
 
   useEffect(() => {
     getCommentPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const showCard = () => {
@@ -75,8 +76,8 @@ const LandingPage = () => {
             {allProfessionals
               .sort(() => 0.5 - Math.random())
               .slice(0, 5)
-              .map((item) => {
-                return <CardSlick item={item} />;
+              .map((item, index) => {
+                return <CardSlick key={index} item={item} />;
               })}
           </Slider>
         </div>
@@ -87,8 +88,8 @@ const LandingPage = () => {
           {commentsPage
             .sort(() => 0.5 - Math.random())
             .slice(0, 6)
-            .map((item: any) => {
-              return <CardComments comments={item} />;
+            .map((item: any, index: number) => {
+              return <CardComments key={index} comments={item} />;
             })}
         </Comments>
       </div>

@@ -61,7 +61,7 @@ const Index = () => {
             )}
             <Link to="/signin">
               <div className="icons" onClick={() => changeLoginSignup()}>
-                {accessToken ? <FaSignInAlt /> : <FaSignOutAlt />}
+                {accessToken ? <FaSignOutAlt /> : <FaSignInAlt />}
               </div>
             </Link>
           </Menu>
