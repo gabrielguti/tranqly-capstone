@@ -5,6 +5,7 @@ export const CardPro = styled.div`
   border-radius: 5px;
   min-height: 350px;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
   margin-top: 5vh;
@@ -14,8 +15,8 @@ export const CardPro = styled.div`
   button {
     background-color: var(--red50);
     width: 130px;
-    margin-top: 65px;
     height: 40px;
+    margin-bottom: 10px;
   }
   @media (min-width: 1000px) {
     button {
@@ -53,7 +54,7 @@ export const BoxButton = styled.div`
 
 export const Info = styled.div`
   width: 90%;
-  margin-top: 30px;
+  margin: 10px;
   max-height: 100px;
   display: flex;
   flex-direction: column;

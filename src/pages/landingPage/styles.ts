@@ -96,7 +96,6 @@ export const FooterContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
   flex-direction: column;
   color: var(--black0);
   h1 {
@@ -152,4 +151,11 @@ export const Comments = styled.div`
   @media (min-width: 1000px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
+`;
+
+export const Text = styled.div`
+  padding: 50px 0;
+  max-width: 1280px;
+  width: 90%;
+  margin: auto;
 `;
