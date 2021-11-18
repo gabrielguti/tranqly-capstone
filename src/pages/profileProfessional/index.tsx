@@ -85,7 +85,6 @@ const ProfileProfessional = () => {
                           {formed
                             .filter((f) => f.date === item.date)
                             .map((m, secondIndex) => {
-                              console.log(m);
                               return (
                                 <div
                                   key={secondIndex}

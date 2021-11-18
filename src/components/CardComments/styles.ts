@@ -4,12 +4,12 @@ export const CardCommentStyle = styled.div`
   margin-top: 20px;
   width: 1280px;
   max-width: 300px;
-  height: 150px;
+  height: 170px;
   background-color: var(--purple100);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 0 5px;
+  padding: 10px;
   color: white;
   text-align: left;
   .data {

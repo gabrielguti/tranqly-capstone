@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { FaRegClock } from "react-icons/fa";
@@ -9,11 +10,7 @@ import { useCalendar } from "../../providers/calendarProvider";
 import { Calendar, ContainerProfessionalData } from "./styles";
 
 const DashboardProfessional = () => {
-  const {
-    searchDate,
-    searchComments,
-    calendar,
-  } = useCalendar();
+  const { searchDate, searchComments, calendar } = useCalendar();
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalType, setModalType] = useState<string>("event");
@@ -63,9 +60,7 @@ const DashboardProfessional = () => {
               {formed.map((item, index) => {
                 if (
                   !ref.includes(moment(item.date).format("l")) &&
-                  ref.push(moment(item.date).format("l")) &&
-                  moment(now).format("l").replace(/\D/g, "") <=
-                    moment(item.date).format("l").replace(/\D/g, "")
+                  ref.push(moment(item.date).format("l"))
                 ) {
                   return (
                     <div key={index} className="week">
@@ -79,18 +74,20 @@ const DashboardProfessional = () => {
                               moment(newFiltered.date).format("L") ===
                               moment(item.date).format("L")
                           )
-                          .filter(
-                            (filteredTimes) =>
-                              moment(filteredTimes.date)
-                                .format()
-                                .replace(/\D/g, "") >
-                              moment(now).format().replace(/\D/g, "")
-                          )
                           .map((m, secondIndex) => {
                             return (
                               <div
+                                className={
+                                  m.type === false
+                                    ? "purple"
+                                    : moment(m.date)
+                                        .format()
+                                        .replace(/\D/g, "") >
+                                      moment(now).format().replace(/\D/g, "")
+                                    ? "green"
+                                    : "yellow"
+                                }
                                 key={secondIndex}
-                                className="time"
                                 onClick={() => activateModal("event")}
                               >
                                 <p>{moment(m.date).format("DD/MM/YYYY")}</p>
