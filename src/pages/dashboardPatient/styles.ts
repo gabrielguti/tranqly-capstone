@@ -34,6 +34,36 @@ export const ContainerProfessionalData = styled.div`
     gap: 10px;
     flex-direction: column;
   }
+  .newComment {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+      color: var(--purple300);
+      width: 100px;
+      font-size: 14px;
+    }
+  }
+  .icon {
+    background-color: var(--orange200);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--gray50);
+    cursor: pointer;
+    :hover {
+      background-color: var(--orange100);
+      color: var(--purple100);
+    }
+  }
 `;
 
 export const SectionInfo = styled.section`

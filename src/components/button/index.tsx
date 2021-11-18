@@ -7,5 +7,9 @@ interface ButtonProps {
 }
 
 export default function Button({ children, onClick }: ButtonProps) {
-  return <ButtonContainer onClick={onClick}>{children}</ButtonContainer>;
+  return (
+    <ButtonContainer className="custom-btn btn-7" onClick={onClick}>
+      <span>{children}</span>
+    </ButtonContainer>
+  );
 }

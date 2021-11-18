@@ -12,6 +12,8 @@ interface CardProps {
   token?: any;
   id?: any;
   ownerId?: number;
+  zoom?: string;
+  passwordZoom?: string;
 }
 
 const DashboardCard = ({
@@ -24,6 +26,8 @@ const DashboardCard = ({
   token,
   id,
   ownerId,
+  zoom,
+  passwordZoom,
 }: CardProps) => {
   const { cancelConference } = useClientCard();
 
@@ -39,6 +43,10 @@ const DashboardCard = ({
           </div>
           <div>
             <span id="cancel">{cancel && "Atendimento cancelado"}</span>
+            <a href={zoom} target="_blank" rel="noreferrer">
+              Zoom
+            </a>
+            <p>{passwordZoom}</p>
           </div>
         </Info>
       </div>
@@ -47,7 +55,7 @@ const DashboardCard = ({
           <Button
             children={"Cancelar"}
             onClick={() => cancelConference(token, id, Number(ownerId))}
-          />{" "}
+          />
         </BoxButton>
       )}
     </CardPro>

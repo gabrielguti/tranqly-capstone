@@ -119,18 +119,15 @@ export const ProfessionalModal = ({
           </>
         )}
         {modalType === "availability" && (
-          <>
-            <h3>Nova disponibilidade</h3>
-            <DatePicker
-              selected={startDate}
-              locale={ptBR}
-              showTimeSelect
-              timeFormat="p"
-              dateFormat="Pp"
-              timeIntervals={60}
-              onChange={(e: Date) => handleOnChange(e)}
-            />
-          </>
+          <DatePicker
+            selected={startDate}
+            locale={ptBR}
+            showTimeSelect
+            timeFormat="p"
+            dateFormat="Pp"
+            timeIntervals={60}
+            onChange={(e: Date) => handleOnChange(e)}
+          />
         )}
         <div className="confirmHolder">
           <button

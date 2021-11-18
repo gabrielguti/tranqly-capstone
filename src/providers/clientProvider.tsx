@@ -14,6 +14,8 @@ interface DataProps {
   name: string;
   areas: string;
   ownerId: number;
+  zoom?: string;
+  passwordZoom?: string;
 }
 interface ClientData {
   conference: DataProps[];

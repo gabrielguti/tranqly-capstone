@@ -30,16 +30,15 @@ const Index = () => {
         </div>
         <div className="options">
           {accessToken ? (
-            <Link to={`/dashboard${user.type}`}>Dashboard</Link>
-          ) : (
-            <Link to="/signupprofessional">Para especialistas</Link>
-          )}
-          {accessToken ? (
             <Link to="/dashboardfilter">Procurar especialista</Link>
           ) : (
             <Link to="/signupclient">Para clientes</Link>
           )}
-
+          {accessToken ? (
+            <Link to={`/dashboard${user.type}`}>Dashboard</Link>
+          ) : (
+            <Link to="/signupprofessional">Para especialistas</Link>
+          )}
           <Link to="/signin">
             <div className="icons" onClick={() => changeLoginSignup()}>
               {accessToken ? <FaSignOutAlt /> : <FaSignInAlt />}

@@ -31,7 +31,6 @@ export const Container = styled.div`
       line-height: 125%;
     }
   }
-
   .confirmHolder {
     display: flex;
     width: 100%;
@@ -46,14 +45,15 @@ export const ModalBox = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  /* height: 368px; */
   padding: 20px 0;
-  gap: 20px;
-  width: 465px;
+  gap: 10px;
+  max-width: 465px;
+  width: 90%;
 
   input {
-    height: 158px;
-    width: 385px;
+    height: 80px;
+    max-width: 400px;
+    width: 90%;
     background-color: var(--purple400);
     color: white;
     text-align: center;
@@ -61,8 +61,9 @@ export const ModalBox = styled.form`
   }
 
   .eventDetails {
-    height: 158px;
-    width: 385px;
+    height: 80px;
+    max-width: 400px;
+    width: 90%;
     background-color: var(--purple400);
     color: white;
     border-radius: 12px;

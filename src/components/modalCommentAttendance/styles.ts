@@ -7,6 +7,7 @@ export const ModalCommentStyle = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
+  color: black;
   div {
     background-color: white;
     position: fixed;
@@ -17,31 +18,26 @@ export const ModalCommentStyle = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 450px;
-    height: 350px;
+    width: 90%;
+    max-width: 450px;
+    height: 300px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
     gap: 10px;
+    textarea {
+      background-color: var(--gray100);
+      max-width: 385px;
+      width: 90%;
+      height: 100px;
+      border-radius: 10px;
+      padding: 10px;
+    }
     svg {
       position: absolute;
       top: 10px;
       right: 10px;
       font-size: 24px;
       cursor: pointer;
-    }
-    textarea {
-      width: 385px;
-      height: 160px;
-      border-radius: 10px;
-      padding: 20px;
-      background-color: var(--gray100);
-    }
-    input {
-      background-color: var(--gray100);
-      padding: 0 20px;
-      width: 385px;
-      height: 50px;
-      border-radius: 10px;
     }
   }
 `;
