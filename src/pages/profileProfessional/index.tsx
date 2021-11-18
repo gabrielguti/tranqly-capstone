@@ -42,6 +42,7 @@ const ProfileProfessional = () => {
   useEffect(() => {
     searchDate(id, accessToken);
     searchComments(professionalId, accessToken);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const formed = calendar

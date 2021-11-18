@@ -30,7 +30,7 @@ const DashboardPatient = () => {
 
   useEffect(() => {
     getConference(accessToken, user.id);
-    // esclearlint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formed = conference
@@ -78,6 +78,7 @@ const DashboardPatient = () => {
         </Title>
         <CardsBox>
           {reverseFormed &&
+            // eslint-disable-next-line array-callback-return
             reverseFormed.map((filtered, index) => {
               if (
                 !ref.includes(filtered.date) &&
@@ -109,6 +110,7 @@ const DashboardPatient = () => {
         </Title>
         <CardsBox>
           {formed &&
+            // eslint-disable-next-line array-callback-return
             formed.map((item, index) => {
               if (
                 !refTwo.includes(item.date) &&

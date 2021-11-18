@@ -65,6 +65,7 @@ export const ProfessionalProvider = ({ children }: ProfessionalProps) => {
   const [professionalComments, setProfessionalComments] = useState<
     IProfessionalComments[]
   >([] as IProfessionalComments[]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [qualifications, setQualifications] = useState<IQualificationData[]>(
     [] as IQualificationData[]
   );
