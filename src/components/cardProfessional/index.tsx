@@ -7,7 +7,7 @@ import api from "../../services/api";
 import StarsCount from "../contStars";
 import Aos from "aos";
 import "aos/dist/aos.css";
-
+import Profile from "../../assets/img/profile.png";
 interface ProfessionalData {
   id: number;
   name: string;
@@ -78,7 +78,11 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
     <ProfessionalContainer data-aos="fade-up">
       <Card>
         <div className="img">
-          <img src={image} alt={name} />
+          {image ? (
+            <img src={image} alt={name} />
+          ) : (
+            <img src={Profile} alt={name} />
+          )}
         </div>
         <div className="infos">
           <div>
@@ -99,10 +103,12 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
         <div className="button">
           <div>
             <h1>
-              {price.toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              })}
+              {price
+                ? price.toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL",
+                  })
+                : "Sem valor"}
             </h1>
             <p>/ 60 minutos</p>
           </div>
