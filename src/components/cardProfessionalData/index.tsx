@@ -1,6 +1,8 @@
 import Profile from "../../assets/img/profile.png";
 import { useEffect, useState } from "react";
+import { FaUserCog } from "react-icons/fa";
 import api from "../../services/api";
+import Button from "../button";
 import StarsCount from "../contStars";
 
 interface ProfessionalData {
@@ -21,9 +23,15 @@ interface ProfessionalData {
 
 interface CardProfessionalProps {
   professional: ProfessionalData;
+  changeShowUser?: () => void;
+  changeShowProf?: () => void;
 }
 
-const CardProfessionalData = ({ professional }: CardProfessionalProps) => {
+const CardProfessionalData = ({
+  professional,
+  changeShowUser,
+  changeShowProf,
+}: CardProfessionalProps) => {
   const {
     name,
     image,
@@ -63,11 +71,19 @@ const CardProfessionalData = ({ professional }: CardProfessionalProps) => {
   return (
     <div className="ProfessionalData">
       <div className="img">
-        {image ? (
+          {image ? (
           <img src={image} alt={name} />
         ) : (
           <img src={Profile} alt={name} />
-        )}
+        )}        <div>
+          <Button onClick={changeShowUser}>
+            <FaUserCog />
+          </Button>
+          <Button onClick={changeShowProf}>
+            <FaUserCog />
+          </Button>
+        </div>
+      
       </div>
       <div className="data">
         <div>
@@ -94,11 +110,6 @@ const CardProfessionalData = ({ professional }: CardProfessionalProps) => {
                   currency: "BRL",
                 })
               : "Sem valor"}
-            {/* Preço:{" "}
-            {price.toLocaleString("pt-br", {
-              style: "currency",
-              currency: "BRL",
-            })}{" "} */}
             / 60 minutos
           </p>
         </div>

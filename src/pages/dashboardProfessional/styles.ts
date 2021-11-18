@@ -22,7 +22,15 @@ export const ContainerProfessionalData = styled.div`
       height: 100%;
       max-width: 350px;
       display: flex;
+      align-items: center;
       justify-content: center;
+      flex-direction: column;
+      div {
+        margin: 10px;
+        width: 200px;
+        display: flex;
+        gap: 20px;
+      }
       img {
         width: 150px;
         height: 150px;
@@ -176,5 +184,53 @@ export const Calendar = styled.div`
     line-height: 115%;
     font-size: 1.2rem;
     margin-bottom: 5px;
+  }
+`;
+
+export const Modal = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  div {
+    position: absolute;
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--gray50);
+    border-radius: 10px;
+    gap: 10px;
+    padding: 20px 0;
+    svg {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    label {
+      font-size: 12px;
+      width: 90%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      input {
+        background-color: var(--gray100);
+        padding: 0 20px;
+        max-width: 385px;
+        width: 100%;
+        height: 40px;
+        border-radius: 10px;
+      }
+    }
   }
 `;
