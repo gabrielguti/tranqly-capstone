@@ -29,8 +29,10 @@ const Index = () => {
           </Link>
         </div>
         <div className="options">
-          {accessToken ? (
+          {accessToken && user.type === "client" ? (
             <Link to="/dashboardfilter">Procurar especialista</Link>
+          ) : accessToken && user.type === "professional" ? (
+            <></>
           ) : (
             <Link to="/signupclient">Para clientes</Link>
           )}
@@ -58,8 +60,12 @@ const Index = () => {
               <Link to="/signupprofessional">Para especialistas</Link>
             )}
             {!accessToken && <Link to="/signupclient">Para clientes</Link>}
-            {accessToken && (
+            {accessToken && user.type === "client" ? (
               <Link to="/dashboardfilter">Procurar especialista</Link>
+            ) : accessToken && user.type === "professional" ? (
+              <></>
+            ) : (
+              <Link to="/signupclient">Para clientes</Link>
             )}
             <Link to="/signin">
               <div className="icons" onClick={() => changeLoginSignup()}>
