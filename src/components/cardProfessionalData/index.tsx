@@ -1,3 +1,4 @@
+import Profile from "../../assets/img/profile.png";
 import { useEffect, useState } from "react";
 import { FaUserCog } from "react-icons/fa";
 import api from "../../services/api";
@@ -8,7 +9,7 @@ interface ProfessionalData {
   name: string;
   profession: string;
   description: string;
-  image: string;
+  image?: string;
   areas: string;
   gender: string;
   price: number;
@@ -70,8 +71,11 @@ const CardProfessionalData = ({
   return (
     <div className="ProfessionalData">
       <div className="img">
-        <img src={image} alt={name} />
-        <div>
+          {image ? (
+          <img src={image} alt={name} />
+        ) : (
+          <img src={Profile} alt={name} />
+        )}        <div>
           <Button onClick={changeShowUser}>
             <FaUserCog />
           </Button>
@@ -79,6 +83,7 @@ const CardProfessionalData = ({
             <FaUserCog />
           </Button>
         </div>
+      
       </div>
       <div className="data">
         <div>
@@ -99,11 +104,12 @@ const CardProfessionalData = ({
           </p>
           <p>Senha da sala: {passwordZoom}</p>
           <p>
-            Preço:{" "}
-            {price.toLocaleString("pt-br", {
-              style: "currency",
-              currency: "BRL",
-            })}{" "}
+            {price
+              ? price.toLocaleString("pt-br", {
+                  style: "currency",
+                  currency: "BRL",
+                })
+              : "Sem valor"}
             / 60 minutos
           </p>
         </div>

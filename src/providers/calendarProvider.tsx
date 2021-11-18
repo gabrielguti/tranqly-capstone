@@ -204,6 +204,7 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
       })
       .then((_) => {
         searchDate(professionalId, token);
+        toast.success("Agendamento feito com sucesso");
       })
       .catch((e) => console.log(e));
   };
@@ -246,7 +247,7 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
           );
         }
       })
-      .catch((e) => console.log(e));
+      .catch((_) => toast.error("Falha ao realizar o agendamento"));
   };
 
   return (
