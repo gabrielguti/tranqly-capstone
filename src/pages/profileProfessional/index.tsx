@@ -8,12 +8,12 @@ import moment from "moment";
 import "moment/locale/pt-br";
 import ModalComment from "../../components/modalComment";
 import { FaRegClock } from "react-icons/fa";
-import CardProfessionalData from "../../components/cardProfessionalData";
 import { useCalendar } from "../../providers/calendarProvider";
 import { UseAuth } from "../../providers/authProvider";
 import { useParams } from "react-router";
 import { Line } from "../../components/dashboardCard/styles";
 import ModalCommentAttendance from "../../components/modalCommentAttendance";
+import CardProfessionalProf from "../../components/cardProfessionalProf";
 
 const ProfileProfessional = () => {
   const { searchDate, searchComments, calendar, comments } = useCalendar();
@@ -56,7 +56,7 @@ const ProfileProfessional = () => {
     <>
       <Bar />
       <ContainerProfessionalData>
-        <CardProfessionalData professional={getProfessionalStorage} />
+        <CardProfessionalProf professional={getProfessionalStorage[0]} />
       </ContainerProfessionalData>
 
       <Calendar>

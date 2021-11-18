@@ -31,7 +31,9 @@ const DashboardProfessional = () => {
   const [newDescription, setNewDescription] = useState(
     getProfessionalStorage.description
   );
-  const [newPrice, setNewPrice] = useState(getProfessionalStorage.price);
+  const [newPrice, setNewPrice] = useState<number>(
+    getProfessionalStorage.price
+  );
   const [newLanguage, setNewLanguage] = useState(
     getProfessionalStorage.language
   );
@@ -41,8 +43,8 @@ const DashboardProfessional = () => {
   const [newPasswordZoom, SetNewPasswordZoom] = useState(
     getProfessionalStorage.passwordZoom
   );
-  const [showUser, setShowUser] = useState(false);
-  const [showProf, setShowProf] = useState(false);
+  const [showUser, setShowUser] = useState<boolean>(false);
+  const [showProf, setShowProf] = useState<boolean>(false);
 
   const changeShowUser = () => {
     setShowUser(!showUser);
@@ -60,7 +62,7 @@ const DashboardProfessional = () => {
       profession: newProfession,
       areas: newAreas,
       description: newDescription,
-      price: newPrice,
+      price: Number(newPrice),
       language: newLanguage,
       state: newState,
       crp: newCrp,
@@ -184,7 +186,7 @@ const DashboardProfessional = () => {
       {showUser && (
         <Modal>
           <div>
-            <FaTimes onClick={changeShowUser} />
+            <FaTimes onClick={() => setShowUser(!showUser)} />
             <label>
               Nome completo
               <input
@@ -232,7 +234,7 @@ const DashboardProfessional = () => {
       {showProf && (
         <Modal>
           <div>
-            <FaTimes onClick={changeShowProf} />
+            <FaTimes onClick={() => setShowProf(!showProf)} />
             <label>
               Profissão
               <input
@@ -261,7 +263,7 @@ const DashboardProfessional = () => {
               Preço
               <input
                 value={newPrice}
-                onChange={(e) => setNewPrice(e.target.value)}
+                onChange={(e) => setNewPrice(Number(e.target.value))}
                 placeholder="Preço"
               />
             </label>

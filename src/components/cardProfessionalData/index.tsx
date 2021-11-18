@@ -1,4 +1,3 @@
-import Profile from "../../assets/img/profile.png";
 import { useEffect, useState } from "react";
 import { FaUserCog } from "react-icons/fa";
 import api from "../../services/api";
@@ -9,7 +8,7 @@ interface ProfessionalData {
   name: string;
   profession: string;
   description: string;
-  image?: string;
+  image: string;
   areas: string;
   gender: string;
   price: number;
@@ -23,8 +22,8 @@ interface ProfessionalData {
 
 interface CardProfessionalProps {
   professional: ProfessionalData;
-  changeShowUser?: () => void;
-  changeShowProf?: () => void;
+  changeShowUser: () => void;
+  changeShowProf: () => void;
 }
 
 const CardProfessionalData = ({
@@ -71,11 +70,8 @@ const CardProfessionalData = ({
   return (
     <div className="ProfessionalData">
       <div className="img">
-          {image ? (
-          <img src={image} alt={name} />
-        ) : (
-          <img src={Profile} alt={name} />
-        )}        <div>
+        <img src={image} alt={name} />
+        <div>
           <Button onClick={changeShowUser}>
             <FaUserCog />
           </Button>
@@ -83,7 +79,6 @@ const CardProfessionalData = ({
             <FaUserCog />
           </Button>
         </div>
-      
       </div>
       <div className="data">
         <div>
@@ -104,6 +99,7 @@ const CardProfessionalData = ({
           </p>
           <p>Senha da sala: {passwordZoom}</p>
           <p>
+            Preço:{" "}
             {price
               ? price.toLocaleString("pt-br", {
                   style: "currency",
