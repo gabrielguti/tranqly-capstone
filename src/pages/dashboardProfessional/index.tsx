@@ -7,6 +7,7 @@ import CardProfessionalData from "../../components/cardProfessionalData";
 import { ProfessionalModal } from "../../components/professionalModal";
 import { UseAuth } from "../../providers/authProvider";
 import { useCalendar } from "../../providers/calendarProvider";
+import api from "../../services/api";
 import { Calendar, ContainerProfessionalData } from "./styles";
 
 const DashboardProfessional = () => {
@@ -26,6 +27,7 @@ const DashboardProfessional = () => {
   useEffect(() => {
     searchDate(Number(getProfessionalStorage.id), accessToken);
     searchComments(Number(getProfessionalStorage.id), accessToken);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formed = calendar
@@ -36,6 +38,13 @@ const DashboardProfessional = () => {
     setShowModal(!showModal);
     setModalType(type);
   };
+
+  // const newData = () => {
+  //   api
+  //     .patch(`/commentsPage`)
+  //     .then((response) => setCommentsPage(response.data))
+  //     .catch((e) => console.log(e));
+  // };
 
   return (
     <>

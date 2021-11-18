@@ -32,17 +32,21 @@ interface AuthContextData {
   signOut: () => void;
   signUp: (data: SignUpCredentials) => void;
 }
-
 interface SignUpCredentials {
   name: string;
   email: string;
   password: string;
-  type?: string;
-  phone?: string;
-  profession?: string;
   gender?: string;
+  profession?: string;
   areas?: string;
   description?: string;
+  type?: string;
+  price?: number;
+  language?: string;
+  state?: string;
+  crp?: string;
+  zoom?: string;
+  passwordZoom?: string;
 }
 
 const UseAuth = () => {
@@ -79,8 +83,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   const signUp = (data: SignUpCredentials) => {
-    api.post(`/register`, data).catch((e) => console.log(e));
-    history.push("/signin");
+    api
+      .post(`/register`, data)
+      .then(() => history.push("/signin"))
+      .catch((e) => console.log(e));
   };
 
   return (

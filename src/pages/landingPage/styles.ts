@@ -130,7 +130,7 @@ export const FooterContainer = styled.div`
     }
   }
   p {
-    font-size: 13px;
+    font-size: 14px;
   }
   a {
     color: var(--black0);

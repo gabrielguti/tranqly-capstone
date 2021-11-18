@@ -81,7 +81,7 @@ export const Calendar = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 940px;
+    max-width: 970px;
     height: 70px;
     background-color: var(--purple300);
     font-size: 28px;
@@ -96,8 +96,8 @@ export const Calendar = styled.div`
   }
   .container {
     width: 100%;
-    max-width: 940px;
-    height: 625px;
+    max-width: 970px;
+    height: 660px;
     display: flex;
     background-color: var(--gray50);
     overflow-x: scroll;
@@ -157,6 +157,7 @@ export const Calendar = styled.div`
     background-image: linear-gradient(90deg, var(--purple100) 15%, white 10%);
   }
   .nothingHere {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
