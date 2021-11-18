@@ -31,6 +31,7 @@ export const ModalCommentStyle = styled.div`
       height: 100px;
       border-radius: 10px;
       padding: 10px;
+      resize: none;
     }
     svg {
       position: absolute;

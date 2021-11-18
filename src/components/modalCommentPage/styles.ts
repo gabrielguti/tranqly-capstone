@@ -35,6 +35,7 @@ export const ModalCommentStyle = styled.div`
       border-radius: 10px;
       padding: 20px;
       background-color: var(--gray100);
+      resize: none;
     }
     input {
       background-color: var(--gray100);
