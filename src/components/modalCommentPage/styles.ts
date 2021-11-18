@@ -7,7 +7,7 @@ export const ModalCommentStyle = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
-  div {
+  > div {
     background-color: white;
     position: fixed;
     top: 50%;

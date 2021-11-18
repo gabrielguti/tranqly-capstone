@@ -59,7 +59,7 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
   }, [professional.id]);
 
   useEffect(() => {
-    Aos.init({ duration: 600});
+    Aos.init({ duration: 600 });
   }, []);
 
   let media =
