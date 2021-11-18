@@ -15,7 +15,13 @@ interface SignUpProfessional {
   profession: string;
   areas: string;
   description: string;
-  type?: string;
+  type: string;
+  price: number;
+  language: string;
+  state: string;
+  crp: string;
+  zoom: string;
+  passwordZoom: string;
 }
 
 const RegisterProfessional = () => {
@@ -49,7 +55,6 @@ const RegisterProfessional = () => {
   function onSubmitFunction(data: SignUpProfessional) {
     const { name, email, password, gender, profession, areas, description } =
       data;
-
     const userData = {
       name,
       email,
@@ -59,8 +64,13 @@ const RegisterProfessional = () => {
       areas,
       description,
       type: "professional",
+      price: 0,
+      language: "",
+      state: "",
+      crp: "",
+      zoom: "",
+      passwordZoom: "",
     } as SignUpProfessional;
-
     signUp(userData);
   }
 

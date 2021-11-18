@@ -42,13 +42,12 @@ const ProfileProfessional = () => {
   useEffect(() => {
     searchDate(id, accessToken);
     searchComments(professionalId, accessToken);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const formed = calendar
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
-
-  console.log(formed);
 
   const filters = formed.filter((item) => item.type === true);
   const areas = getProfessionalStorage[0].areas;
@@ -57,7 +56,7 @@ const ProfileProfessional = () => {
     <>
       <Bar />
       <ContainerProfessionalData>
-        <CardProfessionalData professional={getProfessionalStorage[0]} />
+        <CardProfessionalData professional={getProfessionalStorage} />
       </ContainerProfessionalData>
 
       <Calendar>
@@ -85,7 +84,6 @@ const ProfileProfessional = () => {
                           {formed
                             .filter((f) => f.date === item.date)
                             .map((m, secondIndex) => {
-                              console.log(m);
                               return (
                                 <div
                                   key={secondIndex}

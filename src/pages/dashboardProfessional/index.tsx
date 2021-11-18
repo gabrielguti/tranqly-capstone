@@ -1,34 +1,90 @@
+/* eslint-disable array-callback-return */
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { FaRegClock } from "react-icons/fa";
+import { FaRegClock, FaTimes } from "react-icons/fa";
 import Bar from "../../components/bar";
+import Button from "../../components/button";
 import CardProfessionalData from "../../components/cardProfessionalData";
 import { ProfessionalModal } from "../../components/professionalModal";
 import { UseAuth } from "../../providers/authProvider";
 import { useCalendar } from "../../providers/calendarProvider";
-import { Calendar, ContainerProfessionalData } from "./styles";
+import api from "../../services/api";
+import { Calendar, ContainerProfessionalData, Modal } from "./styles";
 
 const DashboardProfessional = () => {
-  const {
-    searchDate,
-    searchComments,
-    calendar,
-  } = useCalendar();
-
+  const { searchDate, searchComments, calendar } = useCalendar();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalType, setModalType] = useState<string>("event");
-
   const { accessToken } = UseAuth();
   const getProfessionalStorage = JSON.parse(
     localStorage.getItem("@tranqyl:user") || ""
   );
-
   let ref: string[] = [];
   let now = new Date();
+  const [newName, setNewName] = useState(getProfessionalStorage.name);
+  const [newEmail, setNewEmail] = useState(getProfessionalStorage.email);
+  const [newGender, setNewGender] = useState(getProfessionalStorage.gender);
+  const [newProfession, setNewProfessional] = useState(
+    getProfessionalStorage.profession
+  );
+  const [newAreas, setNewAreas] = useState(getProfessionalStorage.areas);
+  const [newDescription, setNewDescription] = useState(
+    getProfessionalStorage.description
+  );
+  const [newPrice, setNewPrice] = useState(getProfessionalStorage.price);
+  const [newLanguage, setNewLanguage] = useState(
+    getProfessionalStorage.language
+  );
+  const [newState, setNewState] = useState(getProfessionalStorage.state);
+  const [newCrp, setNewCrp] = useState(getProfessionalStorage.crp);
+  const [newZoom, setNewZoom] = useState(getProfessionalStorage.zoom);
+  const [newPasswordZoom, SetNewPasswordZoom] = useState(
+    getProfessionalStorage.passwordZoom
+  );
+  const [showUser, setShowUser] = useState(false);
+  const [showProf, setShowProf] = useState(false);
+
+  const changeShowUser = () => {
+    setShowUser(!showUser);
+  };
+
+  const changeShowProf = () => {
+    setShowProf(!showProf);
+  };
+
+  const newData = () => {
+    const data = {
+      name: newName,
+      email: newEmail,
+      gender: newGender,
+      profession: newProfession,
+      areas: newAreas,
+      description: newDescription,
+      price: newPrice,
+      language: newLanguage,
+      state: newState,
+      crp: newCrp,
+      zoom: newZoom,
+      passwordZoom: newPasswordZoom,
+    };
+    api
+      .patch(`/users/${getProfessionalStorage.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((r) => {
+        localStorage.setItem("@tranqyl:user", JSON.stringify(r.data));
+        setShowUser(false);
+        setShowProf(false);
+      })
+      .catch((e) => console.log(e));
+  };
 
   useEffect(() => {
     searchDate(Number(getProfessionalStorage.id), accessToken);
     searchComments(Number(getProfessionalStorage.id), accessToken);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formed = calendar
@@ -44,7 +100,11 @@ const DashboardProfessional = () => {
     <>
       <Bar />
       <ContainerProfessionalData>
-        <CardProfessionalData professional={getProfessionalStorage} />
+        <CardProfessionalData
+          professional={getProfessionalStorage}
+          changeShowUser={changeShowUser}
+          changeShowProf={changeShowProf}
+        />
       </ContainerProfessionalData>
 
       <Calendar>
@@ -63,9 +123,7 @@ const DashboardProfessional = () => {
               {formed.map((item, index) => {
                 if (
                   !ref.includes(moment(item.date).format("l")) &&
-                  ref.push(moment(item.date).format("l")) &&
-                  moment(now).format("l").replace(/\D/g, "") <=
-                    moment(item.date).format("l").replace(/\D/g, "")
+                  ref.push(moment(item.date).format("l"))
                 ) {
                   return (
                     <div key={index} className="week">
@@ -79,18 +137,20 @@ const DashboardProfessional = () => {
                               moment(newFiltered.date).format("L") ===
                               moment(item.date).format("L")
                           )
-                          .filter(
-                            (filteredTimes) =>
-                              moment(filteredTimes.date)
-                                .format()
-                                .replace(/\D/g, "") >
-                              moment(now).format().replace(/\D/g, "")
-                          )
                           .map((m, secondIndex) => {
                             return (
                               <div
+                                className={
+                                  m.type === false
+                                    ? "purple"
+                                    : moment(m.date)
+                                        .format()
+                                        .replace(/\D/g, "") >
+                                      moment(now).format().replace(/\D/g, "")
+                                    ? "green"
+                                    : "yellow"
+                                }
                                 key={secondIndex}
-                                className="time"
                                 onClick={() => activateModal("event")}
                               >
                                 <p>{moment(m.date).format("DD/MM/YYYY")}</p>
@@ -120,6 +180,118 @@ const DashboardProfessional = () => {
           modalType={modalType}
           searchDate={searchDate}
         />
+      )}
+      {showUser && (
+        <Modal>
+          <div>
+            <FaTimes onClick={changeShowUser} />
+            <label>
+              Nome completo
+              <input
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+                placeholder="Nome"
+              />
+            </label>
+            <label>
+              Email
+              <input
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+                placeholder="Email"
+              />
+            </label>
+            <label>
+              Gênero
+              <input
+                value={newGender}
+                onChange={(e) => setNewGender(e.target.value)}
+                placeholder="Genero"
+              />
+            </label>
+            <label>
+              Idioma
+              <input
+                value={newLanguage}
+                onChange={(e) => setNewLanguage(e.target.value)}
+                placeholder="Idioma"
+              />
+            </label>
+            <label>
+              Estado
+              <input
+                value={newState}
+                onChange={(e) => setNewState(e.target.value)}
+                placeholder="Estado"
+              />
+            </label>
+            <Button onClick={newData}>Atualizar dados</Button>
+          </div>
+        </Modal>
+      )}
+      {showProf && (
+        <Modal>
+          <div>
+            <FaTimes onClick={changeShowProf} />
+            <label>
+              Profissão
+              <input
+                value={newProfession}
+                onChange={(e) => setNewProfessional(e.target.value)}
+                placeholder="Profissão"
+              />
+            </label>
+            <label>
+              Especialidades
+              <input
+                value={newAreas}
+                onChange={(e) => setNewAreas(e.target.value)}
+                placeholder="Especialidades"
+              />
+            </label>
+            <label>
+              Descrição
+              <input
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+                placeholder="Descrição"
+              />
+            </label>
+            <label>
+              Preço
+              <input
+                value={newPrice}
+                onChange={(e) => setNewPrice(e.target.value)}
+                placeholder="Preço"
+              />
+            </label>
+            <label>
+              CRP
+              <input
+                value={newCrp}
+                onChange={(e) => setNewCrp(e.target.value)}
+                placeholder="CRP"
+              />
+            </label>
+            <label>
+              Zoom
+              <input
+                value={newZoom}
+                onChange={(e) => setNewZoom(e.target.value)}
+                placeholder="Zoom"
+              />
+            </label>
+            <label>
+              Senha do Zoom
+              <input
+                value={newPasswordZoom}
+                onChange={(e) => SetNewPasswordZoom(e.target.value)}
+                placeholder="Senha do Zoom"
+              />
+            </label>
+            <Button onClick={newData}>Atualizar dados</Button>
+          </div>
+        </Modal>
       )}
     </>
   );

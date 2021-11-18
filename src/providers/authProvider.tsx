@@ -7,6 +7,8 @@ import {
 } from "react";
 import { useHistory } from "react-router";
 import api from "../services/api";
+import toast from "react-hot-toast";
+
 interface AuthProviderProps {
   children: ReactNode;
 }
@@ -32,17 +34,21 @@ interface AuthContextData {
   signOut: () => void;
   signUp: (data: SignUpCredentials) => void;
 }
-
 interface SignUpCredentials {
   name: string;
   email: string;
   password: string;
-  type?: string;
-  phone?: string;
-  profession?: string;
   gender?: string;
+  profession?: string;
   areas?: string;
   description?: string;
+  type?: string;
+  price?: number;
+  language?: string;
+  state?: string;
+  crp?: string;
+  zoom?: string;
+  passwordZoom?: string;
 }
 
 const UseAuth = () => {
@@ -52,6 +58,7 @@ const UseAuth = () => {
   }
   return context;
 };
+
 const AutContext = createContext<AuthContextData>({} as AuthContextData);
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [data, setData] = useState<AuthState>(() => {
@@ -65,22 +72,33 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const history = useHistory();
 
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
-    const response = await api.post("/login", { email, password });
-    const { accessToken, user } = response.data;
-    localStorage.setItem("@tranqyl:accessToken", accessToken);
-    localStorage.setItem("@tranqyl:user", JSON.stringify(user));
-    setData({ accessToken, user });
+    await api
+      .post("/login", { email, password })
+      .then((response) => {
+        const { accessToken, user } = response.data;
+        localStorage.setItem("@tranqyl:accessToken", accessToken);
+        localStorage.setItem("@tranqyl:user", JSON.stringify(user));
+        setData({ accessToken, user });
+        toast.success("Login realizado com sucesso");
+      })
+      .catch((_) => toast.error("Senha ou Email incorreto"));
   }, []);
   const signOut = useCallback(() => {
     localStorage.removeItem("@tranqyl:accessToken");
     localStorage.removeItem("@tranqyl:user");
     localStorage.clear();
     setData({} as AuthState);
+    toast.success("Logout realizado com sucesso");
   }, []);
 
   const signUp = (data: SignUpCredentials) => {
-    api.post(`/register`, data).catch((e) => console.log(e));
-    history.push("/signin");
+    api
+      .post(`/register`, data)
+      .then((_) => {
+        history.push("/signin");
+        toast.success("Registrado com sucesso");
+      })
+      .catch((_) => toast.error("Falha ao registrar, usuário já existe"));
   };
 
   return (

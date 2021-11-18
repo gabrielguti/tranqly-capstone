@@ -90,10 +90,9 @@ const LandingPage = () => {
           <div className="info">
             <h1>Um jeito diferente de mudar sua vida</h1>
             <p>
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical Latin literature from 45 BC,
-              making it over 2000 years old. Richard McClintock, a Latin
-              professor at Hampden-Sydney College in Virginia.
+              Uma aplicação que visa o bem estar emocional e comportamental dos
+              usuários. Valorizando o atendimento remoto de maneira objetiva e
+              segura. .
             </p>
             <Button onClick={() => setShow(!show)}>Saiba mais</Button>
           </div>
