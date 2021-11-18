@@ -71,6 +71,19 @@ export const SectionInfo = styled.section`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  .nothingHere {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 30px;
+    color: var(--purple100);
+    opacity: 0.8;
+    svg {
+      font-size: 80px;
+    }
+  }
 `;
 export const Title = styled.div`
   margin-top: 5vh;
