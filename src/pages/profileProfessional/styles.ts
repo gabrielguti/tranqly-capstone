@@ -39,7 +39,6 @@ export const ContainerProfessionalData = styled.div`
       gap: 30px;
       flex-direction: column;
       color: var(--gray200);
-
       div {
         flex-direction: column;
         svg {

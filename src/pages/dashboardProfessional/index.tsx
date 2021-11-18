@@ -1,6 +1,7 @@
 /* eslint-disable array-callback-return */
 import moment from "moment";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaRegClock, FaTimes } from "react-icons/fa";
 import Bar from "../../components/bar";
 import Button from "../../components/button";
@@ -31,7 +32,9 @@ const DashboardProfessional = () => {
   const [newDescription, setNewDescription] = useState(
     getProfessionalStorage.description
   );
-  const [newPrice, setNewPrice] = useState(getProfessionalStorage.price);
+  const [newPrice, setNewPrice] = useState<number>(
+    getProfessionalStorage.price
+  );
   const [newLanguage, setNewLanguage] = useState(
     getProfessionalStorage.language
   );
@@ -41,8 +44,8 @@ const DashboardProfessional = () => {
   const [newPasswordZoom, SetNewPasswordZoom] = useState(
     getProfessionalStorage.passwordZoom
   );
-  const [showUser, setShowUser] = useState(false);
-  const [showProf, setShowProf] = useState(false);
+  const [showUser, setShowUser] = useState<boolean>(false);
+  const [showProf, setShowProf] = useState<boolean>(false);
 
   const changeShowUser = () => {
     setShowUser(!showUser);
@@ -60,7 +63,7 @@ const DashboardProfessional = () => {
       profession: newProfession,
       areas: newAreas,
       description: newDescription,
-      price: newPrice,
+      price: Number(newPrice),
       language: newLanguage,
       state: newState,
       crp: newCrp,
@@ -77,6 +80,7 @@ const DashboardProfessional = () => {
         localStorage.setItem("@tranqyl:user", JSON.stringify(r.data));
         setShowUser(false);
         setShowProf(false);
+        toast.success("Alterações salvas com sucesso");
       })
       .catch((e) => console.log(e));
   };
@@ -157,6 +161,15 @@ const DashboardProfessional = () => {
                                 <span className="check">
                                   {moment(m.date).format("LT")}
                                 </span>
+                                <div className="moreInfos">
+                                  {m.name ? (
+                                    <h2>{m.name}</h2>
+                                  ) : (
+                                    <p>Sem informações</p>
+                                  )}
+                                  {m.comment ? <p>{m.comment}</p> : <></>}
+                                  {m.email ? <b>{m.email}</b> : <></>}
+                                </div>
                               </div>
                             );
                           })}
@@ -184,7 +197,7 @@ const DashboardProfessional = () => {
       {showUser && (
         <Modal>
           <div>
-            <FaTimes onClick={changeShowUser} />
+            <FaTimes onClick={() => setShowUser(!showUser)} />
             <label>
               Nome completo
               <input
@@ -232,7 +245,7 @@ const DashboardProfessional = () => {
       {showProf && (
         <Modal>
           <div>
-            <FaTimes onClick={changeShowProf} />
+            <FaTimes onClick={() => setShowProf(!showProf)} />
             <label>
               Profissão
               <input
@@ -261,7 +274,7 @@ const DashboardProfessional = () => {
               Preço
               <input
                 value={newPrice}
-                onChange={(e) => setNewPrice(e.target.value)}
+                onChange={(e) => setNewPrice(Number(e.target.value))}
                 placeholder="Preço"
               />
             </label>
