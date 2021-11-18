@@ -155,7 +155,6 @@ const DashboardProfessional = () => {
                                     : "yellow"
                                 }
                                 key={secondIndex}
-                                onClick={() => activateModal("event")}
                               >
                                 <p>{moment(m.date).format("DD/MM/YYYY")}</p>
                                 <span className="check">

@@ -19,6 +19,7 @@ export const CardPro = styled.div`
     button {
     }
     max-height: 550px;
+    max-width: 400px;
   }
 `;
 
