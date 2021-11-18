@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { FaRegClock } from "react-icons/fa";
@@ -29,6 +30,7 @@ const DashboardProfessional = () => {
   useEffect(() => {
     searchDate(Number(getProfessionalStorage.id), accessToken);
     searchComments(Number(getProfessionalStorage.id), accessToken);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formed = calendar

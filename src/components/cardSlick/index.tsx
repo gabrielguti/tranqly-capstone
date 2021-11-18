@@ -15,6 +15,7 @@ export default function CardSlick({item}:any) {
       )
       .then((response) => setComments(response.data))
       .catch((e) => console.log(e));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let media =
