@@ -6,6 +6,8 @@ interface CalendarProps {
   children: ReactNode;
 }
 interface DataProps {
+  data(id: number, data: any): void;
+  zoom: any;
   userId: number;
   type: boolean;
   date: any;
@@ -40,7 +42,10 @@ interface CalendarData {
     patientId: any,
     token: string,
     areas: string,
-    name: string
+    name: string,
+    comment: string,
+    zoom: string,
+    passwordZoom: string
   ) => void;
   check: (
     id: number,
@@ -48,7 +53,10 @@ interface CalendarData {
     professionalId: number,
     patientId: number,
     areas: string,
-    name: string
+    name: string,
+    comment: string,
+    zoom: string,
+    passwordZoom: string
   ) => void;
   show: boolean;
   setShow: any;
@@ -174,8 +182,12 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     patientId: any,
     token: string,
     areas: string,
-    name: string
+    name: string,
+    comment: string,
+    zoom: string,
+    passwordZoom: string
   ) => {
+    console.log(zoom);
     const newTime = {
       patientId: patientId,
       type: data.type,
@@ -184,8 +196,10 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
       cancel: false,
       areas: areas,
       name: name,
+      comment: comment,
+      zoom: zoom,
+      passwordZoom: passwordZoom,
     };
-    console.log(newTime);
     api
       .post(`/patient`, newTime, {
         headers: {
@@ -204,7 +218,10 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     professionalId: number,
     patientId: number,
     areas: string,
-    name: string
+    name: string,
+    comment: string,
+    zoom: string,
+    passwordZoom: string
   ) => {
     api
       .patch(
@@ -226,7 +243,10 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
             patientId,
             token,
             areas,
-            name
+            name,
+            comment,
+            zoom,
+            passwordZoom
           );
         }
       })

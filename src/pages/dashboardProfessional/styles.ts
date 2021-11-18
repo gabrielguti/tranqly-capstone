@@ -33,7 +33,6 @@ export const ContainerProfessionalData = styled.div`
     .data {
       margin-bottom: 50px;
       padding: 5px;
-      /* max-width: 350px; */
       width: 100%;
       display: flex;
       gap: 30px;
@@ -90,7 +89,6 @@ export const Calendar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
     button {
       border-radius: 50%;
       background-color: white;
@@ -148,10 +146,6 @@ export const Calendar = styled.div`
     flex-direction: column;
     text-align: center;
   }
-  :hover {
-    filter: brightness(1.2);
-  }
-
   .nothingHere {
     display: flex;
     justify-content: center;
@@ -165,7 +159,6 @@ export const Calendar = styled.div`
       font-size: 80px;
     }
   }
-  /* width: 100%; */
   .newAval {
     width: 20px;
     height: 20px;

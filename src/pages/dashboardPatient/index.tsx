@@ -17,13 +17,16 @@ import { useCalendar } from "../../providers/calendarProvider";
 import ModalCommentPage from "../../components/modalCommentPage";
 import Profile from "../../assets/img/profile.png";
 import UserEditModal from "../../components/userEditModal";
+import { MdOutlineFeedback } from "react-icons/md";
 
 const DashboardPatient = () => {
   const { conference, getConference } = useClientCard();
+  const { user, accessToken } = UseAuth();
+  const { show, setShow } = useCalendar();
+  const { userEdit, setUserEdit } = useClientCard();
   let now = new Date();
   let ref: string[] = [];
   let refTwo: string[] = [];
-  const { user, accessToken } = UseAuth();
 
   useEffect(() => {
     getConference(accessToken, user.id);
@@ -36,10 +39,8 @@ const DashboardPatient = () => {
 
   const reverseFormed = conference
     .slice()
-    .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
-
-  const { show, setShow } = useCalendar();
-  const { userEdit, setUserEdit } = useClientCard();
+    .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1))
+    .filter((item) => item.cancel === false);
 
   return (
     <>
@@ -59,6 +60,14 @@ const DashboardPatient = () => {
             <Button onClick={() => setUserEdit(!userEdit)}>
               Editar usuário
             </Button>
+            <div className="newComment">
+              <p>Avalie nossa plataforma</p>
+              <div className="icon">
+                <MdOutlineFeedback
+                  onClick={() => setShow(!show)}
+                ></MdOutlineFeedback>
+              </div>
+            </div>
           </div>
         </div>
       </ContainerProfessionalData>
@@ -69,30 +78,30 @@ const DashboardPatient = () => {
         </Title>
         <CardsBox>
           {reverseFormed &&
-            reverseFormed
-              .filter((item) => item.cancel === false)
-              .map((filtered, index) => {
-                if (
-                  !ref.includes(filtered.date) &&
-                  ref.push(filtered.date) &&
-                  moment(now).format().replace(/\D/g, "") <=
-                    moment(filtered.date).format().replace(/\D/g, "")
-                )
-                  return (
-                    <DashboardCard
-                      isRemovable={filtered.cancel}
-                      date={moment(filtered.date).format("LL")}
-                      name={filtered.name}
-                      time={moment(filtered.date).format("LT")}
-                      key={index}
-                      info={filtered.areas}
-                      cancel={filtered.cancel}
-                      token={accessToken}
-                      id={filtered.id}
-                      ownerId={Number(user.id)}
-                    ></DashboardCard>
-                  );
-              })}
+            reverseFormed.map((filtered, index) => {
+              if (
+                !ref.includes(filtered.date) &&
+                ref.push(filtered.date) &&
+                moment(now).format().replace(/\D/g, "") <=
+                  moment(filtered.date).format().replace(/\D/g, "")
+              )
+                return (
+                  <DashboardCard
+                    isRemovable={filtered.cancel}
+                    date={moment(filtered.date).format("LL")}
+                    name={filtered.name}
+                    time={moment(filtered.date).format("LT")}
+                    key={index}
+                    info={filtered.areas}
+                    cancel={filtered.cancel}
+                    token={accessToken}
+                    id={filtered.id}
+                    ownerId={Number(user.id)}
+                    zoom={filtered.zoom}
+                    passwordZoom={filtered.passwordZoom}
+                  ></DashboardCard>
+                );
+            })}
         </CardsBox>
         <Line />
         <Title>
@@ -121,7 +130,6 @@ const DashboardPatient = () => {
             })}
         </CardsBox>
         <Line />
-        <Button onClick={() => setShow(!show)}>Feedback</Button>
       </SectionInfo>
       {userEdit && (
         <UserEditModal userEdit={userEdit} setUserEdit={setUserEdit} />

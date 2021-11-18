@@ -21,8 +21,7 @@ export const ProfessionalModal = ({
   const [stars, setStars] = useState<Number>(0);
   const [displayStar, setDisplayStar] = useState<Number>(0);
   const [startDate, setStartDate] = useState<Date>(new Date());
-  const [publicType, setPublicType] = useState<boolean>(true);
-  const { accessToken, user } = UseAuth();
+  const { accessToken } = UseAuth();
 
   const enterHoverStar = (currentStar: Number) => {
     setDisplayStar(currentStar);
@@ -120,18 +119,15 @@ export const ProfessionalModal = ({
           </>
         )}
         {modalType === "availability" && (
-          <>
-            <h3>Nova disponibilidade</h3>
-            <DatePicker
-              selected={startDate}
-              locale={ptBR}
-              showTimeSelect
-              timeFormat="p"
-              dateFormat="Pp"
-              timeIntervals={60}
-              onChange={(e: Date) => handleOnChange(e)}
-            />
-          </>
+          <DatePicker
+            selected={startDate}
+            locale={ptBR}
+            showTimeSelect
+            timeFormat="p"
+            dateFormat="Pp"
+            timeIntervals={60}
+            onChange={(e: Date) => handleOnChange(e)}
+          />
         )}
         <div className="confirmHolder">
           <button

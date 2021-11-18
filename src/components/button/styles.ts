@@ -13,6 +13,6 @@ export const ButtonContainer = styled.button`
   color: white;
   font-size: 22px;
   :hover {
-    filter: brightness(1.2);
+    background-color: var(--orange100);
   }
 `;

@@ -4,12 +4,12 @@ export const CardCommentStyle = styled.div`
   margin-top: 20px;
   width: 1280px;
   max-width: 300px;
-  height: 140px;
+  height: 150px;
   background-color: var(--purple100);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 5px 10px;
+  padding: 0 5px;
   color: white;
   text-align: left;
   .data {
@@ -18,7 +18,7 @@ export const CardCommentStyle = styled.div`
     align-items: baseline;
   }
   .comment {
-    font-size: 10px;
+    font-size: 12px;
   }
   .stars {
     display: flex;

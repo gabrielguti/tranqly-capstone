@@ -16,6 +16,8 @@ interface DataProps {
   name: string;
   areas: string;
   ownerId: number;
+  zoom?: string;
+  passwordZoom?: string;
 }
 interface ClientData {
   conference: DataProps[];
@@ -38,8 +40,6 @@ export const ClientCardProvider = ({ children }: ClientProps) => {
   const [userEdit, setUserEdit] = useState<boolean>(false);
 
   const user = JSON.parse(localStorage.getItem("@tranqyl:user") || "{}");
-
-  console.log(user);
 
   const getConference = (token: string, id: any) => {
     api

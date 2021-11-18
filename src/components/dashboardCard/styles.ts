@@ -8,9 +8,6 @@ export const CardPro = styled.div`
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  margin-top: 5vh;
-  min-width: 250px;
-  margin-bottom: 7vh;
   margin: 20px;
   button {
     background-color: var(--red50);

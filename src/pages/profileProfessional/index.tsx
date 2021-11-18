@@ -3,7 +3,7 @@ import { Calendar, ContainerProfessionalData, Comments } from "./styles";
 import Bar from "../../components/bar";
 import Button from "../../components/button";
 import CardComments from "../../components/CardComments";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import "moment/locale/pt-br";
 import ModalComment from "../../components/modalComment";
@@ -13,10 +13,10 @@ import { useCalendar } from "../../providers/calendarProvider";
 import { UseAuth } from "../../providers/authProvider";
 import { useParams } from "react-router";
 import { Line } from "../../components/dashboardCard/styles";
+import ModalCommentAttendance from "../../components/modalCommentAttendance";
 
 const ProfileProfessional = () => {
-  const { searchDate, searchComments, check, calendar, comments } =
-    useCalendar();
+  const { searchDate, searchComments, calendar, comments } = useCalendar();
   const { id }: any = useParams();
   const { accessToken, user } = UseAuth();
   const getProfessionalStorage = JSON.parse(
@@ -26,6 +26,18 @@ const ProfileProfessional = () => {
   let ref: string[] = [];
   let now = new Date();
   const { show, setShow } = useCalendar();
+  const [showNewTime, setShowNewTime] = useState(false);
+  const [date, setDate] = useState("");
+  const [idTime, setIdTime] = useState("");
+
+  const changeShow = () => {
+    setShowNewTime(!showNewTime);
+  };
+
+  const change = (id: any, date: any) => {
+    setIdTime(id);
+    setDate(date);
+  };
 
   useEffect(() => {
     searchDate(id, accessToken);
@@ -36,11 +48,11 @@ const ProfileProfessional = () => {
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
+  console.log(formed);
+
   const filters = formed.filter((item) => item.type === true);
-  console.log(getProfessionalStorage[0].areas);
   const areas = getProfessionalStorage[0].areas;
   const name = getProfessionalStorage[0].name;
-  console.log(formed);
   return (
     <>
       <Bar />
@@ -73,20 +85,15 @@ const ProfileProfessional = () => {
                           {formed
                             .filter((f) => f.date === item.date)
                             .map((m, secondIndex) => {
+                              console.log(m);
                               return (
                                 <div
                                   key={secondIndex}
                                   className="time"
-                                  onClick={() =>
-                                    check(
-                                      m.id,
-                                      accessToken,
-                                      professionalId,
-                                      Number(user.id),
-                                      areas,
-                                      name
-                                    )
-                                  }
+                                  onClick={() => {
+                                    changeShow();
+                                    change(m.id, m.date);
+                                  }}
                                 >
                                   <p>{moment(m.date).format("DD/MM/YYYY")}</p>
                                   <span className="check">
@@ -120,6 +127,20 @@ const ProfileProfessional = () => {
         </div>
       </Comments>
       <Line />
+      {showNewTime && (
+        <ModalCommentAttendance
+          timeId={idTime}
+          date={date}
+          zoom={getProfessionalStorage[0].zoom}
+          passwordZoom={getProfessionalStorage[0].passwordZoom}
+          accessToken={accessToken}
+          professionalId={professionalId}
+          patientId={Number(user.id)}
+          areas={areas}
+          name={name}
+          changeShow={changeShow}
+        />
+      )}
     </>
   );
 };
