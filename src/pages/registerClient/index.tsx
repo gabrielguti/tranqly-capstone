@@ -70,7 +70,7 @@ const RegisterClient = () => {
                 {...register("confirmPassword")}
               />
               <span>{errors.confirmPassword?.message}</span>
-              <button type="submit">Entrar</button>
+              <button type="submit">Cadastrar</button>
             </form>
             <p>
               Já possui conta? <Link to="/signIn">Entre aqui</Link>
