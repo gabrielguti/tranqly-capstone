@@ -67,13 +67,13 @@ const ProfileProfessional = () => {
           {filters.length > 0 ? (
             <>
               {formed
-                .filter((f) => f.type === true)
+                .filter((filtered) => filtered.type === true)
                 .map((item, index) => {
                   if (
-                    !ref.includes(item.date) &&
-                    ref.push(item.date) &&
-                    moment(now).format().replace(/\D/g, "") <=
-                      moment(item.date).format().replace(/\D/g, "")
+                    !ref.includes(moment(item.date).format("l")) &&
+                    ref.push(moment(item.date).format("l")) &&
+                    moment(now).format("l").replace(/\D/g, "") <=
+                      moment(item.date).format("l").replace(/\D/g, "")
                   ) {
                     return (
                       <div key={index} className="week">
@@ -82,7 +82,18 @@ const ProfileProfessional = () => {
                         </div>
                         <div className="times">
                           {formed
-                            .filter((f) => f.date === item.date)
+                            .filter(
+                              (newFiltered) =>
+                                moment(newFiltered.date).format("L") ===
+                                moment(item.date).format("L")
+                            )
+                            .filter(
+                              (filteredTimes) =>
+                                moment(filteredTimes.date)
+                                  .format()
+                                  .replace(/\D/g, "") >
+                                moment(now).format().replace(/\D/g, "")
+                            )
                             .map((m, secondIndex) => {
                               return (
                                 <div
