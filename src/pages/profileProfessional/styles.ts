@@ -34,7 +34,6 @@ export const ContainerProfessionalData = styled.div`
     .data {
       margin-bottom: 50px;
       padding: 5px;
-      /* max-width: 350px; */
       width: 100%;
       display: flex;
       gap: 30px;
@@ -81,7 +80,7 @@ export const Calendar = styled.div`
   align-items: center;
   .tittle {
     width: 100%;
-    max-width: 940px;
+    max-width: 970px;
     height: 70px;
     background-color: var(--purple300);
     font-size: 28px;
@@ -92,8 +91,8 @@ export const Calendar = styled.div`
   }
   .container {
     width: 100%;
-    max-width: 940px;
-    height: 625px;
+    max-width: 970px;
+    height: 660px;
     display: flex;
     background-color: var(--gray50);
     overflow-x: scroll;

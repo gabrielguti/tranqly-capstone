@@ -59,7 +59,7 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
   }, [professional.id]);
 
   useEffect(() => {
-    Aos.init({ duration: 600});
+    Aos.init({ duration: 600 });
   }, []);
 
   let media =
@@ -97,12 +97,15 @@ const CardProfessional = ({ professional }: CardProfessionalProps) => {
           </div>
         </div>
         <div className="button">
-          <h1>
-            {price.toLocaleString("pt-br", {
-              style: "currency",
-              currency: "BRL",
-            })}
-          </h1>
+          <div>
+            <h1>
+              {price.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </h1>
+            <p>/ 60 minutos</p>
+          </div>
           <Button onClick={() => schedule(professional.name, professional.id)}>
             Agendar
           </Button>

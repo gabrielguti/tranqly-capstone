@@ -1,10 +1,22 @@
 import Profile from "../../assets/img/profile.png";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
+import StarsCount from "../contStars";
+
 interface ProfessionalData {
   name: string;
   profession: string;
   description: string;
   image?: string;
-  areas: [];
+  areas: string;
+  gender: string;
+  price: number;
+  language: string;
+  state: string;
+  crp: string;
+  zoom: string;
+  passwordZoom: string;
+  id: number;
 }
 
 interface CardProfessionalProps {
@@ -12,7 +24,41 @@ interface CardProfessionalProps {
 }
 
 const CardProfessionalData = ({ professional }: CardProfessionalProps) => {
-  const { name, image, areas, description } = professional;
+  const {
+    name,
+    image,
+    areas,
+    description,
+    gender,
+    price,
+    language,
+    state,
+    crp,
+    zoom,
+    passwordZoom,
+    id,
+  } = professional;
+
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    api
+      .get(`https://tranqly.herokuapp.com/comments?professionalId=${id}`)
+      .then((response) => setComments(response.data))
+      .catch((e) => console.log(e));
+  }, [id]);
+
+  let media =
+    comments.length > 0 &&
+    Math.round(
+      comments.reduce(
+        (total: number, atual: { score: number }) => total + atual.score,
+        0
+      ) / comments.length
+    );
+  if (media === false) {
+    media = 0;
+  }
 
   return (
     <div className="ProfessionalData">
@@ -26,10 +72,29 @@ const CardProfessionalData = ({ professional }: CardProfessionalProps) => {
       <div className="data">
         <div>
           <h2>{name}</h2>
-          <div className="stars"></div>
+          <StarsCount stars={media} />
         </div>
         <div>
-          <p>{areas}</p>
+          <p>Especialidade: {areas}</p>
+          <p>CRP: {crp}</p>
+          <p>Idiomas: {language}</p>
+          <p>Estado: {state}</p>
+          <p>Genero: {gender}</p>
+          <p>
+            Link para sala para o{" "}
+            <a href={zoom} target="_blank" rel="noreferrer">
+              Zoom
+            </a>
+          </p>
+          <p>Senha da sala: {passwordZoom}</p>
+          <p>
+            Preço:{" "}
+            {price.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}{" "}
+            / 60 minutos
+          </p>
         </div>
         <div>
           <p>{description}</p>

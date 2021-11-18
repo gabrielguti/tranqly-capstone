@@ -80,10 +80,22 @@ export const Card = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    h1 {
-      color: var(--purple200);
-      font-weight: 500;
-      font-size: 20px;
+    div {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      justify-content: flex-end;
+      h1 {
+        color: var(--purple200);
+        font-weight: 500;
+        font-size: 20px;
+      }
+      p {
+        font-size: 12px;
+        color: var(--purple200);
+      }
     }
     button {
       width: 100%;
