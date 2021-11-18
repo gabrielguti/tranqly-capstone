@@ -1,6 +1,7 @@
 import moment from "moment";
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { UseAuth } from "../../providers/authProvider";
 import { useCalendar } from "../../providers/calendarProvider";
 import Button from "../button";
 import { ModalCommentStyle } from "./styles";
@@ -19,7 +20,8 @@ export default function ModalCommentAttendance({
 }: any) {
   const { check } = useCalendar();
   const [comment, setComment] = useState("");
-  console.log(date);
+  const { user } = UseAuth();
+
   return (
     <ModalCommentStyle>
       <div>
@@ -42,7 +44,8 @@ export default function ModalCommentAttendance({
               name,
               comment,
               zoom,
-              passwordZoom
+              passwordZoom,
+              user.email
             );
             changeShow();
           }}

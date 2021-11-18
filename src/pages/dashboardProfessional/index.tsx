@@ -1,6 +1,7 @@
 /* eslint-disable array-callback-return */
 import moment from "moment";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaRegClock, FaTimes } from "react-icons/fa";
 import Bar from "../../components/bar";
 import Button from "../../components/button";
@@ -79,6 +80,7 @@ const DashboardProfessional = () => {
         localStorage.setItem("@tranqyl:user", JSON.stringify(r.data));
         setShowUser(false);
         setShowProf(false);
+        toast.success("Alterações salvas com sucesso");
       })
       .catch((e) => console.log(e));
   };
@@ -159,6 +161,15 @@ const DashboardProfessional = () => {
                                 <span className="check">
                                   {moment(m.date).format("LT")}
                                 </span>
+                                <div className="moreInfos">
+                                  {m.name ? (
+                                    <h2>{m.name}</h2>
+                                  ) : (
+                                    <p>Sem informações</p>
+                                  )}
+                                  {m.comment ? <p>{m.comment}</p> : <></>}
+                                  {m.email ? <b>{m.email}</b> : <></>}
+                                </div>
                               </div>
                             );
                           })}

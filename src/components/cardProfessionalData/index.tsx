@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaUserCog } from "react-icons/fa";
+import { FaUserCog, FaUserEdit } from "react-icons/fa";
 import api from "../../services/api";
 import Button from "../button";
 import StarsCount from "../contStars";
@@ -76,7 +76,7 @@ const CardProfessionalData = ({
             <FaUserCog />
           </Button>
           <Button onClick={changeShowProf}>
-            <FaUserCog />
+            <FaUserEdit />
           </Button>
         </div>
       </div>

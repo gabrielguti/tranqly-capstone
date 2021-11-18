@@ -6,13 +6,15 @@ interface CalendarProps {
   children: ReactNode;
 }
 interface DataProps {
-  data(id: number, data: any): void;
+  name: string;
   zoom: any;
   userId: number;
   type: boolean;
   date: any;
   id: number;
   calendar: any;
+  comment: string;
+  email: string;
 }
 interface CommentsProps {
   namePatient: string;
@@ -54,7 +56,8 @@ interface CalendarData {
     name: string,
     comment: string,
     zoom: string,
-    passwordZoom: string
+    passwordZoom: string,
+    email: string
   ) => void;
   show: boolean;
   setShow: any;
@@ -183,7 +186,6 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     zoom: string,
     passwordZoom: string
   ) => {
-    console.log(zoom);
     const newTime = {
       patientId: patientId,
       type: data.type,
@@ -218,22 +220,19 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     name: string,
     comment: string,
     zoom: string,
-    passwordZoom: string
+    passwordZoom: string,
+    email: string
   ) => {
+    const data = { name, comment, type: false, email };
     api
-      .patch(
-        `/professional/${id}`,
-        { type: false },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      .patch(`/professional/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         // eslint-disable-next-line no-lone-blocks
         {
-          console.log(response.data);
           addMyCalendar(
             response.data,
             professionalId,

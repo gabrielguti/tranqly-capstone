@@ -154,6 +154,16 @@ export const Calendar = styled.div`
     align-items: center;
     flex-direction: column;
     text-align: center;
+    &:hover .moreInfos {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      background-color: var(--purple400);
+      border-radius: 10px;
+      padding: 20px;
+      color: var(--gray50);
+      border: 3px solid var(--purple200);
+    }
   }
   .yellow {
     background-image: linear-gradient(90deg, var(--yellow50) 15%, white 10%);
@@ -184,6 +194,9 @@ export const Calendar = styled.div`
     line-height: 115%;
     font-size: 1.2rem;
     margin-bottom: 5px;
+  }
+  .moreInfos {
+    display: none;
   }
 `;
 
