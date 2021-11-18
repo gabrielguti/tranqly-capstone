@@ -88,11 +88,17 @@ const CardProfessionalData = ({ professional }: CardProfessionalProps) => {
           </p>
           <p>Senha da sala: {passwordZoom}</p>
           <p>
-            Preço:{" "}
+            {price
+              ? price.toLocaleString("pt-br", {
+                  style: "currency",
+                  currency: "BRL",
+                })
+              : "Sem valor"}
+            {/* Preço:{" "}
             {price.toLocaleString("pt-br", {
               style: "currency",
               currency: "BRL",
-            })}{" "}
+            })}{" "} */}
             / 60 minutos
           </p>
         </div>
