@@ -76,85 +76,81 @@ const DashboardPatient = () => {
         <Title>
           <h2>Próximos agendamentos</h2>
         </Title>
-          {reverseFormed.length>0?(
-          
+        {reverseFormed.length > 0 ? (
           <>
             <CardsBox>
-          {reverseFormed &&
-            // eslint-disable-next-line array-callback-return
-            reverseFormed.map((filtered, index) => {
-              if (
-                !ref.includes(filtered.date) &&
-                ref.push(filtered.date) &&
-                moment(now).format().replace(/\D/g, "") <=
-                  moment(filtered.date).format().replace(/\D/g, "")
-              )
- 
-              return (
-                
-                 <DashboardCard
-                    isRemovable={filtered.cancel}
-                    date={moment(filtered.date).format("LL")}
-                    name={filtered.name}
-                    time={moment(filtered.date).format("LT")}
-                    key={index}
-                    info={filtered.areas}
-                    cancel={filtered.cancel}
-                    token={accessToken}
-                    id={filtered.id}
-                    ownerId={Number(user.id)}
-                    zoom={filtered.zoom}
-                    passwordZoom={filtered.passwordZoom}
-                  ></DashboardCard>
-                );
-            })}
-        </CardsBox>
+              {reverseFormed &&
+                // eslint-disable-next-line array-callback-return
+                reverseFormed.map((filtered, index) => {
+                  if (
+                    !ref.includes(filtered.date) &&
+                    ref.push(filtered.date) &&
+                    moment(now).format().replace(/\D/g, "") <=
+                      moment(filtered.date).format().replace(/\D/g, "")
+                  )
+                    return (
+                      <DashboardCard
+                        isRemovable={filtered.cancel}
+                        date={moment(filtered.date).format("LL")}
+                        name={filtered.name}
+                        time={moment(filtered.date).format("LT")}
+                        key={index}
+                        info={filtered.areas}
+                        cancel={filtered.cancel}
+                        token={accessToken}
+                        id={filtered.id}
+                        ownerId={Number(user.id)}
+                        zoom={filtered.zoom}
+                        passwordZoom={filtered.passwordZoom}
+                      ></DashboardCard>
+                    );
+                })}
+            </CardsBox>
           </>
-          ):(
+        ) : (
           <div className="nothingHere">
-            <FaRegClock/><h1>Você não possui horários agendados no momento</h1>
+            <FaRegClock />
+            <h1>Você não possui horários agendados no momento</h1>
           </div>
-          )}
-        
+        )}
+
         <Line />
         <Title>
           <h2>Últimos atendimentos</h2>
         </Title>
-        {formed.length>0?(
+        {formed.length > 0 ? (
           <>
-
-        <CardsBox>
-          {formed &&
-            // eslint-disable-next-line array-callback-return
-            formed.map((item, index) => {
-              if (
-                !refTwo.includes(item.date) &&
-                refTwo.push(item.date) &&
-                moment(now).format().replace(/\D/g, "") >
-                  moment(item.date).format().replace(/\D/g, "")
-              )
-                return (
-                  <DashboardCard
-                    date={moment(item.date).format("LL")}
-                    name={item.name}
-                    time={moment(item.date).format("LT")}
-                    key={index}
-                    info={item.areas}
-                    isRemovable={true}
-                    cancel={item.cancel}
-                  />
-                );
-            })}
-        </CardsBox>
-
+            <CardsBox>
+              {formed &&
+                // eslint-disable-next-line array-callback-return
+                formed.map((item, index) => {
+                  if (
+                    !refTwo.includes(item.date) &&
+                    refTwo.push(item.date) &&
+                    moment(now).format().replace(/\D/g, "") >
+                      moment(item.date).format().replace(/\D/g, "")
+                  )
+                    return (
+                      <DashboardCard
+                        date={moment(item.date).format("LL")}
+                        name={item.name}
+                        time={moment(item.date).format("LT")}
+                        key={index}
+                        info={item.areas}
+                        isRemovable={true}
+                        cancel={item.cancel}
+                      />
+                    );
+                })}
+            </CardsBox>
           </>
-        ):(
-        <div className="nothingHere">
-          <FaRegClock/><h1>Suas últimas consultas aparecerão aqui</h1>
-        </div>
-        
+        ) : (
+          <div className="nothingHere">
+            <FaRegClock />
+            <h1>Suas últimas consultas aparecerão aqui</h1>
+          </div>
         )}
-        
+
         <Line />
       </SectionInfo>
       {userEdit && (

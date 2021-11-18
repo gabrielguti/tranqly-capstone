@@ -12,10 +12,10 @@ export const ContainerProfessionalData = styled.div`
     flex-direction: column;
     text-align: center;
     @media (min-width: 700px) {
-      flex-direction: column;
-
+      flex-direction: row;
       justify-content: center;
       align-items: center;
+      text-align: left;
     }
     .img {
       width: 100%;
@@ -71,7 +71,7 @@ export const ContainerProfessionalData = styled.div`
 
 export const Calendar = styled.div`
   width: 100%;
-  padding-top: 30px;
+  padding: 30px 0;
   color: white;
   display: flex;
   flex-direction: column;
@@ -81,7 +81,7 @@ export const Calendar = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 940px;
+    max-width: 970px;
     height: 70px;
     background-color: var(--purple300);
     font-size: 28px;
@@ -96,8 +96,8 @@ export const Calendar = styled.div`
   }
   .container {
     width: 100%;
-    max-width: 940px;
-    height: 625px;
+    max-width: 970px;
+    height: 660px;
     display: flex;
     background-color: var(--gray50);
     overflow-x: scroll;
@@ -127,7 +127,9 @@ export const Calendar = styled.div`
     flex-direction: column;
     border: 10px solid transparent;
   }
-  .time {
+  .yellow,
+  .green,
+  .purple {
     min-width: 90px;
     width: 100%;
     font-weight: bold;
@@ -135,18 +137,27 @@ export const Calendar = styled.div`
     background-color: white;
     border-radius: 10px;
     margin: 5px 0;
-    color: white;
+    color: var(--black0);
     font-size: 16px;
     padding: 5px;
     cursor: pointer;
-    background-color: var(--orange200);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
   }
+  .yellow {
+    background-image: linear-gradient(90deg, var(--yellow50) 15%, white 10%);
+  }
+  .green {
+    background-image: linear-gradient(90deg, var(--green50) 15%, white 10%);
+  }
+  .purple {
+    background-image: linear-gradient(90deg, var(--purple100) 15%, white 10%);
+  }
   .nothingHere {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
