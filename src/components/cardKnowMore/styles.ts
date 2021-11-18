@@ -23,6 +23,9 @@ export const Container = styled.div`
     gap: 40px;
     flex-direction: column;
     overflow-y: scroll;
+    span{
+      color: var(--orange200) ;
+    }
     @media (min-width: 800px) {
       padding: 100px;
     }
