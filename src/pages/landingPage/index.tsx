@@ -145,8 +145,8 @@ const LandingPage = () => {
 
         <Lottie
           options={defaultOptions}
-          height={300}
-          width={300}
+          height={250}
+          width={250}
           speed={1}
           isStopped={animationState.isStopped}
           isPaused={animationState.isPaused}
@@ -155,8 +155,8 @@ const LandingPage = () => {
       <Text data-aos="fade-right" data-aos-duration="1000" className="boxes">
         <Lottie
           options={defaultOptionsTwo}
-          height={350}
-          width={350}
+          height={250}
+          width={250}
           speed={1}
           isStopped={animationState.isStopped}
           isPaused={animationState.isPaused}
@@ -185,8 +185,8 @@ const LandingPage = () => {
 
         <Lottie
           options={defaultOptionsThree}
-          height={200}
-          width={200}
+          height={250}
+          width={250}
           speed={1}
           isStopped={animationState.isStopped}
           isPaused={animationState.isPaused}

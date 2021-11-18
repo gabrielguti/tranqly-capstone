@@ -13,6 +13,7 @@ export const Container = styled.div`
   .boxes {
     width: 60%;
   }
+  overflow-x: hidden;
 `;
 
 export const HeaderContainer = styled.div`
