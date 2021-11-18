@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 import api from "../services/api";
+import toast from "react-hot-toast";
+
 interface ClientProps {
   children: ReactNode;
 }
@@ -61,8 +63,11 @@ export const ClientCardProvider = ({ children }: ClientProps) => {
           },
         }
       )
-      .then((_) => getConference(token, ownerId))
-      .catch((err) => console.log(err));
+      .then((_) => {
+        getConference(token, ownerId);
+        toast.success("Agendamento cancelado com sucesso");
+      })
+      .catch((_) => toast.error("Erro ao cancelar o agendamento"));
   };
 
   const editUserFunction = (token: string, id: string, data: EditDataProps) => {
@@ -77,8 +82,7 @@ export const ClientCardProvider = ({ children }: ClientProps) => {
         user.name = data.name || user.name;
         localStorage.setItem("@tranqyl:user", JSON.stringify(user));
         document.location.reload();
-      })
-      .catch((err) => console.log(err));
+      });
   };
 
   return (

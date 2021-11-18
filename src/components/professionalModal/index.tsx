@@ -6,6 +6,7 @@ import ptBR from "date-fns/locale/pt-BR";
 import moment from "moment";
 import api from "../../services/api";
 import { UseAuth } from "../../providers/authProvider";
+import toast from "react-hot-toast";
 
 interface ModalProps {
   activateModal: (value: string) => void;
@@ -52,8 +53,8 @@ export const ProfessionalModal = ({
           }`,
         },
       })
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
+      .then((_) => toast.success("Sucesso ao criar agendamento"))
+      .catch((_) => toast.error("Falha ao criar agendamento"));
     searchDate(userData.id, accessToken);
     activateModal(modalType);
   };
