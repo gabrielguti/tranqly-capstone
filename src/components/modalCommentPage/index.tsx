@@ -4,6 +4,7 @@ import { FaTimes } from "react-icons/fa";
 import Button from "../button";
 import { UseAuth } from "../../providers/authProvider";
 import { useCalendar } from "../../providers/calendarProvider";
+import { StarRating } from "../starRating";
 
 export default function ModalCommentPage() {
   const { createCommentPage } = useCalendar();
@@ -21,11 +22,7 @@ export default function ModalCommentPage() {
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         ></textarea>
-        <input
-          placeholder="Sua Nota"
-          value={newScore}
-          onChange={(e) => setNewScore(Number(e.target.value))}
-        ></input>
+        <StarRating setNewScore={setNewScore} />
         <Button
           onClick={() =>
             createCommentPage(

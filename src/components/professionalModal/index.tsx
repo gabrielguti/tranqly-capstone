@@ -6,6 +6,7 @@ import ptBR from "date-fns/locale/pt-BR";
 import moment from "moment";
 import api from "../../services/api";
 import { UseAuth } from "../../providers/authProvider";
+import { StarRating } from "../starRating";
 import toast from "react-hot-toast";
 
 interface ModalProps {
@@ -19,20 +20,10 @@ export const ProfessionalModal = ({
   modalType,
   searchDate,
 }: ModalProps) => {
-  const [stars, setStars] = useState<Number>(0);
-  const [displayStar, setDisplayStar] = useState<Number>(0);
+  const [newScore, setNewScore] = useState<Number>(0);
   const [startDate, setStartDate] = useState<Date>(new Date());
   const { accessToken } = UseAuth();
 
-  const enterHoverStar = (currentStar: Number) => {
-    setDisplayStar(currentStar);
-  };
-  const leaveHoverStar = () => {
-    setDisplayStar(stars);
-  };
-  const changeRating = (currentStar: Number) => {
-    setStars(currentStar);
-  };
   const handleOnChange = (newDate: Date) => {
     setStartDate(newDate);
   };
@@ -71,54 +62,7 @@ export const ProfessionalModal = ({
             />
           </>
         )}
-        {modalType === "comment" && (
-          <>
-            <h3>Comente sobre o profissional</h3>
-            <input type="text" placeholder="Seu comentário aqui" />
-            <div>
-              <span
-                className={
-                  displayStar >= 1 ? "fa fa-star checked" : "fa fa-star"
-                }
-                onPointerEnter={() => enterHoverStar(1)}
-                onPointerLeave={() => leaveHoverStar()}
-                onClick={() => changeRating(1)}
-              ></span>
-              <span
-                className={
-                  displayStar >= 2 ? "fa fa-star checked" : "fa fa-star"
-                }
-                onPointerEnter={() => enterHoverStar(2)}
-                onPointerLeave={() => leaveHoverStar()}
-                onClick={() => changeRating(2)}
-              ></span>
-              <span
-                className={
-                  displayStar >= 3 ? "fa fa-star checked" : "fa fa-star"
-                }
-                onPointerEnter={() => enterHoverStar(3)}
-                onPointerLeave={() => leaveHoverStar()}
-                onClick={() => changeRating(3)}
-              ></span>
-              <span
-                className={
-                  displayStar >= 4 ? "fa fa-star checked" : "fa fa-star"
-                }
-                onPointerEnter={() => enterHoverStar(4)}
-                onPointerLeave={() => leaveHoverStar()}
-                onClick={() => changeRating(4)}
-              ></span>
-              <span
-                className={
-                  displayStar === 5 ? "fa fa-star checked" : "fa fa-star"
-                }
-                onPointerEnter={() => enterHoverStar(5)}
-                onPointerLeave={() => leaveHoverStar()}
-                onClick={() => changeRating(5)}
-              ></span>
-            </div>
-          </>
-        )}
+        {modalType === "comment" && <StarRating setNewScore={setNewScore} />}
         {modalType === "availability" && (
           <DatePicker
             selected={startDate}
