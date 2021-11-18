@@ -56,7 +56,7 @@ const ProfileProfessional = () => {
     <>
       <Bar />
       <ContainerProfessionalData>
-        <CardProfessionalData professional={getProfessionalStorage[0]} />
+        <CardProfessionalData professional={getProfessionalStorage} />
       </ContainerProfessionalData>
 
       <Calendar>
