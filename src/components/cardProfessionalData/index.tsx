@@ -1,8 +1,9 @@
+import Profile from "../../assets/img/profile.png";
 interface ProfessionalData {
   name: string;
   profession: string;
   description: string;
-  image: string;
+  image?: string;
   areas: [];
 }
 
@@ -16,7 +17,11 @@ const CardProfessionalData = ({ professional }: CardProfessionalProps) => {
   return (
     <div className="ProfessionalData">
       <div className="img">
-        <img src={image} alt={name} />
+        {image ? (
+          <img src={image} alt={name} />
+        ) : (
+          <img src={Profile} alt={name} />
+        )}
       </div>
       <div className="data">
         <div>
