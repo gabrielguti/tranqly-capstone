@@ -15,7 +15,8 @@ export default function ModalCommentAttendance({
   professionalId,
   patientId,
   areas,
-  name,
+  namePatient,
+  nameProf,
   changeShow,
 }: any) {
   const { check } = useCalendar();
@@ -41,7 +42,8 @@ export default function ModalCommentAttendance({
               professionalId,
               patientId,
               areas,
-              name,
+              namePatient,
+              nameProf,
               comment,
               zoom,
               passwordZoom,

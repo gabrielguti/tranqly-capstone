@@ -13,7 +13,8 @@ interface DataProps {
   date: string;
   patientId?: number;
   cancel: boolean;
-  name: string;
+  namePatient?: string;
+  nameProf?: string;
   areas: string;
   ownerId: number;
   zoom?: string;

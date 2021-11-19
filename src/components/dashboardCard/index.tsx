@@ -5,7 +5,7 @@ import { BoxButton, CardPro, Date, Info, Time } from "./styles";
 interface CardProps {
   date: string;
   time: string;
-  name: string;
+  nameProf?: string;
   info?: string;
   isRemovable: any;
   cancel: any;
@@ -19,7 +19,7 @@ interface CardProps {
 const DashboardCard = ({
   date,
   time,
-  name,
+  nameProf,
   info,
   isRemovable,
   cancel,
@@ -37,7 +37,7 @@ const DashboardCard = ({
         <Date>{date}</Date>
         <Time>{time}</Time>
         <Info>
-          <h4>{name}</h4>
+          <h4>{nameProf}</h4>
           <div>
             <span>{info}</span>
           </div>
