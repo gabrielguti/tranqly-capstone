@@ -227,14 +227,6 @@ const DashboardProfessional = () => {
                 placeholder="Estado"
               />
             </label>
-            <Button onClick={newData}>Atualizar dados</Button>
-          </div>
-        </Modal>
-      )}
-      {showProf && (
-        <Modal>
-          <div>
-            <FaTimes onClick={() => setShowProf(!showProf)} />
             <label>
               Idioma
               <input
@@ -251,20 +243,29 @@ const DashboardProfessional = () => {
                 placeholder="Profissão"
               />
             </label>
+            <Button onClick={newData}>Atualizar dados</Button>
+          </div>
+        </Modal>
+      )}
+      {showProf && (
+        <Modal>
+          <div>
+            <FaTimes onClick={() => setShowProf(!showProf)} />
+            <label>
+              Descrição
+              <textarea
+                className="description"
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+                placeholder="Descrição"
+              />
+            </label>
             <label>
               Especialidades
               <input
                 value={newAreas}
                 onChange={(e) => setNewAreas(e.target.value)}
                 placeholder="Especialidades"
-              />
-            </label>
-            <label>
-              Descrição
-              <input
-                value={newDescription}
-                onChange={(e) => setNewDescription(e.target.value)}
-                placeholder="Descrição"
               />
             </label>
             <label>
