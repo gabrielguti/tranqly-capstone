@@ -6,7 +6,8 @@ interface CalendarProps {
   children: ReactNode;
 }
 interface DataProps {
-  name: string;
+  namePatient: any;
+  nameProf: any;
   zoom: any;
   userId: number;
   type: boolean;
@@ -42,7 +43,8 @@ interface CalendarData {
     patientId: any,
     token: string,
     areas: string,
-    name: string,
+    namePatient: string,
+    nameProf: string,
     comment: string,
     zoom: string,
     passwordZoom: string
@@ -53,7 +55,8 @@ interface CalendarData {
     professionalId: number,
     patientId: number,
     areas: string,
-    name: string,
+    namePatient: string,
+    nameProf: string,
     comment: string,
     zoom: string,
     passwordZoom: string,
@@ -181,7 +184,8 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     patientId: any,
     token: string,
     areas: string,
-    name: string,
+    namePatient: string,
+    nameProf: string,
     comment: string,
     zoom: string,
     passwordZoom: string
@@ -193,7 +197,8 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
       date: data.date,
       cancel: false,
       areas: areas,
-      name: name,
+      namePatient,
+      nameProf,
       comment: comment,
       zoom: zoom,
       passwordZoom: passwordZoom,
@@ -217,13 +222,14 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
     professionalId: number,
     patientId: number,
     areas: string,
-    name: string,
+    namePatient: string,
+    nameProf: string,
     comment: string,
     zoom: string,
     passwordZoom: string,
     email: string
   ) => {
-    const data = { name, comment, type: false, email };
+    const data = { namePatient, nameProf, comment, type: false, email };
     api
       .patch(`/professional/${id}`, data, {
         headers: {
@@ -239,7 +245,8 @@ export const CalendarProvider = ({ children }: CalendarProps) => {
             patientId,
             token,
             areas,
-            name,
+            namePatient,
+            nameProf,
             comment,
             zoom,
             passwordZoom

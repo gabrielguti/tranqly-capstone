@@ -5,15 +5,18 @@ import toast from "react-hot-toast";
 import { FaRegClock, FaTimes } from "react-icons/fa";
 import Bar from "../../components/bar";
 import Button from "../../components/button";
+import CardComments from "../../components/CardComments";
 import CardProfessionalData from "../../components/cardProfessionalData";
 import { ProfessionalModal } from "../../components/professionalModal";
+import UserEditModal from "../../components/userEditModal";
 import { UseAuth } from "../../providers/authProvider";
 import { useCalendar } from "../../providers/calendarProvider";
+import { useClientCard } from "../../providers/clientProvider";
 import api from "../../services/api";
-import { Calendar, ContainerProfessionalData, Modal } from "./styles";
+import { Calendar, Modal, Comments } from "./styles";
 
 const DashboardProfessional = () => {
-  const { searchDate, searchComments, calendar } = useCalendar();
+  const { searchDate, searchComments, calendar, comments } = useCalendar();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalType, setModalType] = useState<string>("event");
   const { accessToken } = UseAuth();
@@ -22,8 +25,7 @@ const DashboardProfessional = () => {
   );
   let ref: string[] = [];
   let now = new Date();
-  const [newName, setNewName] = useState(getProfessionalStorage.name);
-  const [newEmail, setNewEmail] = useState(getProfessionalStorage.email);
+
   const [newGender, setNewGender] = useState(getProfessionalStorage.gender);
   const [newProfession, setNewProfessional] = useState(
     getProfessionalStorage.profession
@@ -46,6 +48,11 @@ const DashboardProfessional = () => {
   );
   const [showUser, setShowUser] = useState<boolean>(false);
   const [showProf, setShowProf] = useState<boolean>(false);
+  const { userEdit, setUserEdit } = useClientCard();
+
+  const changeEdit = () => {
+    setUserEdit(!userEdit);
+  };
 
   const changeShowUser = () => {
     setShowUser(!showUser);
@@ -57,8 +64,6 @@ const DashboardProfessional = () => {
 
   const newData = () => {
     const data = {
-      name: newName,
-      email: newEmail,
       gender: newGender,
       profession: newProfession,
       areas: newAreas,
@@ -103,14 +108,12 @@ const DashboardProfessional = () => {
   return (
     <>
       <Bar />
-      <ContainerProfessionalData>
-        <CardProfessionalData
-          professional={getProfessionalStorage}
-          changeShowUser={changeShowUser}
-          changeShowProf={changeShowProf}
-        />
-      </ContainerProfessionalData>
-
+      <CardProfessionalData
+        professional={getProfessionalStorage}
+        changeShowUser={changeShowUser}
+        changeShowProf={changeShowProf}
+        changeEdit={changeEdit}
+      />
       <Calendar>
         <div className="tittle">
           <p>Minha agenda</p>
@@ -161,8 +164,8 @@ const DashboardProfessional = () => {
                                   {moment(m.date).format("LT")}
                                 </span>
                                 <div className="moreInfos">
-                                  {m.name ? (
-                                    <h2>{m.name}</h2>
+                                  {m.namePatient ? (
+                                    <h2>{m.namePatient}</h2>
                                   ) : (
                                     <p>Sem informações</p>
                                   )}
@@ -186,6 +189,14 @@ const DashboardProfessional = () => {
           )}
         </div>
       </Calendar>
+      <Comments>
+        <h1>Comentários sobre você</h1>
+        <div className="containerComment">
+          {comments.map((item) => {
+            return <CardComments comments={item} />;
+          })}
+        </div>
+      </Comments>
       {showModal && (
         <ProfessionalModal
           activateModal={activateModal}
@@ -193,32 +204,27 @@ const DashboardProfessional = () => {
           searchDate={searchDate}
         />
       )}
+      {userEdit && (
+        <UserEditModal userEdit={userEdit} setUserEdit={setUserEdit} />
+      )}
       {showUser && (
         <Modal>
           <div>
             <FaTimes onClick={() => setShowUser(!showUser)} />
-            <label>
-              Nome completo
-              <input
-                value={newName}
-                onChange={(e) => setNewName(e.target.value)}
-                placeholder="Nome"
-              />
-            </label>
-            <label>
-              Email
-              <input
-                value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)}
-                placeholder="Email"
-              />
-            </label>
             <label>
               Gênero
               <input
                 value={newGender}
                 onChange={(e) => setNewGender(e.target.value)}
                 placeholder="Genero"
+              />
+            </label>
+            <label>
+              Estado
+              <input
+                value={newState}
+                onChange={(e) => setNewState(e.target.value)}
+                placeholder="Estado"
               />
             </label>
             <label>
@@ -230,11 +236,11 @@ const DashboardProfessional = () => {
               />
             </label>
             <label>
-              Estado
+              Profissão
               <input
-                value={newState}
-                onChange={(e) => setNewState(e.target.value)}
-                placeholder="Estado"
+                value={newProfession}
+                onChange={(e) => setNewProfessional(e.target.value)}
+                placeholder="Profissão"
               />
             </label>
             <Button onClick={newData}>Atualizar dados</Button>
@@ -246,11 +252,12 @@ const DashboardProfessional = () => {
           <div>
             <FaTimes onClick={() => setShowProf(!showProf)} />
             <label>
-              Profissão
-              <input
-                value={newProfession}
-                onChange={(e) => setNewProfessional(e.target.value)}
-                placeholder="Profissão"
+              Descrição
+              <textarea
+                className="description"
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+                placeholder="Descrição"
               />
             </label>
             <label>
@@ -259,14 +266,6 @@ const DashboardProfessional = () => {
                 value={newAreas}
                 onChange={(e) => setNewAreas(e.target.value)}
                 placeholder="Especialidades"
-              />
-            </label>
-            <label>
-              Descrição
-              <input
-                value={newDescription}
-                onChange={(e) => setNewDescription(e.target.value)}
-                placeholder="Descrição"
               />
             </label>
             <label>

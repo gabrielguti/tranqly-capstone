@@ -13,7 +13,8 @@ interface DataProps {
   date: string;
   patientId?: number;
   cancel: boolean;
-  name: string;
+  namePatient?: string;
+  nameProf?: string;
   areas: string;
   ownerId: number;
   zoom?: string;
@@ -67,7 +68,10 @@ export const ClientCardProvider = ({ children }: ClientProps) => {
         getConference(token, ownerId);
         toast.success("Agendamento cancelado com sucesso");
       })
-      .catch((_) => toast.error("Erro ao cancelar o agendamento"));
+      .catch((e) => {
+        toast.error("Erro ao cancelar o agendamento");
+        console.log(e);
+      });
   };
 
   const editUserFunction = (token: string, id: string, data: EditDataProps) => {

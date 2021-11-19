@@ -3,7 +3,8 @@ import { FaUserCog, FaUserEdit } from "react-icons/fa";
 import api from "../../services/api";
 import Button from "../button";
 import StarsCount from "../contStars";
-
+import { ContainerProfessionalData } from "./style";
+import Profile from "../../assets/img/profile.png";
 interface ProfessionalData {
   name: string;
   profession: string;
@@ -24,12 +25,14 @@ interface CardProfessionalProps {
   professional: ProfessionalData;
   changeShowUser: () => void;
   changeShowProf: () => void;
+  changeEdit: () => void;
 }
 
 const CardProfessionalData = ({
   professional,
   changeShowUser,
   changeShowProf,
+  changeEdit,
 }: CardProfessionalProps) => {
   const {
     name,
@@ -68,52 +71,59 @@ const CardProfessionalData = ({
   }
 
   return (
-    <div className="ProfessionalData">
-      <div className="img">
-        <img src={image} alt={name} />
-        <div>
-          <Button onClick={changeShowUser}>
-            <FaUserCog />
-          </Button>
-          <Button onClick={changeShowProf}>
-            <FaUserEdit />
-          </Button>
+    <ContainerProfessionalData>
+      <div className="ProfessionalData">
+        <div className="img">
+          {image ? (
+            <img src={image} alt={name} />
+          ) : (
+            <img src={Profile} alt={name} />
+          )}
+          <div>
+            <Button onClick={changeShowUser}>
+              <FaUserCog />
+            </Button>
+            <Button onClick={changeShowProf}>
+              <FaUserEdit />
+            </Button>
+          </div>
+          <Button onClick={changeEdit}> Editar usuário</Button>
+        </div>
+        <div className="data">
+          <div>
+            <h2>{name}</h2>
+            <StarsCount stars={media} />
+          </div>
+          <div>
+            <p>Especialidade: {areas}</p>
+            <p>CRP: {crp}</p>
+            <p>Idiomas: {language}</p>
+            <p>Estado: {state}</p>
+            <p>Genero: {gender}</p>
+            <p>
+              Link para sala para o{" "}
+              <a className="zoom" href={zoom} target="_blank" rel="noreferrer">
+                Zoom
+              </a>
+            </p>
+            <p>Senha da sala: {passwordZoom}</p>
+            <p>
+              Preço:{" "}
+              {price
+                ? price.toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL",
+                  })
+                : "Sem valor"}
+              / 60 minutos
+            </p>
+          </div>
+          <div>
+            <p>{description}</p>
+          </div>
         </div>
       </div>
-      <div className="data">
-        <div>
-          <h2>{name}</h2>
-          <StarsCount stars={media} />
-        </div>
-        <div>
-          <p>Especialidade: {areas}</p>
-          <p>CRP: {crp}</p>
-          <p>Idiomas: {language}</p>
-          <p>Estado: {state}</p>
-          <p>Genero: {gender}</p>
-          <p>
-            Link para sala para o{" "}
-            <a href={zoom} target="_blank" rel="noreferrer">
-              Zoom
-            </a>
-          </p>
-          <p>Senha da sala: {passwordZoom}</p>
-          <p>
-            Preço:{" "}
-            {price
-              ? price.toLocaleString("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                })
-              : "Sem valor"}
-            / 60 minutos
-          </p>
-        </div>
-        <div>
-          <p>{description}</p>
-        </div>
-      </div>
-    </div>
+    </ContainerProfessionalData>
   );
 };
 export default CardProfessionalData;
