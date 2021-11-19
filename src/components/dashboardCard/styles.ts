@@ -3,23 +3,23 @@ import styled from "styled-components";
 export const CardPro = styled.div`
   box-shadow: 0px 0px 4px;
   border-radius: 5px;
-  min-height: 350px;
+  height: 350px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
   margin: 20px;
+  div {
+    width: 300px;
+  }
   button {
     background-color: var(--red50);
     width: 130px;
     height: 40px;
     margin-bottom: 10px;
-  }
-  @media (min-width: 1000px) {
-    button {
+    :hover {
+      background-color: var(--red100);
     }
-    max-height: 550px;
-    max-width: 400px;
   }
 `;
 

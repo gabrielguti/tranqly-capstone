@@ -44,10 +44,12 @@ export const ProfessionalModal = ({
           }`,
         },
       })
-      .then((_) => toast.success("Sucesso ao criar agendamento"))
+      .then((_) => {
+        toast.success("Sucesso ao criar agendamento");
+        searchDate(userData.id, accessToken);
+        activateModal(modalType);
+      })
       .catch((_) => toast.error("Falha ao criar agendamento"));
-    searchDate(userData.id, accessToken);
-    activateModal(modalType);
   };
 
   return (

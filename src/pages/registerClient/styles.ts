@@ -113,6 +113,9 @@ export const BoxForm = styled.div`
     border-radius: 5px;
     font-size: 20px;
   }
+  a {
+    color: var(--purple300);
+  }
   @media (min-width: 1080px) {
     animation: ${apear} 1.2s;
   }
