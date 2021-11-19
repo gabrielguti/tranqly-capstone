@@ -33,6 +33,14 @@ export const ModalCommentStyle = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
+      label {
+        font-size: 12px;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
       input {
         background-color: var(--gray100);
         padding: 0 20px;

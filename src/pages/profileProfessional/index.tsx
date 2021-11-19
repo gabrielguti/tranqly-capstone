@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { Calendar, ContainerProfessionalData, Comments } from "./styles";
+import { Calendar, Comments } from "./styles";
 import Bar from "../../components/bar";
 import Button from "../../components/button";
 import CardComments from "../../components/CardComments";
@@ -23,7 +23,6 @@ const ProfileProfessional = () => {
     localStorage.getItem("@tranqyl:prof") || ""
   );
   let professionalId = Number(id);
-  let ref: string[] = [];
   let now = new Date();
   const { show, setShow } = useCalendar();
   const [showNewTime, setShowNewTime] = useState(false);
@@ -45,20 +44,23 @@ const ProfileProfessional = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  let ref: string[] = [];
+
   const formed = calendar
     .slice()
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1));
 
   const filters = formed.filter((item) => item.type === true);
+
   const areas = getProfessionalStorage[0].areas;
-  const name = getProfessionalStorage[0].name;
+  const name = user.name;
+
+  console.log(ref);
+
   return (
     <>
       <Bar />
-      <ContainerProfessionalData>
-        <CardProfessionalProf professional={getProfessionalStorage[0]} />
-      </ContainerProfessionalData>
-
+      <CardProfessionalProf professional={getProfessionalStorage[0]} />
       <Calendar>
         <div className="tittle">
           <p>Escolha seu horário</p>
@@ -66,56 +68,48 @@ const ProfileProfessional = () => {
         <div className="container">
           {filters.length > 0 ? (
             <>
-              {formed
-                .filter((filtered) => filtered.type === true)
-                .map((item, index) => {
-                  if (
-                    !ref.includes(moment(item.date).format("l")) &&
-                    ref.push(moment(item.date).format("l")) &&
-                    moment(now).format("l").replace(/\D/g, "") <=
-                      moment(item.date).format("l").replace(/\D/g, "")
-                  ) {
-                    return (
-                      <div key={index} className="week">
-                        <div className="day">
-                          <p>{moment(item.date).format("ddd")}</p>
-                        </div>
-                        <div className="times">
-                          {formed
-                            .filter(
-                              (newFiltered) =>
-                                moment(newFiltered.date).format("L") ===
-                                moment(item.date).format("L")
-                            )
-                            .filter(
-                              (filteredTimes) =>
-                                moment(filteredTimes.date)
-                                  .format()
-                                  .replace(/\D/g, "") >
-                                moment(now).format().replace(/\D/g, "")
-                            )
-                            .map((m, secondIndex) => {
-                              return (
-                                <div
-                                  key={secondIndex}
-                                  className="time"
-                                  onClick={() => {
-                                    changeShow();
-                                    change(m.id, m.date);
-                                  }}
-                                >
-                                  <p>{moment(m.date).format("DD/MM/YYYY")}</p>
-                                  <span className="check">
-                                    {moment(m.date).format("LT")}
-                                  </span>
-                                </div>
-                              );
-                            })}
-                        </div>
+              {filters.map((item, index) => {
+                if (
+                  !ref.includes(moment(item.date).format("l")) &&
+                  ref.push(moment(item.date).format("l")) &&
+                  moment(now).format().replace(/\D/g, "") <=
+                    moment(item.date).format().replace(/\D/g, "")
+                ) {
+                  return (
+                    <div key={index} className="week">
+                      <div className="day">
+                        <p>{moment(item.date).format("ddd")}</p>
                       </div>
-                    );
-                  }
-                })}
+                      <div className="times">
+                        {filters
+                          .filter(
+                            (f) =>
+                              moment(f.date).format("l") ===
+                              moment(item.date).format("l")
+                          )
+                          .map((m, secondIndex) => {
+                            console.log(m.date);
+                            return (
+                              <div
+                                key={secondIndex}
+                                className="time"
+                                onClick={() => {
+                                  changeShow();
+                                  change(m.id, m.date);
+                                }}
+                              >
+                                <p>{moment(m.date).format("DD/MM/YYYY")}</p>
+                                <span className="check">
+                                  {moment(m.date).format("LT")}
+                                </span>
+                              </div>
+                            );
+                          })}
+                      </div>
+                    </div>
+                  );
+                }
+              })}
             </>
           ) : (
             <div className="nothingHere">

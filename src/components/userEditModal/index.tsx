@@ -68,23 +68,32 @@ export default function UserEditModal({
       <div>
         <FaTimes onClick={() => setUserEdit(!userEdit)} />
         <form onSubmit={handleSubmit(onSubmitFunction)}>
-          <input placeholder="Nome" {...register("name")} />
-          <span>{errors.name?.message}</span>
-          <input placeholder="Email" {...register("email")} />
-          <span>{errors.email?.message}</span>
-          <input
-            placeholder="Senha"
-            type="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              if (e.target.value.length >= 4 || e.target.value.length === 0) {
-                setPasswordCheck(false);
-              }
-            }}
-          />
+          <label>
+            Nome
+            <input placeholder="Nome" {...register("name")} />
+            <span>{errors.name?.message}</span>
+          </label>
+          <label>
+            Email
+            <input placeholder="Email" {...register("email")} />
+            <span>{errors.email?.message}</span>
+          </label>
+          <label>
+            Senha
+            <input
+              placeholder="Senha"
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (e.target.value.length >= 4 || e.target.value.length === 0) {
+                  setPasswordCheck(false);
+                }
+              }}
+            />
+          </label>
           <span>{passwordCheck && "Mínimo de 4 dígitos"}</span>
-          <button type="submit">Editar</button>
+          <button type="submit">Atualizar dados</button>
         </form>
       </div>
     </ModalCommentStyle>

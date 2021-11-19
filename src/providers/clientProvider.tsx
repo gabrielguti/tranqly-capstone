@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 
 import api from "../services/api";
 import toast from "react-hot-toast";
+import { waitFor } from "@testing-library/dom";
 
 interface ClientProps {
   children: ReactNode;
@@ -67,7 +68,10 @@ export const ClientCardProvider = ({ children }: ClientProps) => {
         getConference(token, ownerId);
         toast.success("Agendamento cancelado com sucesso");
       })
-      .catch((_) => toast.error("Erro ao cancelar o agendamento"));
+      .catch((e) => {
+        toast.error("Erro ao cancelar o agendamento");
+        console.log(e);
+      });
   };
 
   const editUserFunction = (token: string, id: string, data: EditDataProps) => {

@@ -5,15 +5,18 @@ import toast from "react-hot-toast";
 import { FaRegClock, FaTimes } from "react-icons/fa";
 import Bar from "../../components/bar";
 import Button from "../../components/button";
+import CardComments from "../../components/CardComments";
 import CardProfessionalData from "../../components/cardProfessionalData";
 import { ProfessionalModal } from "../../components/professionalModal";
+import UserEditModal from "../../components/userEditModal";
 import { UseAuth } from "../../providers/authProvider";
 import { useCalendar } from "../../providers/calendarProvider";
+import { useClientCard } from "../../providers/clientProvider";
 import api from "../../services/api";
-import { Calendar, ContainerProfessionalData, Modal } from "./styles";
+import { Calendar, Modal, Comments } from "./styles";
 
 const DashboardProfessional = () => {
-  const { searchDate, searchComments, calendar } = useCalendar();
+  const { searchDate, searchComments, calendar, comments } = useCalendar();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalType, setModalType] = useState<string>("event");
   const { accessToken } = UseAuth();
@@ -46,6 +49,11 @@ const DashboardProfessional = () => {
   );
   const [showUser, setShowUser] = useState<boolean>(false);
   const [showProf, setShowProf] = useState<boolean>(false);
+  const { userEdit, setUserEdit } = useClientCard();
+
+  const changeEdit = () => {
+    setUserEdit(!userEdit);
+  };
 
   const changeShowUser = () => {
     setShowUser(!showUser);
@@ -103,14 +111,12 @@ const DashboardProfessional = () => {
   return (
     <>
       <Bar />
-      <ContainerProfessionalData>
-        <CardProfessionalData
-          professional={getProfessionalStorage}
-          changeShowUser={changeShowUser}
-          changeShowProf={changeShowProf}
-        />
-      </ContainerProfessionalData>
-
+      <CardProfessionalData
+        professional={getProfessionalStorage}
+        changeShowUser={changeShowUser}
+        changeShowProf={changeShowProf}
+        changeEdit={changeEdit}
+      />
       <Calendar>
         <div className="tittle">
           <p>Minha agenda</p>
@@ -186,6 +192,14 @@ const DashboardProfessional = () => {
           )}
         </div>
       </Calendar>
+      <Comments>
+        <h1>Comentários sobre você</h1>
+        <div className="containerComment">
+          {comments.map((item) => {
+            return <CardComments comments={item} />;
+          })}
+        </div>
+      </Comments>
       {showModal && (
         <ProfessionalModal
           activateModal={activateModal}
@@ -193,40 +207,19 @@ const DashboardProfessional = () => {
           searchDate={searchDate}
         />
       )}
+      {userEdit && (
+        <UserEditModal userEdit={userEdit} setUserEdit={setUserEdit} />
+      )}
       {showUser && (
         <Modal>
           <div>
             <FaTimes onClick={() => setShowUser(!showUser)} />
-            <label>
-              Nome completo
-              <input
-                value={newName}
-                onChange={(e) => setNewName(e.target.value)}
-                placeholder="Nome"
-              />
-            </label>
-            <label>
-              Email
-              <input
-                value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)}
-                placeholder="Email"
-              />
-            </label>
             <label>
               Gênero
               <input
                 value={newGender}
                 onChange={(e) => setNewGender(e.target.value)}
                 placeholder="Genero"
-              />
-            </label>
-            <label>
-              Idioma
-              <input
-                value={newLanguage}
-                onChange={(e) => setNewLanguage(e.target.value)}
-                placeholder="Idioma"
               />
             </label>
             <label>
@@ -245,6 +238,14 @@ const DashboardProfessional = () => {
         <Modal>
           <div>
             <FaTimes onClick={() => setShowProf(!showProf)} />
+            <label>
+              Idioma
+              <input
+                value={newLanguage}
+                onChange={(e) => setNewLanguage(e.target.value)}
+                placeholder="Idioma"
+              />
+            </label>
             <label>
               Profissão
               <input

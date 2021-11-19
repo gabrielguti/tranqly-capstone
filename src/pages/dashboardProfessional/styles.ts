@@ -27,7 +27,7 @@ export const ContainerProfessionalData = styled.div`
       flex-direction: column;
       div {
         margin: 10px;
-        width: 200px;
+        width: 250px;
         display: flex;
         gap: 20px;
       }
@@ -241,9 +241,34 @@ export const Modal = styled.div`
         padding: 0 20px;
         max-width: 385px;
         width: 100%;
-        height: 40px;
+        height: 50px;
         border-radius: 10px;
       }
+    }
+  }
+`;
+
+export const Comments = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px 0;
+  h1 {
+    text-align: center;
+  }
+  .containerComment {
+    display: grid;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    @media (min-width: 700px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 1000px) {
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 `;
