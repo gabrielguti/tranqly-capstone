@@ -2,7 +2,6 @@ import { createContext, ReactNode, useContext, useState } from "react";
 
 import api from "../services/api";
 import toast from "react-hot-toast";
-import { waitFor } from "@testing-library/dom";
 
 interface ClientProps {
   children: ReactNode;

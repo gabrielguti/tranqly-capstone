@@ -25,8 +25,7 @@ const DashboardProfessional = () => {
   );
   let ref: string[] = [];
   let now = new Date();
-  const [newName, setNewName] = useState(getProfessionalStorage.name);
-  const [newEmail, setNewEmail] = useState(getProfessionalStorage.email);
+
   const [newGender, setNewGender] = useState(getProfessionalStorage.gender);
   const [newProfession, setNewProfessional] = useState(
     getProfessionalStorage.profession
@@ -65,8 +64,6 @@ const DashboardProfessional = () => {
 
   const newData = () => {
     const data = {
-      name: newName,
-      email: newEmail,
       gender: newGender,
       profession: newProfession,
       areas: newAreas,
