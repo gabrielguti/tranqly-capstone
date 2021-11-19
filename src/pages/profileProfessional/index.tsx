@@ -53,7 +53,8 @@ const ProfileProfessional = () => {
   const filters = formed.filter((item) => item.type === true);
 
   const areas = getProfessionalStorage[0].areas;
-  const name = user.name;
+  const nameProf = getProfessionalStorage[0].name;
+  const namePatient = user.name;
 
   console.log(ref);
 
@@ -140,7 +141,8 @@ const ProfileProfessional = () => {
           professionalId={professionalId}
           patientId={Number(user.id)}
           areas={areas}
-          name={name}
+          namePatient={namePatient}
+          nameProf={nameProf}
           changeShow={changeShow}
         />
       )}

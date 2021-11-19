@@ -92,7 +92,7 @@ const DashboardPatient = () => {
                       <DashboardCard
                         isRemovable={filtered.cancel}
                         date={moment(filtered.date).format("LL")}
-                        name={filtered.name}
+                        nameProf={filtered.nameProf}
                         time={moment(filtered.date).format("LT")}
                         key={index}
                         info={filtered.areas}
@@ -133,7 +133,7 @@ const DashboardPatient = () => {
                     return (
                       <DashboardCard
                         date={moment(item.date).format("LL")}
-                        name={item.name}
+                        nameProf={item.nameProf}
                         time={moment(item.date).format("LT")}
                         key={index}
                         info={item.areas}

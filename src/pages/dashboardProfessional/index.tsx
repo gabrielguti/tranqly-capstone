@@ -164,8 +164,8 @@ const DashboardProfessional = () => {
                                   {moment(m.date).format("LT")}
                                 </span>
                                 <div className="moreInfos">
-                                  {m.name ? (
-                                    <h2>{m.name}</h2>
+                                  {m.namePatient ? (
+                                    <h2>{m.namePatient}</h2>
                                   ) : (
                                     <p>Sem informações</p>
                                   )}
